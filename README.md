@@ -124,6 +124,7 @@ python -m http.server 8088
 ├── covers/                        # 書影画像フォルダ
 ├── data.js                        # 自動生成される集計データ
 ├── index.html                     # メインWebダッシュボード
+├── favicon.ico                    # ファビコン (各種PNG / apple-touch-icon対応)
 ├── css/
 │   └── style.css                  # 和モダン・文芸調スタイルシート
 ├── js/
