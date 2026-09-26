@@ -434,10 +434,61 @@
         </div>
       </div>` : ''}
     `;
+
+    // チャートのマウスオーバー・インタラクション設定
+    setupChartInteractions(b);
   }
 
   // ============================================================
-  // SVG チャート描画関数群
+  // インタラクティブ・チャート ツールチップ制御
+  // ============================================================
+  function getTooltipEl() {
+    return document.getElementById('chartTooltip');
+  }
+
+  function showChartTooltip(clientX, clientY, html) {
+    const tip = getTooltipEl();
+    if (!tip) return;
+    tip.innerHTML = html;
+    tip.style.display = 'block';
+
+    const tRect = tip.getBoundingClientRect();
+    const w = tRect.width || 180;
+    const h = tRect.height || 70;
+
+    let left = clientX;
+    let top = clientY - 14;
+    let transY = '-100%';
+
+    // 画面左右のはみ出し補正
+    const pad = 12;
+    if (left - w / 2 < pad) {
+      left = pad + w / 2;
+    } else if (left + w / 2 > window.innerWidth - pad) {
+      left = window.innerWidth - pad - w / 2;
+    }
+
+    // 画面上部のはみ出し補正（上に入らない場合は下へ）
+    if (clientY - h - 20 < pad) {
+      top = clientY + 20;
+      transY = '0%';
+    }
+
+    tip.style.left = `${left}px`;
+    tip.style.top = `${top}px`;
+    tip.style.transform = `translate(-50%, ${transY})`;
+    tip.classList.add('active');
+  }
+
+  function hideChartTooltip() {
+    const tip = getTooltipEl();
+    if (!tip) return;
+    tip.classList.remove('active');
+    tip.style.display = 'none';
+  }
+
+  // ============================================================
+  // SVG チャート描画関数群 (インタラクティブ対応)
   // ============================================================
   function renderHourlySvg(hourly) {
     if (!hourly || !hourly.today || !hourly.today.length) {
@@ -470,27 +521,39 @@
     }).join('');
 
     return `
-      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart">
-        <!-- グリッド線 -->
-        <line x1="${padL}" y1="${padT + plotH * 0.5}" x2="${w - padR}" y2="${padT + plotH * 0.5}" stroke="var(--line-soft)" stroke-dasharray="3,3" />
-        <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
+      <div class="interactive-chart-wrap" id="hourlyChartWrap">
+        <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart" id="hourlySvg">
+          <!-- 全域マウス検知用透明ヒットエリア -->
+          <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:crosshair;" />
 
-        <!-- 昨日ライン -->
-        <polyline points="${yestPts}" fill="none" stroke="var(--lilac)" stroke-width="2" opacity="0.65" stroke-dasharray="4,2" />
-        
-        <!-- 本日ライン -->
-        <polyline points="${todayPts}" fill="none" stroke="var(--rose-deep)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
-        
-        <!-- データポイント (本日) -->
-        ${todayData.map((v, i) => {
-          if (v === 0) return '';
-          const x = padL + (i / 23) * plotW;
-          const y = padT + plotH - (v / maxVal) * plotH;
-          return `<circle cx="${x}" cy="${y}" r="3" fill="var(--rose-deep)"><title>${i}時: ${v} PV</title></circle>`;
-        }).join('')}
+          <!-- グリッド線 -->
+          <line x1="${padL}" y1="${padT + plotH * 0.5}" x2="${w - padR}" y2="${padT + plotH * 0.5}" stroke="var(--line-soft)" stroke-dasharray="3,3" />
+          <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
 
-        ${axisLabels}
-      </svg>
+          <!-- 昨日ライン -->
+          <polyline points="${yestPts}" fill="none" stroke="var(--lilac)" stroke-width="2" opacity="0.65" stroke-dasharray="4,2" />
+          
+          <!-- 本日ライン -->
+          <polyline points="${todayPts}" fill="none" stroke="var(--rose-deep)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+          
+          <!-- データポイント (本日) -->
+          ${todayData.map((v, i) => {
+            if (v === 0) return '';
+            const x = padL + (i / 23) * plotW;
+            const y = padT + plotH - (v / maxVal) * plotH;
+            return `<circle cx="${x}" cy="${y}" r="3" fill="var(--rose-deep)"></circle>`;
+          }).join('')}
+
+          ${axisLabels}
+
+          <!-- マウスオーバー・ガイド線とハイライトポイント -->
+          <g class="hourly-hover-group" style="display:none;pointer-events:none;">
+            <line class="hourly-v-line" x1="0" y1="${padT}" x2="0" y2="${padT + plotH}" stroke="var(--forest)" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.85" />
+            <circle class="hourly-yest-pt" cx="0" cy="0" r="4.5" fill="var(--lilac)" stroke="#FFF" stroke-width="1.5" />
+            <circle class="hourly-today-pt" cx="0" cy="0" r="5.5" fill="var(--rose-deep)" stroke="#FFF" stroke-width="2" />
+          </g>
+        </svg>
+      </div>
     `;
   }
 
@@ -515,30 +578,33 @@
     const appOffset = -(pcLen + spLen);
 
     return `
-      <div class="donut-container">
-        <svg width="110" height="110" viewBox="0 0 100 100" style="transform: rotate(-90deg);">
+      <div class="donut-container" id="donutChartContainer">
+        <svg width="110" height="110" viewBox="0 0 100 100" style="transform: rotate(-90deg);overflow:visible;">
           <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--bg-color)" stroke-width="16" />
           <!-- PC (濃い青) -->
-          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-pc)" stroke-width="16"
-            stroke-dasharray="${pcLen} ${c - pcLen}" stroke-dashoffset="${pcOffset}" />
+          <circle class="donut-slice" data-name="パソコン (PC)" data-pct="${pcPct}" data-pv="${pc}" data-color="var(--device-pc)"
+            cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-pc)" stroke-width="16"
+            stroke-dasharray="${pcLen} ${c - pcLen}" stroke-dashoffset="${pcOffset}" style="cursor:pointer;" />
           <!-- SP (薄い青) -->
-          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-sp)" stroke-width="16"
-            stroke-dasharray="${spLen} ${c - spLen}" stroke-dashoffset="${spOffset}" />
+          <circle class="donut-slice" data-name="スマートフォン" data-pct="${spPct}" data-pv="${sp}" data-color="var(--device-sp)"
+            cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-sp)" stroke-width="16"
+            stroke-dasharray="${spLen} ${c - spLen}" stroke-dashoffset="${spOffset}" style="cursor:pointer;" />
           <!-- 公式アプリ (薄いグリーン) -->
-          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-app)" stroke-width="16"
-            stroke-dasharray="${appLen} ${c - appLen}" stroke-dashoffset="${appOffset}" />
+          <circle class="donut-slice" data-name="公式アプリ" data-pct="${appPct}" data-pv="${app}" data-color="var(--device-app)"
+            cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-app)" stroke-width="16"
+            stroke-dasharray="${appLen} ${c - appLen}" stroke-dashoffset="${appOffset}" style="cursor:pointer;" />
         </svg>
 
         <div class="donut-legend-list">
-          <div class="donut-legend-item">
+          <div class="donut-legend-item" data-name="パソコン (PC)" data-pct="${pcPct}" data-pv="${pc}" data-color="var(--device-pc)" style="cursor:pointer;">
             <span><span class="donut-dot" style="background:var(--device-pc);"></span>パソコン (PC)</span>
             <b>${pcPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${pc.toLocaleString()}PV)</span></b>
           </div>
-          <div class="donut-legend-item">
+          <div class="donut-legend-item" data-name="スマートフォン" data-pct="${spPct}" data-pv="${sp}" data-color="var(--device-sp)" style="cursor:pointer;">
             <span><span class="donut-dot" style="background:var(--device-sp);"></span>スマートフォン</span>
             <b>${spPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${sp.toLocaleString()}PV)</span></b>
           </div>
-          <div class="donut-legend-item">
+          <div class="donut-legend-item" data-name="公式アプリ" data-pct="${appPct}" data-pv="${app}" data-color="var(--device-app)" style="cursor:pointer;">
             <span><span class="donut-dot" style="background:var(--device-app);"></span>公式アプリ</span>
             <b>${appPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${app.toLocaleString()}PV)</span></b>
           </div>
@@ -565,19 +631,30 @@
     const areaPts = `${padL},${padT + plotH} ${pts} ${padL + plotW},${padT + plotH}`;
 
     return `
-      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart">
-        <defs>
-          <linearGradient id="retGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="${strokeColor}" stop-opacity="0.3" />
-            <stop offset="100%" stop-color="${strokeColor}" stop-opacity="0.0" />
-          </linearGradient>
-        </defs>
-        <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
-        <polygon points="${areaPts}" fill="url(#retGrad)" />
-        <polyline points="${pts}" fill="none" stroke="${strokeColor}" stroke-width="2.5" stroke-linejoin="round" />
-        <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">第1話 (${episodes[0].toLocaleString()}PV)</text>
-        <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">最新 ${n}話 (${episodes[n - 1].toLocaleString()}PV)</text>
-      </svg>
+      <div class="interactive-chart-wrap" id="retentionChartWrap">
+        <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart" id="retentionSvg">
+          <defs>
+            <linearGradient id="retGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="${strokeColor}" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="${strokeColor}" stop-opacity="0.0" />
+            </linearGradient>
+          </defs>
+          <!-- 全域マウス検知用透明ヒットエリア -->
+          <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:crosshair;" />
+
+          <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
+          <polygon points="${areaPts}" fill="url(#retGrad)" />
+          <polyline points="${pts}" fill="none" stroke="${strokeColor}" stroke-width="2.5" stroke-linejoin="round" />
+          <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">第1話 (${episodes[0].toLocaleString()}PV)</text>
+          <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">最新 ${n}話 (${episodes[n - 1].toLocaleString()}PV)</text>
+
+          <!-- マウスオーバー・ガイド線とハイライトポイント -->
+          <g class="retention-hover-group" style="display:none;pointer-events:none;">
+            <line class="retention-v-line" x1="0" y1="${padT}" x2="0" y2="${padT + plotH}" stroke="${strokeColor}" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.85" />
+            <circle class="retention-pt" cx="0" cy="0" r="5.5" fill="${strokeColor}" stroke="#FFF" stroke-width="2" />
+          </g>
+        </svg>
+      </div>
     `;
   }
 
@@ -598,19 +675,289 @@
       const y = padT + plotH - barH;
       const isSelected = d.date === state.selectedDate;
       const fillColor = isSelected ? 'var(--rose-deep)' : 'var(--lilac)';
-      return `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" rx="1" fill="${fillColor}" opacity="${isSelected ? '1' : '0.8'}">
-        <title>${d.date} (${d.d}): ${d.pv.toLocaleString()} PV</title>
+      return `<rect class="daily-bar" data-idx="${i}" x="${x}" y="${y}" width="${barW}" height="${barH}" rx="1" fill="${fillColor}" opacity="${isSelected ? '1' : '0.8'}">
       </rect>`;
     }).join('');
 
     return `
-      <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart">
-        <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
-        ${bars}
-        <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">${dailyHistory[0].d}</text>
-        <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">${dailyHistory[n - 1].d}</text>
-      </svg>
+      <div class="interactive-chart-wrap" id="dailyHistoryChartWrap">
+        <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart" id="dailyHistorySvg">
+          <!-- 全域マウス検知用透明ヒットエリア -->
+          <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:pointer;" />
+
+          <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
+          ${bars}
+          <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">${dailyHistory[0].d}</text>
+          <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">${dailyHistory[n - 1].d}</text>
+
+          <!-- マウスオーバー用ハイライトバー -->
+          <rect class="daily-highlight-bar" x="0" y="0" width="${barW}" height="0" rx="1" fill="var(--rose-deep)" stroke="#FFF" stroke-width="1.5" style="display:none;pointer-events:none;" />
+        </svg>
+      </div>
     `;
+  }
+
+  // ============================================================
+  // チャート インタラクション登録 (マウスオーバーで数値を表示)
+  // ============================================================
+  function setupChartInteractions(b) {
+    if (!b) return;
+
+    // --- 1. 時間帯別PVグラフ (折れ線) ---
+    const hourlyWrap = document.getElementById('hourlyChartWrap');
+    const hourlySvg = document.getElementById('hourlySvg');
+    if (hourlyWrap && hourlySvg && b.narou && b.narou.hourly) {
+      const hourly = b.narou.hourly;
+      const todayData = hourly.today || [];
+      const yestData = hourly.yesterday || [];
+      const maxVal = Math.max(...todayData, ...yestData, 1);
+
+      const w = 600, h = 160;
+      const padL = 30, padR = 15, padT = 15, padB = 25;
+      const plotW = w - padL - padR;
+      const plotH = h - padT - padB;
+
+      const hoverGroup = hourlySvg.querySelector('.hourly-hover-group');
+      const vLine = hourlySvg.querySelector('.hourly-v-line');
+      const todayPt = hourlySvg.querySelector('.hourly-today-pt');
+      const yestPt = hourlySvg.querySelector('.hourly-yest-pt');
+
+      const handleMove = (e) => {
+        const rect = hourlySvg.getBoundingClientRect();
+        const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+        const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+        if (clientX === null || clientY === null) return;
+
+        const relX = (clientX - rect.left) / rect.width;
+        const padLNorm = padL / w;
+        const plotWNorm = plotW / w;
+        const frac = (relX - padLNorm) / plotWNorm;
+        const hour = Math.max(0, Math.min(23, Math.round(frac * 23)));
+
+        const todayVal = todayData[hour] !== undefined ? todayData[hour] : 0;
+        const yestVal = yestData[hour] !== undefined ? yestData[hour] : 0;
+        const diff = todayVal - yestVal;
+
+        const diffBadge = diff > 0 
+          ? `<span class="chart-tooltip-badge up">+${diff.toLocaleString()} PV</span>` 
+          : diff < 0 
+            ? `<span class="chart-tooltip-badge down">${diff.toLocaleString()} PV</span>` 
+            : '<span class="chart-tooltip-badge" style="background:var(--line-soft);color:var(--text-sub);">±0</span>';
+
+        const ptX = padL + (hour / 23) * plotW;
+        const todayY = padT + plotH - (todayVal / maxVal) * plotH;
+        const yestY = padT + plotH - (yestVal / maxVal) * plotH;
+
+        if (vLine) {
+          vLine.setAttribute('x1', ptX);
+          vLine.setAttribute('x2', ptX);
+        }
+        if (todayPt) {
+          todayPt.setAttribute('cx', ptX);
+          todayPt.setAttribute('cy', todayY);
+        }
+        if (yestPt) {
+          yestPt.setAttribute('cx', ptX);
+          yestPt.setAttribute('cy', yestY);
+        }
+        if (hoverGroup) hoverGroup.style.display = 'block';
+
+        const html = `
+          <div class="chart-tooltip-title">🕒 ${hour}:00 〜 ${hour}:59 の閲覧数</div>
+          <div class="chart-tooltip-row">
+            <span><span class="chart-tooltip-dot" style="background:var(--rose-deep);"></span>本日 (${hourly.todayDate || '本日'}):</span>
+            <b>${todayVal.toLocaleString()} PV</b>
+          </div>
+          <div class="chart-tooltip-row">
+            <span><span class="chart-tooltip-dot" style="background:var(--lilac);"></span>昨日 (${hourly.yesterdayDate || '昨日'}):</span>
+            <b>${yestVal.toLocaleString()} PV</b>
+          </div>
+          <div class="chart-tooltip-row" style="margin-top:4px;padding-top:4px;border-top:1px dashed var(--line-soft);">
+            <span>前日比:</span>
+            ${diffBadge}
+          </div>
+        `;
+        showChartTooltip(clientX, clientY, html);
+      };
+
+      const handleLeave = () => {
+        if (hoverGroup) hoverGroup.style.display = 'none';
+        hideChartTooltip();
+      };
+
+      hourlyWrap.addEventListener('mousemove', handleMove);
+      hourlyWrap.addEventListener('pointermove', handleMove);
+      hourlyWrap.addEventListener('mouseleave', handleLeave);
+      hourlyWrap.addEventListener('pointerleave', handleLeave);
+    }
+
+    // --- 2. カクヨム 話数別 累計PVグラフ (折れ線) ---
+    const retWrap = document.getElementById('retentionChartWrap');
+    const retSvg = document.getElementById('retentionSvg');
+    if (retWrap && retSvg && b.kakuyomu && b.kakuyomu.episodes && b.kakuyomu.episodes.length) {
+      const episodes = b.kakuyomu.episodes;
+      const n = episodes.length;
+      const maxVal = Math.max(...episodes, 1);
+
+      const w = 700, h = 140;
+      const padL = 35, padR = 20, padT = 15, padB = 22;
+      const plotW = w - padL - padR;
+      const plotH = h - padT - padB;
+
+      const hoverGroup = retSvg.querySelector('.retention-hover-group');
+      const vLine = retSvg.querySelector('.retention-v-line');
+      const retPt = retSvg.querySelector('.retention-pt');
+
+      const handleMove = (e) => {
+        const rect = retSvg.getBoundingClientRect();
+        const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+        const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+        if (clientX === null || clientY === null) return;
+
+        const relX = (clientX - rect.left) / rect.width;
+        const padLNorm = padL / w;
+        const plotWNorm = plotW / w;
+        const frac = (relX - padLNorm) / plotWNorm;
+        const idx = Math.max(0, Math.min(n - 1, Math.round(frac * Math.max(1, n - 1))));
+
+        const pv = episodes[idx];
+        const firstPv = episodes[0] || 1;
+        const retentionPct = ((pv / firstPv) * 100).toFixed(1);
+
+        const ptX = padL + (idx / Math.max(1, n - 1)) * plotW;
+        const ptY = padT + plotH - (pv / maxVal) * plotH;
+
+        if (vLine) {
+          vLine.setAttribute('x1', ptX);
+          vLine.setAttribute('x2', ptX);
+        }
+        if (retPt) {
+          retPt.setAttribute('cx', ptX);
+          retPt.setAttribute('cy', ptY);
+        }
+        if (hoverGroup) hoverGroup.style.display = 'block';
+
+        const html = `
+          <div class="chart-tooltip-title">📖 カクヨム 第 ${idx + 1} 話</div>
+          <div class="chart-tooltip-row">
+            <span><span class="chart-tooltip-dot" style="background:var(--kakuyomu-color);"></span>累計閲覧数:</span>
+            <b>${pv.toLocaleString()} PV</b>
+          </div>
+          <div class="chart-tooltip-row" style="margin-top:4px;padding-top:4px;border-top:1px dashed var(--line-soft);">
+            <span>第1話比 読了定着率:</span>
+            <b style="color:var(--forest);">${retentionPct}%</b>
+          </div>
+        `;
+        showChartTooltip(clientX, clientY, html);
+      };
+
+      const handleLeave = () => {
+        if (hoverGroup) hoverGroup.style.display = 'none';
+        hideChartTooltip();
+      };
+
+      retWrap.addEventListener('mousemove', handleMove);
+      retWrap.addEventListener('pointermove', handleMove);
+      retWrap.addEventListener('mouseleave', handleLeave);
+      retWrap.addEventListener('pointerleave', handleLeave);
+    }
+
+    // --- 3. なろう 日別PV推移グラフ (棒グラフ) ---
+    const dailyWrap = document.getElementById('dailyHistoryChartWrap');
+    const dailySvg = document.getElementById('dailyHistorySvg');
+    if (dailyWrap && dailySvg && b.narou && b.narou.dailyHistory && b.narou.dailyHistory.length) {
+      const dailyHistory = b.narou.dailyHistory;
+      const n = dailyHistory.length;
+      const maxVal = Math.max(...dailyHistory.map(d => d.pv), 1);
+
+      const w = 700, h = 140;
+      const padL = 35, padR = 20, padT = 15, padB = 22;
+      const plotW = w - padL - padR;
+      const plotH = h - padT - padB;
+      const barW = Math.max(2, (plotW / n) * 0.7);
+
+      const highlightBar = dailySvg.querySelector('.daily-highlight-bar');
+
+      const handleMove = (e) => {
+        const rect = dailySvg.getBoundingClientRect();
+        const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+        const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+        if (clientX === null || clientY === null) return;
+
+        const relX = (clientX - rect.left) / rect.width;
+        const padLNorm = padL / w;
+        const plotWNorm = plotW / w;
+        const frac = (relX - padLNorm) / plotWNorm;
+        const idx = Math.max(0, Math.min(n - 1, Math.floor(frac * n)));
+
+        const item = dailyHistory[idx];
+        if (!item) return;
+
+        const x = padL + (idx / n) * plotW;
+        const barH = (item.pv / maxVal) * plotH;
+        const y = padT + plotH - barH;
+
+        if (highlightBar) {
+          highlightBar.setAttribute('x', x);
+          highlightBar.setAttribute('y', y);
+          highlightBar.setAttribute('height', Math.max(barH, 3));
+          highlightBar.style.display = 'block';
+        }
+
+        const isSelected = item.date === state.selectedDate;
+
+        const html = `
+          <div class="chart-tooltip-title">📅 ${item.date} (${item.d}) ${isSelected ? '<span class="chart-tooltip-badge up">選択日</span>' : ''}</div>
+          <div class="chart-tooltip-row">
+            <span><span class="chart-tooltip-dot" style="background:var(--rose-deep);"></span>なろう閲覧数:</span>
+            <b>${item.pv.toLocaleString()} PV</b>
+          </div>
+        `;
+        showChartTooltip(clientX, clientY, html);
+      };
+
+      const handleLeave = () => {
+        if (highlightBar) highlightBar.style.display = 'none';
+        hideChartTooltip();
+      };
+
+      dailyWrap.addEventListener('mousemove', handleMove);
+      dailyWrap.addEventListener('pointermove', handleMove);
+      dailyWrap.addEventListener('mouseleave', handleLeave);
+      dailyWrap.addEventListener('pointerleave', handleLeave);
+    }
+
+    // --- 4. デバイス構成比 ドーナツグラフ & 凡例 ---
+    const donutContainer = document.getElementById('donutChartContainer');
+    if (donutContainer) {
+      const items = donutContainer.querySelectorAll('.donut-slice, .donut-legend-item');
+      items.forEach(el => {
+        const handleEnter = (e) => {
+          const name = el.dataset.name;
+          const pct = el.dataset.pct;
+          const pv = el.dataset.pv;
+          const color = el.dataset.color;
+          if (!name) return;
+
+          const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 200);
+          const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : 200);
+
+          const html = `
+            <div class="chart-tooltip-title">📱 デバイス構成比 (なろう)</div>
+            <div class="chart-tooltip-row">
+              <span><span class="chart-tooltip-dot" style="background:${color};"></span>${name}:</span>
+              <b>${pct}% (${Number(pv).toLocaleString()} PV)</b>
+            </div>
+          `;
+          showChartTooltip(clientX, clientY, html);
+        };
+
+        el.addEventListener('mouseenter', handleEnter);
+        el.addEventListener('pointerenter', handleEnter);
+        el.addEventListener('mouseleave', hideChartTooltip);
+        el.addEventListener('pointerleave', hideChartTooltip);
+      });
+    }
   }
 
   // ============================================================
