@@ -191,71 +191,64 @@
   }
 
   // ============================================================
-  // レンダリング: 本棚 (Bookshelf)
+  // レンダリング: 作品クイックセレクター (スクロール不要・書影なし)
   // ============================================================
-  function renderBookshelf() {
-    const shelf = document.getElementById('shelfScroll');
-    shelf.innerHTML = '';
+  function renderWorkSelector() {
+    const grid = document.getElementById('workSelectorGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
 
-    BOOKS.forEach(b => {
-      const card = document.createElement('button');
-      card.className = `book-card ${b.ncode === state.selectedNcode ? 'active' : ''}`;
-      card.dataset.ncode = b.ncode;
-      card.setAttribute('aria-label', b.title);
+    BOOKS.forEach((b, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `selector-btn ${b.ncode === state.selectedNcode ? 'active' : ''}`;
+      btn.dataset.ncode = b.ncode;
+      btn.setAttribute('aria-label', b.title);
 
       const pv = getBookPvOnDate(b, state.selectedDate);
       const cumul = getNaroCumulative(b) + getKakuCumulative(b);
+      const statusText = b.status === 'done' ? '完結' : '連載中';
+      const statusCls = b.status === 'done' ? 'done' : 'ongoing';
 
-      const statusBadge = b.prerelease 
-        ? `<span class="badge" style="background:rgba(28,54,36,0.85);color:#EAF5ED;">配信前</span>`
-        : b.hot 
-          ? `<span class="badge hot">急上昇</span>`
-          : `<span class="badge ${b.status === 'done' ? 'done' : 'ongoing'}">${b.status === 'done' ? '完結' : '連載中'}</span>`;
+      const isToday = state.selectedDate === TODAY_ISO;
+      const dateLabel = isToday ? '本日' : formatDisplayDate(state.selectedDate).slice(5);
 
-      const genreClass = b.genre === '歴史' ? 'history' : b.genre === '女性向け' ? 'josei' : 'dansei';
-      const genreBadge = b.genre ? `<span class="genre-badge ${genreClass}">${b.genre}</span>` : '';
-
-      const coverHtml = b.cover 
-        ? `<img class="book-cover-img" src="${b.cover}" alt="${b.shortTitle}" loading="lazy">`
-        : `<div class="book-cover-fallback"><div class="title-vert">${b.shortTitle}</div></div>`;
-
-      card.innerHTML = `
-        ${coverHtml}
-        <div class="book-badges">
-          ${statusBadge}
-          ${genreBadge}
+      btn.innerHTML = `
+        <div class="selector-btn-top">
+          <span class="selector-order">${b.order || idx + 1}</span>
+          <span class="selector-status ${statusCls}">${statusText}</span>
+          ${b.hot ? `<span class="badge hot" style="padding:1px 6px;font-size:9px;">急上昇</span>` : ''}
+          <span style="font-size:10px;color:var(--text-dim);margin-left:auto;">${b.genre || ''}</span>
         </div>
-        <div class="book-card-footer">
-          <div class="book-card-title">${b.shortTitle}</div>
-          <div class="book-card-pv">
-            <span>PV: <b>${pv.total.toLocaleString()}</b></span>
-            <span>累計: <b>${cumul.toLocaleString()}</b></span>
-          </div>
+        <div class="selector-title">${b.shortTitle}</div>
+        <div class="selector-meta">
+          <span>${dateLabel}: <b>${pv.total.toLocaleString()}</b> PV</span>
+          <span>累計: <b>${cumul.toLocaleString()}</b> PV</span>
         </div>
       `;
 
-      card.addEventListener('click', () => {
+      btn.addEventListener('click', () => {
         selectBook(b.ncode);
       });
 
-      shelf.appendChild(card);
+      grid.appendChild(btn);
     });
   }
 
   function selectBook(ncode) {
     state.selectedNcode = ncode;
     
-    // 本棚カードのアクティブ切り替え
-    const cards = document.querySelectorAll('.book-card');
-    cards.forEach(c => {
-      c.classList.toggle('active', c.dataset.ncode === ncode);
+    // セレクターボタンのアクティブ切り替え
+    const btns = document.querySelectorAll('.selector-btn');
+    btns.forEach(b => {
+      b.classList.toggle('active', b.dataset.ncode === ncode);
     });
 
     renderDetailPanel();
   }
 
   // ============================================================
-  // レンダリング: 作品詳細パネル (Detail Panel)
+  // レンダリング: 作品詳細パネル (Detail Panel - ここで書影画像を表示！)
   // ============================================================
   function renderDetailPanel() {
     const wrap = document.getElementById('detailPanel');
@@ -273,14 +266,22 @@
     const isToday = state.selectedDate === TODAY_ISO;
     const dateLabel = isToday ? '本日' : formatDisplayDate(state.selectedDate).slice(5);
 
+    // 書影画像のHTML
+    const coverHtml = b.cover ? `
+      <div class="detail-cover-wrap">
+        <img class="detail-cover-img" src="${b.cover}" alt="${b.shortTitle}">
+      </div>
+    ` : '';
+
     wrap.innerHTML = `
       <div class="detail-header">
+        ${coverHtml}
         <div class="detail-title-area">
           <h3>${b.title}</h3>
           ${b.mood ? `<div class="detail-mood">${b.mood}</div>` : ''}
           <div class="detail-tags">
             ${(b.tags || []).map(t => `<span class="tag">#${t}</span>`).join('')}
-            ${b.genre ? `<span class="tag" style="color:var(--rose-deep);font-weight:700;">${b.genre}</span>` : ''}
+            ${b.genre ? `<span class="tag" style="color:var(--green-deep);font-weight:700;">${b.genre}</span>` : ''}
             <span class="tag" style="color:var(--gold);font-weight:700;">${b.status === 'done' ? '完結済み' : '連載中'}</span>
           </div>
           <div class="detail-links">
@@ -907,7 +908,7 @@
   function onDateChanged() {
     renderDateToolbar();
     renderKpiSummary();
-    renderBookshelf();
+    renderWorkSelector();
     renderDetailPanel();
     renderTables();
   }
@@ -915,7 +916,7 @@
   // グローバル公開 (行クリックから詳細を開くため)
   window.selectBookApp = function (ncode) {
     selectBook(ncode);
-    const detailEl = document.getElementById('detailPanel');
+    const detailEl = document.getElementById('detailSection');
     if (detailEl) {
       detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

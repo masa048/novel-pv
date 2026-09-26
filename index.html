@@ -136,38 +136,8 @@
         </div>
       </section>
 
-      <!-- 本棚 (Bookshelf View) -->
-      <section class="shelf-section" aria-label="作品本棚">
-        <div class="section-head">
-          <h2>
-            <span>本棚一覧</span>
-          </h2>
-          <span class="en">Interactive Bookshelf</span>
-        </div>
-
-        <div class="shelf">
-          <div class="shelf-scroll" id="shelfScroll">
-            <!-- JavaScript で作品カードを動的描画 -->
-          </div>
-        </div>
-      </section>
-
-      <!-- 選択作品 詳細ダッシュボード -->
-      <section class="detail-section" aria-label="選択作品詳細">
-        <div class="section-head">
-          <h2>
-            <span>作品詳細アクセス解析</span>
-          </h2>
-          <span class="en">Work Performance Analytics</span>
-        </div>
-
-        <div class="detail-panel" id="detailPanel">
-          <!-- JavaScript で選択作品の詳細情報を描画 -->
-        </div>
-      </section>
-
-      <!-- 一覧比較テーブルセクション (3タブ) -->
-      <section class="table-section" aria-label="データ一覧テーブル">
+      <!-- ★ ファーストビュー最優先: 集計データ一覧テーブルセクション (3タブ) -->
+      <section class="table-section first-view" aria-label="データ一覧テーブル">
         <div class="section-head">
           <h2>
             <span>集計データ一覧</span>
@@ -198,10 +168,34 @@
           <span>低</span>
           <span class="legend-bar"></span>
           <span>高</span>
+          <span style="margin-left:auto;font-size:11px;color:var(--text-sub);">💡 行をクリックすると下の個別詳細を表示します</span>
         </div>
         <div style="font-size:11px;color:var(--text-dim);margin-top:8px;line-height:1.6;">
           ※小説家になろうはKASASAGIの当日時間帯別アクセスをリアルタイム集計しています。<br>
           ※カクヨムは公開ページに「累計PV」のみ提供されているため、本システムが1時間ごとの定期巡回で前日終値からの増分を自動追跡して本日PVを算出しています（計測開始時点を基準として、毎時のPV増加に応じてリアルタイムに加算・蓄積されます）。
+        </div>
+      </section>
+
+      <!-- 個別作品詳細 & 作品セレクター セクション -->
+      <section class="detail-section" id="detailSection" aria-label="個別作品詳細">
+        <div class="section-head">
+          <h2>
+            <span>作品別 詳細アクセス解析</span>
+          </h2>
+          <span class="en">Work Performance Analytics</span>
+        </div>
+
+        <!-- スクロール不要！一目で全作品を選べるクイックセレクター (書影なし) -->
+        <div class="work-selector-wrap" aria-label="作品切り替えセレクター">
+          <div class="selector-label">作品を選択:</div>
+          <div class="work-selector-grid" id="workSelectorGrid">
+            <!-- JavaScript で全作品のボタンを一括描画 -->
+          </div>
+        </div>
+
+        <!-- 選択作品 詳細ダッシュボード (ここで書影画像を表示) -->
+        <div class="detail-panel" id="detailPanel">
+          <!-- JavaScript で選択作品の詳細情報を描画 -->
         </div>
       </section>
 
