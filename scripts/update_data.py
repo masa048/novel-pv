@@ -448,40 +448,45 @@ def parse_kakuyomu(work_id):
 
 def track_kakuyomu_daily(work_id, total_pv, kakuyomu_daily_cache):
     """
-    カクヨムの累計PVのスナップショットを記録し、日別PV推移および今日のPVを算出
-    形式:
-      kakuyomu_daily_cache[work_id] = {
-        "snapshots": { "2026-09-24": 950, "2026-09-25": 980, "2026-09-26": 1019 }
-      }
+    カクヨムの累計PVのスナップショットを記録し、日別PV推移および今日のPVを算出。
+    カクヨム公式には未ログイン公開の「本日PV」がないため、
+    毎時実行で累計PVの差分（今日の増分）を自動集計・追跡します。
     """
     today_str = datetime.now(JST).strftime("%Y-%m-%d")
     work_entry = kakuyomu_daily_cache.setdefault(str(work_id), {})
-    snapshots = work_entry.setdefault("snapshots", {})
+    days = work_entry.setdefault("days", {})
 
-    # 今日の最新累計値を更新
-    snapshots[today_str] = total_pv
+    # 旧形式のマイグレーション
+    if "snapshots" in work_entry and not days:
+        for d_str, snap_val in work_entry["snapshots"].items():
+            days[d_str] = {"start": snap_val, "latest": snap_val}
 
-    # 日付昇順でソート
-    sorted_dates = sorted(snapshots.keys())
+    if today_str not in days:
+        # 今日の初回取得時: 前日の最新累計値があればそれを本日の開始値(start)に。
+        # 初回計測開始日なら今回の total_pv を start に設定。
+        sorted_prev = [d for d in sorted(days.keys()) if d < today_str]
+        prev_latest = days[sorted_prev[-1]]["latest"] if sorted_prev else total_pv
+        days[today_str] = {
+            "start": prev_latest,
+            "latest": total_pv
+        }
+    else:
+        # 同日内の2回目以降の実行時: 最新累計値を更新
+        days[today_str]["latest"] = total_pv
+
+    # 今日のPV = 本日最新累計値 - 本日開始時累計値（前日終値）
+    today_pv = max(0, days[today_str]["latest"] - days[today_str]["start"])
+
+    # 日別PV履歴（昇順）
     daily_history = []
-    
-    # 連続する日の差分から各日のPVを計算
-    for i in range(1, len(sorted_dates)):
-        prev_date = sorted_dates[i - 1]
-        curr_date = sorted_dates[i]
-        diff_pv = max(0, snapshots[curr_date] - snapshots[prev_date])
-        mm, dd = curr_date.split("-")[1:]
+    for d in sorted(days.keys()):
+        day_pv = max(0, days[d]["latest"] - days[d]["start"])
+        mm, dd = d.split("-")[1:]
         daily_history.append({
             "d": f"{int(mm)}/{int(dd)}",
-            "date": curr_date,
-            "pv": diff_pv,
+            "date": d,
+            "pv": day_pv,
         })
-
-    # 今日のPV (直前日のスナップショットとの差分。なければ 0)
-    today_pv = 0
-    if len(sorted_dates) >= 2 and sorted_dates[-1] == today_str:
-        yesterday_snapshot = snapshots[sorted_dates[-2]]
-        today_pv = max(0, total_pv - yesterday_snapshot)
 
     return {
         "dailyHistory": daily_history,
