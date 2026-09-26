@@ -5,7 +5,8 @@
       "comments": 0,
       "followers": 3,
       "reviewAvg": 3.0,
-      "reviewCount": 1
+      "reviewCount": 1,
+      "reviewPoints": 3
     }
   },
   "11054822662136045804": {
@@ -14,7 +15,8 @@
       "comments": 0,
       "followers": 3,
       "reviewAvg": null,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "reviewPoints": 0
     }
   },
   "11054822662704234108": {
@@ -23,7 +25,8 @@
       "comments": 0,
       "followers": 7,
       "reviewAvg": 3.0,
-      "reviewCount": 1
+      "reviewCount": 1,
+      "reviewPoints": 3
     }
   },
   "11054822662753158532": {
@@ -32,7 +35,8 @@
       "comments": 1,
       "followers": 344,
       "reviewAvg": 2.6,
-      "reviewCount": 42
+      "reviewCount": 42,
+      "reviewPoints": 111
     }
   },
   "11054822662829188082": {
@@ -41,7 +45,8 @@
       "comments": 0,
       "followers": 2,
       "reviewAvg": 3.0,
-      "reviewCount": 1
+      "reviewCount": 1,
+      "reviewPoints": 3
     }
   },
   "11054822662922790732": {
@@ -50,7 +55,8 @@
       "comments": 0,
       "followers": 3,
       "reviewAvg": null,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "reviewPoints": 0
     }
   },
   "11054822662997355534": {
@@ -59,7 +65,8 @@
       "comments": 0,
       "followers": 7,
       "reviewAvg": 2.5,
-      "reviewCount": 2
+      "reviewCount": 2,
+      "reviewPoints": 5
     }
   },
   "2912051607385465531": {
@@ -68,7 +75,8 @@
       "comments": 0,
       "followers": 11,
       "reviewAvg": 2.5,
-      "reviewCount": 2
+      "reviewCount": 2,
+      "reviewPoints": 5
     }
   },
   "2912051607786406834": {
@@ -77,7 +85,8 @@
       "comments": 6,
       "followers": 12,
       "reviewAvg": 2.5,
-      "reviewCount": 2
+      "reviewCount": 2,
+      "reviewPoints": 5
     }
   }
 }

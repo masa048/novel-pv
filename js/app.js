@@ -363,7 +363,7 @@
             </div>
             <div class="metric-item">
               <span class="m-label">レビュー評価</span>
-              <span class="m-value">${b.kakuyomu && b.kakuyomu.reviewAvg ? '★ ' + b.kakuyomu.reviewAvg : '-'}<span class="m-unit"></span></span>
+              <span class="m-value highlight-gold">★ ${(b.kakuyomu?.reviewPoints ?? 0).toLocaleString()} <span class="m-unit" style="font-size:12.5px;color:var(--text-sub);font-weight:600;">/ ${(b.kakuyomu?.reviewCount || 0).toLocaleString()}人</span></span>
             </div>
             <div class="metric-item">
               <span class="m-label">コメント数</span>

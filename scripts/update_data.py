@@ -403,6 +403,7 @@ def parse_kakuyomu_work_stats(work_id):
 
     return {
         "followers": followers,
+        "reviewPoints": review_point_sum,
         "reviewAvg": review_avg,
         "reviewCount": review_count,
         "comments": comments,
@@ -596,6 +597,7 @@ def render_book_data(book, kasasagi, kakuyomu, kakuyomu_daily, naro_cumulative, 
       dailyHistory: [{kakuyomu_hist_line}],
       episodes: [{ep_line}],
       followers: {kakuyomu.get("followers", 0)},
+      reviewPoints: {kakuyomu.get("reviewPoints", 0)},
       reviewAvg: {kakuyomu.get("reviewAvg") if kakuyomu.get("reviewAvg") is not None else "null"},
       reviewCount: {kakuyomu.get("reviewCount", 0)},
       comments: {kakuyomu.get("comments", 0)},
@@ -642,7 +644,7 @@ def render_prerelease_book(book):
     kakuyomu: {{
       workId: {js_string(book["kakuyomuId"])},
       todayPv: 0, totalPv: 0, periodStart: "", dailyHistory: [], episodes: [],
-      followers: 0, reviewAvg: null, reviewCount: 0, comments: 0, cheers: 0
+      followers: 0, reviewPoints: 0, reviewAvg: null, reviewCount: 0, comments: 0, cheers: 0
     }},
     hot: false,
     note: {js_string(release_note)},
