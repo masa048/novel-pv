@@ -85,14 +85,14 @@
     return (book.kakuyomu && book.kakuyomu.totalPv) ? book.kakuyomu.totalPv : 0;
   }
 
-  // ヒートマップ用の色補間
+  // ヒートマップ用の色補間 (優しいグリーン系パレット)
   function getHeatColor(ratio) {
-    // 薄紫 -> 桜色 -> 金茶 -> 深紅
+    // 淡い若草 -> 萌黄色 -> 常盤緑 -> 深い千歳緑
     const stops = [
-      { p: 0.0, c: [214, 204, 228] }, // #D6CCE4
-      { p: 0.35, c: [234, 165, 184] }, // #EAA5B8
-      { p: 0.7, c: [236, 217, 172] }, // #ECD9AC
-      { p: 1.0, c: [158, 56, 88] },   // #9E3858
+      { p: 0.0, c: [222, 240, 226] }, // #DEF0E2
+      { p: 0.35, c: [172, 222, 183] }, // #ACDEB7
+      { p: 0.7, c: [78, 174, 110] },  // #4EAE6E
+      { p: 1.0, c: [32, 98, 56] },    // #206238
     ];
     let lo = stops[0], hi = stops[stops.length - 1];
     for (let i = 0; i < stops.length - 1; i++) {
@@ -105,7 +105,7 @@
     const span = (hi.p - lo.p) || 1;
     const t = Math.max(0, Math.min(1, (ratio - lo.p) / span));
     const rgb = lo.c.map((v, idx) => Math.round(v + (hi.c[idx] - v) * t));
-    const textDark = ratio > 0.65 ? '#FFF' : '#3E2432';
+    const textDark = ratio > 0.65 ? '#FFF' : '#1C2D21';
     return { bg: `rgb(${rgb.join(',')})`, color: textDark };
   }
 
@@ -207,7 +207,7 @@
       const cumul = getNaroCumulative(b) + getKakuCumulative(b);
 
       const statusBadge = b.prerelease 
-        ? `<span class="badge" style="background:rgba(74,46,60,0.85);color:#F4E8EE;">配信前</span>`
+        ? `<span class="badge" style="background:rgba(28,54,36,0.85);color:#EAF5ED;">配信前</span>`
         : b.hot 
           ? `<span class="badge hot">急上昇</span>`
           : `<span class="badge ${b.status === 'done' ? 'done' : 'ongoing'}">${b.status === 'done' ? '完結' : '連載中'}</span>`;
@@ -680,7 +680,7 @@
     html += `
         </tbody>
         <tfoot>
-          <tr style="background:rgba(201,104,133,0.08);font-weight:700;">
+          <tr style="background:rgba(55,138,84,0.08);font-weight:700;">
             <td>合計 (${rowsData.length}作品)</td>
             <td>${sum(rowsData.map(r => r.naro)).toLocaleString()}</td>
             <td>${sum(rowsData.map(r => r.kaku)).toLocaleString()}</td>
@@ -755,7 +755,7 @@
     html += `
         </tbody>
         <tfoot>
-          <tr style="background:rgba(201,104,133,0.08);font-weight:700;">
+          <tr style="background:rgba(55,138,84,0.08);font-weight:700;">
             <td colspan="2">全作品累計合算</td>
             <td>${sum(naroVals).toLocaleString()}</td>
             <td>${sum(kakuVals).toLocaleString()}</td>

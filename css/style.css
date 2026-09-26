@@ -1,48 +1,55 @@
 /* ============================================================
    小説家になろう & カクヨム PVモニタ スタイルシート
-   和モダン・文芸調のプレミアムデザイン
+   和モダン・優しいグリーン調のプレミアムデザイン
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
 
 :root {
-  /* 明色テーマ (和風・文学調パレット) */
-  --bg-gradient: radial-gradient(ellipse at 15% -8%, #F5E6EB 0%, transparent 60%),
-                 radial-gradient(ellipse at 100% 15%, #EFE8F4 0%, transparent 55%),
-                 #F8F3F4;
-  --bg-color: #F8F3F4;
-  --panel-bg: rgba(255, 253, 252, 0.95);
+  /* 明色テーマ (優しい和モダン・グリーンパレット) */
+  --bg-gradient: radial-gradient(ellipse at 15% -8%, #E9F3EB 0%, transparent 60%),
+                 radial-gradient(ellipse at 100% 15%, #E3EFE6 0%, transparent 55%),
+                 #F1F7F3;
+  --bg-color: #F1F7F3;
+  --panel-bg: rgba(255, 255, 255, 0.95);
   --panel-card: #FFFFFF;
-  --panel-border: rgba(168, 85, 112, 0.16);
-  --panel-shadow: 0 10px 30px -10px rgba(74, 46, 60, 0.08), 0 2px 8px -2px rgba(74, 46, 60, 0.04);
+  --panel-border: rgba(52, 124, 78, 0.16);
+  --panel-shadow: 0 10px 30px -10px rgba(28, 58, 38, 0.07), 0 2px 8px -2px rgba(28, 58, 38, 0.03);
   
-  --text-main: #3E2432;
-  --text-sub: #7A5B6B;
-  --text-dim: #A88F9C;
-  --line-soft: rgba(74, 46, 60, 0.08);
+  --text-main: #1C2D21;
+  --text-sub: #486350;
+  --text-dim: #7C9683;
+  --line-soft: rgba(42, 80, 52, 0.08);
 
-  /* アクセントカラー */
-  --rose: #C96885;
-  --rose-deep: #9E3858;
-  --rose-glow: #F3B5C7;
-  --rose-light: #FDF0F3;
-  --plum: #462536;
-  --lilac: #7B6898;
-  --lilac-soft: #D6CCE4;
-  --lilac-light: #F4F1F8;
+  /* 優しいグリーン アクセント */
+  --green: #378A54;
+  --green-deep: #256B3E;
+  --green-glow: #BCE7CA;
+  --green-light: #EEF8F1;
+  --forest: #1A462A;
+
+  /* 変数エイリアス (一貫したグリーン統括用) */
+  --rose: var(--green);
+  --rose-deep: var(--green-deep);
+  --rose-glow: var(--green-glow);
+  --rose-light: var(--green-light);
+  --plum: var(--forest);
+  --lilac: #558763;
+  --lilac-soft: #C8E2CB;
+  --lilac-light: #EBF4EC;
   --gold: #B88E4B;
-  --gold-soft: #ECD9AC;
-  --gold-light: #FBF7EE;
-  --teal: #3E848C;
-  --teal-light: #EBF4F5;
+  --gold-soft: #EAD9B0;
+  --gold-light: #FBF8EE;
+  --teal: #2D7F75;
+  --teal-light: #E6F3F1;
 
   /* プラットフォーム色 */
-  --narou-color: #1F6F8B;
-  --narou-bg: rgba(31, 111, 139, 0.08);
-  --narou-border: rgba(31, 111, 139, 0.25);
-  --kakuyomu-color: #387D39;
-  --kakuyomu-bg: rgba(56, 125, 57, 0.08);
-  --kakuyomu-border: rgba(56, 125, 57, 0.25);
+  --narou-color: #216E87;
+  --narou-bg: rgba(33, 110, 135, 0.08);
+  --narou-border: rgba(33, 110, 135, 0.25);
+  --kakuyomu-color: #2A7E3A;
+  --kakuyomu-bg: rgba(42, 126, 58, 0.08);
+  --kakuyomu-border: rgba(42, 126, 58, 0.25);
 
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -54,30 +61,36 @@
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ダークモード */
+/* ダークモード (墨色・深緑の夜間モード) */
 [data-theme="dark"] {
-  --bg-gradient: radial-gradient(ellipse at 15% -8%, #2A1722 0%, transparent 60%),
-                 radial-gradient(ellipse at 100% 15%, #1C1526 0%, transparent 55%),
-                 #150F14;
-  --bg-color: #150F14;
-  --panel-bg: rgba(28, 20, 26, 0.94);
-  --panel-card: #231920;
-  --panel-border: rgba(220, 130, 160, 0.18);
+  --bg-gradient: radial-gradient(ellipse at 15% -8%, #14241A 0%, transparent 60%),
+                 radial-gradient(ellipse at 100% 15%, #102015 0%, transparent 55%),
+                 #0C160F;
+  --bg-color: #0C160F;
+  --panel-bg: rgba(18, 28, 20, 0.94);
+  --panel-card: #152218;
+  --panel-border: rgba(85, 175, 115, 0.18);
   --panel-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 2px 8px -2px rgba(0, 0, 0, 0.3);
 
-  --text-main: #F4E8EE;
-  --text-sub: #BAA1B0;
-  --text-dim: #7C6674;
-  --line-soft: rgba(244, 232, 238, 0.09);
+  --text-main: #EDF6EE;
+  --text-sub: #A2C1AA;
+  --text-dim: #65846C;
+  --line-soft: rgba(237, 246, 238, 0.08);
 
-  --rose: #E07D9B;
-  --rose-deep: #F19EBA;
-  --rose-glow: #70263D;
-  --rose-light: #2A161E;
-  --plum: #F2E4EC;
-  --lilac: #A996C8;
-  --lilac-soft: #483A5E;
-  --lilac-light: #221A2E;
+  --green: #4EBA77;
+  --green-deep: #66CB8C;
+  --green-glow: #1C462B;
+  --green-light: #152A1C;
+  --forest: #E5F3E7;
+
+  --rose: var(--green);
+  --rose-deep: var(--green-deep);
+  --rose-glow: var(--green-glow);
+  --rose-light: var(--green-light);
+  --plum: var(--forest);
+  --lilac: #7DB28B;
+  --lilac-soft: #2B4B32;
+  --lilac-light: #142417;
   --gold: #D6AC63;
   --gold-soft: #5C4722;
   --gold-light: #2A2112;
@@ -87,9 +100,9 @@
   --narou-color: #58B4D4;
   --narou-bg: rgba(88, 180, 212, 0.12);
   --narou-border: rgba(88, 180, 212, 0.3);
-  --kakuyomu-color: #72C773;
-  --kakuyomu-bg: rgba(114, 199, 115, 0.12);
-  --kakuyomu-border: rgba(114, 199, 115, 0.3);
+  --kakuyomu-color: #64C476;
+  --kakuyomu-bg: rgba(100, 196, 118, 0.12);
+  --kakuyomu-border: rgba(100, 196, 118, 0.3);
 }
 
 /* リセット & 基本設定 */
@@ -131,7 +144,7 @@ body {
 .header-left .eyebrow {
   font-size: 11px;
   letter-spacing: 0.28em;
-  color: var(--rose-deep);
+  color: var(--green-deep);
   font-weight: 700;
   margin-bottom: 6px;
   display: flex;
@@ -159,7 +172,7 @@ body {
   font-weight: 800;
   font-size: 32px;
   letter-spacing: 0.03em;
-  color: var(--plum);
+  color: var(--forest);
   display: flex;
   align-items: baseline;
   gap: 12px;
@@ -204,9 +217,9 @@ body {
 }
 
 .icon-btn:hover {
-  background: var(--rose-light);
-  color: var(--rose-deep);
-  border-color: var(--rose);
+  background: var(--green-light);
+  color: var(--green-deep);
+  border-color: var(--green);
   transform: translateY(-1px);
 }
 
@@ -219,7 +232,7 @@ body {
 }
 
 .header-date-badge .date-val {
-  color: var(--rose-deep);
+  color: var(--green-deep);
   font-weight: 700;
 }
 
@@ -248,7 +261,7 @@ body {
 
 .kpi-card:hover {
   transform: translateY(-2px);
-  border-color: var(--rose);
+  border-color: var(--green);
 }
 
 .kpi-card::before {
@@ -258,12 +271,12 @@ body {
   left: 0;
   width: 4px;
   height: 100%;
-  background: var(--rose);
+  background: var(--green);
 }
 
 .kpi-card.narou::before { background: var(--narou-color); }
 .kpi-card.kakuyomu::before { background: var(--kakuyomu-color); }
-.kpi-card.total::before { background: linear-gradient(180deg, var(--rose), var(--gold)); }
+.kpi-card.total::before { background: linear-gradient(180deg, var(--green), var(--gold)); }
 
 .kpi-title {
   font-size: 11.5px;
@@ -286,7 +299,7 @@ body {
   font-family: var(--font-serif);
   font-size: 30px;
   font-weight: 800;
-  color: var(--plum);
+  color: var(--forest);
   line-height: 1;
 }
 
@@ -346,12 +359,12 @@ body {
   font-family: var(--font-serif);
   font-weight: 700;
   font-size: 15px;
-  color: var(--plum);
+  color: var(--forest);
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 4px 10px;
-  background: var(--rose-light);
+  background: var(--green-light);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-sm);
 }
@@ -374,16 +387,16 @@ body {
 }
 
 .date-btn:hover {
-  background: var(--rose-light);
-  color: var(--rose-deep);
-  border-color: var(--rose);
+  background: var(--green-light);
+  color: var(--green-deep);
+  border-color: var(--green);
 }
 
 .date-btn.active {
-  background: var(--rose-deep);
+  background: var(--green-deep);
   color: #FFFFFF;
-  border-color: var(--rose-deep);
-  box-shadow: 0 2px 6px rgba(158, 56, 88, 0.35);
+  border-color: var(--green-deep);
+  box-shadow: 0 2px 6px rgba(37, 107, 62, 0.35);
 }
 
 .date-toolbar-right {
@@ -414,8 +427,8 @@ body {
 }
 
 .date-input:focus {
-  border-color: var(--rose);
-  box-shadow: 0 0 0 3px rgba(201, 104, 133, 0.2);
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(55, 138, 84, 0.2);
 }
 
 /* ============================================================
@@ -437,7 +450,7 @@ body {
   font-family: var(--font-serif);
   font-size: 20px;
   font-weight: 700;
-  color: var(--plum);
+  color: var(--forest);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -452,7 +465,7 @@ body {
 
 .shelf {
   position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent 45%), var(--panel-bg);
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent 45%), var(--panel-bg);
   border-radius: var(--radius-lg);
   border: 1px solid var(--panel-border);
   padding: 26px 22px 22px;
@@ -488,7 +501,7 @@ body {
 }
 
 .shelf-scroll::-webkit-scrollbar-thumb {
-  background: var(--gold);
+  background: var(--green);
   border-radius: 4px;
 }
 
@@ -512,7 +525,7 @@ body {
   z-index: 1;
   display: block;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
-  box-shadow: 2px 6px 14px rgba(74, 46, 60, 0.22);
+  box-shadow: 2px 6px 14px rgba(28, 48, 32, 0.22);
   background: var(--panel-card);
 }
 
@@ -520,18 +533,18 @@ body {
   content: '';
   display: block;
   width: 100%;
-  padding-top: 142%; /* ほぼ文庫本比率 */
+  padding-top: 142%; /* 文庫本比率 */
 }
 
 .book-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 24px -6px rgba(74, 46, 60, 0.32);
+  box-shadow: 0 12px 24px -6px rgba(28, 48, 32, 0.32);
 }
 
 .book-card.active {
   transform: translateY(-12px);
-  box-shadow: 0 16px 30px -8px rgba(158, 56, 88, 0.45);
-  outline: 3px solid var(--rose-deep);
+  box-shadow: 0 16px 30px -8px rgba(37, 107, 62, 0.45);
+  outline: 3px solid var(--green-deep);
   outline-offset: 2px;
 }
 
@@ -553,7 +566,7 @@ body {
   justify-content: center;
   padding: 16px;
   text-align: center;
-  background: linear-gradient(145deg, #7A5B6B, #462536);
+  background: linear-gradient(145deg, #4A6E53, #1E462A);
 }
 
 .book-cover-fallback .title-vert {
@@ -590,9 +603,9 @@ body {
   backdrop-filter: blur(4px);
 }
 
-.badge.ongoing { background: rgba(30, 41, 59, 0.75); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.4); }
+.badge.ongoing { background: rgba(24, 46, 32, 0.78); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.4); }
 .badge.done { background: rgba(255, 255, 255, 0.92); color: var(--gold); border: 1px solid var(--gold); }
-.badge.hot { background: var(--rose-deep); color: #FFFFFF; box-shadow: 0 3px 8px rgba(158, 56, 88, 0.6); }
+.badge.hot { background: var(--green-deep); color: #FFFFFF; box-shadow: 0 3px 8px rgba(37, 107, 62, 0.6); }
 
 .genre-badge {
   font-size: 8.5px;
@@ -603,8 +616,8 @@ body {
 }
 
 .genre-badge.history { background: rgba(184, 142, 75, 0.92); color: #FFFFFF; }
-.genre-badge.josei { background: rgba(201, 104, 133, 0.92); color: #FFFFFF; }
-.genre-badge.dansei { background: rgba(123, 104, 152, 0.92); color: #FFFFFF; }
+.genre-badge.josei { background: rgba(55, 138, 84, 0.92); color: #FFFFFF; }
+.genre-badge.dansei { background: rgba(75, 115, 90, 0.92); color: #FFFFFF; }
 
 .book-card-footer {
   position: absolute;
@@ -612,7 +625,7 @@ body {
   right: 0;
   bottom: 0;
   padding: 10px 10px 8px;
-  background: linear-gradient(180deg, transparent 0%, rgba(15, 10, 14, 0.85) 60%);
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 20, 14, 0.88) 60%);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -634,7 +647,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--gold-soft);
+  color: var(--green-glow);
   font-weight: 600;
 }
 
@@ -670,7 +683,7 @@ body {
   font-family: var(--font-serif);
   font-size: 22px;
   font-weight: 700;
-  color: var(--plum);
+  color: var(--forest);
   line-height: 1.45;
   margin-bottom: 10px;
 }
@@ -797,11 +810,12 @@ body {
   font-family: var(--font-serif);
   font-size: 21px;
   font-weight: 700;
-  color: var(--plum);
+  color: var(--forest);
   line-height: 1.1;
 }
 
-.metric-item .m-value.highlight-rose { color: var(--rose-deep); }
+.metric-item .m-value.highlight-green { color: var(--green-deep); }
+.metric-item .m-value.highlight-rose { color: var(--green-deep); }
 .metric-item .m-value.highlight-gold { color: var(--gold); }
 
 .metric-item .m-unit {
@@ -845,7 +859,7 @@ body {
 .chart-title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--plum);
+  color: var(--forest);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -944,12 +958,12 @@ body {
 }
 
 .tab-btn:hover {
-  color: var(--rose-deep);
-  background: var(--rose-light);
+  color: var(--green-deep);
+  background: var(--green-light);
 }
 
 .tab-btn.active {
-  color: var(--rose-deep);
+  color: var(--green-deep);
   font-weight: 800;
   background: var(--panel-card);
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
@@ -985,13 +999,13 @@ th:first-child, td:first-child {
 thead th {
   font-family: var(--font-serif);
   font-weight: 700;
-  color: var(--plum);
+  color: var(--forest);
   background: rgba(255,255,255,0.4);
   font-size: 12.5px;
 }
 
 tbody tr:hover {
-  background: rgba(201, 104, 133, 0.05);
+  background: rgba(55, 138, 84, 0.05);
 }
 
 .cell-pill {
@@ -1006,7 +1020,7 @@ tbody tr:hover {
 .row-total {
   font-weight: 700;
   font-family: var(--font-serif);
-  color: var(--rose-deep);
+  color: var(--green-deep);
   font-size: 13.5px;
 }
 
@@ -1024,7 +1038,7 @@ tbody tr:hover {
   width: 80px;
   height: 8px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #D6CCE4, #EAA5B8, #ECD9AC, #9E3858);
+  background: linear-gradient(90deg, #D4ECD8, #8CD4A0, #46A868, #1E5C34);
 }
 
 /* ============================================================
@@ -1033,7 +1047,7 @@ tbody tr:hover {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(30, 20, 28, 0.65);
+  background: rgba(14, 26, 18, 0.68);
   backdrop-filter: blur(6px);
   z-index: 1000;
   display: flex;
@@ -1082,13 +1096,13 @@ tbody tr:hover {
 }
 
 .modal-close-btn:hover {
-  color: var(--rose-deep);
+  color: var(--green-deep);
 }
 
 .modal-content h3 {
   font-family: var(--font-serif);
   font-size: 20px;
-  color: var(--plum);
+  color: var(--forest);
   margin-bottom: 16px;
 }
 
@@ -1122,7 +1136,7 @@ tbody tr:hover {
 }
 
 .footer a {
-  color: var(--rose-deep);
+  color: var(--green-deep);
   text-decoration: none;
 }
 .footer a:hover {
