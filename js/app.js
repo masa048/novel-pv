@@ -217,8 +217,8 @@
         <div class="selector-btn-top">
           <span class="selector-order">${b.order || idx + 1}</span>
           <span class="selector-status ${statusCls}">${statusText}</span>
-          ${b.hot ? `<span class="badge hot" style="padding:1px 6px;font-size:9px;">急上昇</span>` : ''}
-          <span style="font-size:10px;color:var(--text-dim);margin-left:auto;">${b.genre || ''}</span>
+          ${b.hot ? `<span class="badge hot" style="padding:2px 7px;font-size:12px;font-weight:700;">急上昇</span>` : ''}
+          <span style="font-size:12px;color:var(--text-dim);margin-left:auto;font-weight:500;">${b.genre || ''}</span>
         </div>
         <div class="selector-title">${b.shortTitle}</div>
         <div class="selector-meta">
@@ -305,7 +305,7 @@
               <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--narou-color);"></span>
               小説家になろう
             </span>
-            <span style="font-size:11px;color:var(--text-dim);">Nコード: ${b.ncode}</span>
+            <span style="font-size:12.5px;color:var(--text-dim);font-weight:500;">Nコード: ${b.ncode}</span>
           </div>
           <div class="platform-metrics-row">
             <div class="metric-item">
@@ -342,7 +342,7 @@
               <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--kakuyomu-color);"></span>
               カクヨム
             </span>
-            <span style="font-size:11px;color:var(--text-dim);">${b.kakuyomu ? '作品ID: ' + b.kakuyomu.workId : ''}</span>
+            <span style="font-size:12.5px;color:var(--text-dim);font-weight:500;">${b.kakuyomu ? '作品ID: ' + b.kakuyomu.workId : ''}</span>
           </div>
           <div class="platform-metrics-row">
             <div class="metric-item">
@@ -401,7 +401,7 @@
       <div class="wide-chart-card">
         <div class="chart-head">
           <span class="chart-title">📈 カクヨム 話数別 累計PV（読了定着カーブ・全${b.kakuyomu.episodes.length}話）</span>
-          <span style="font-size:11.5px;color:var(--text-sub);">第1話〜最新話までの読者推移</span>
+          <span style="font-size:12.5px;color:var(--text-sub);">第1話〜最新話までの読者推移</span>
         </div>
         ${renderRetentionSvg(b.kakuyomu.episodes, 'var(--kakuyomu-color)')}
       </div>` : ''}
@@ -411,7 +411,7 @@
       <div class="wide-chart-card">
         <div class="chart-head">
           <span class="chart-title">📅 なろう 日別PV推移（全期間）</span>
-          <span style="font-size:11.5px;color:var(--text-sub);">連載開始日〜現在までの日次推移</span>
+          <span style="font-size:12.5px;color:var(--text-sub);">連載開始日〜現在までの日次推移</span>
         </div>
         ${renderDailyHistorySvg(b.narou.dailyHistory)}
       </div>` : ''}
@@ -424,9 +424,9 @@
         </div>
         <div style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;padding-right:6px;">
           ${b.rankHistory.map(h => `
-            <div style="display:grid;grid-template-columns:90px 1fr 70px 24px;gap:10px;align-items:center;padding:7px 10px;background:var(--bg-color);border-radius:var(--radius-sm);font-size:11.5px;">
+            <div style="display:grid;grid-template-columns:90px 1fr 70px 24px;gap:10px;align-items:center;padding:8px 10px;background:var(--bg-color);border-radius:var(--radius-sm);font-size:12.5px;">
               <span style="color:var(--text-dim);font-family:var(--font-serif);">${h.date}</span>
-              <span style="font-weight:600;color:var(--plum);">${h.label} ${h.note ? `<span style="font-size:10.5px;color:var(--text-dim);margin-left:4px;">${h.note}</span>` : ''}</span>
+              <span style="font-weight:600;color:var(--plum);">${h.label} ${h.note ? `<span style="font-size:12px;color:var(--text-dim);margin-left:4px;">${h.note}</span>` : ''}</span>
               <span style="font-weight:700;color:var(--rose-deep);text-align:right;">${h.rank}位</span>
               <span style="text-align:center;">${h.source === 'auto' ? '🤖' : '✍️'}</span>
             </div>
@@ -466,7 +466,7 @@
     // 時間軸ラベル (0, 6, 12, 18, 23時)
     const axisLabels = [0, 6, 12, 18, 23].map(hour => {
       const x = padL + (hour / 23) * plotW;
-      return `<text x="${x}" y="${h - 6}" font-size="10" fill="var(--text-dim)" text-anchor="middle">${hour}時</text>`;
+      return `<text x="${x}" y="${h - 6}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="middle">${hour}時</text>`;
     }).join('');
 
     return `
@@ -532,15 +532,15 @@
         <div class="donut-legend-list">
           <div class="donut-legend-item">
             <span><span class="donut-dot" style="background:var(--rose-deep);"></span>スマートフォン</span>
-            <b>${spPct}% <span style="font-weight:normal;font-size:10px;color:var(--text-dim);">(${sp.toLocaleString()}PV)</span></b>
+            <b>${spPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${sp.toLocaleString()}PV)</span></b>
           </div>
           <div class="donut-legend-item">
             <span><span class="donut-dot" style="background:var(--narou-color);"></span>パソコン (PC)</span>
-            <b>${pcPct}% <span style="font-weight:normal;font-size:10px;color:var(--text-dim);">(${pc.toLocaleString()}PV)</span></b>
+            <b>${pcPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${pc.toLocaleString()}PV)</span></b>
           </div>
           <div class="donut-legend-item">
             <span><span class="donut-dot" style="background:var(--gold);"></span>公式アプリ</span>
-            <b>${appPct}% <span style="font-weight:normal;font-size:10px;color:var(--text-dim);">(${app.toLocaleString()}PV)</span></b>
+            <b>${appPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${app.toLocaleString()}PV)</span></b>
           </div>
         </div>
       </div>
@@ -575,8 +575,8 @@
         <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
         <polygon points="${areaPts}" fill="url(#retGrad)" />
         <polyline points="${pts}" fill="none" stroke="${strokeColor}" stroke-width="2.5" stroke-linejoin="round" />
-        <text x="${padL}" y="${h - 5}" font-size="10" fill="var(--text-dim)">第1話 (${episodes[0].toLocaleString()}PV)</text>
-        <text x="${w - padR}" y="${h - 5}" font-size="10" fill="var(--text-dim)" text-anchor="end">最新 ${n}話 (${episodes[n - 1].toLocaleString()}PV)</text>
+        <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">第1話 (${episodes[0].toLocaleString()}PV)</text>
+        <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">最新 ${n}話 (${episodes[n - 1].toLocaleString()}PV)</text>
       </svg>
     `;
   }
@@ -607,8 +607,8 @@
       <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart">
         <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
         ${bars}
-        <text x="${padL}" y="${h - 5}" font-size="10" fill="var(--text-dim)">${dailyHistory[0].d}</text>
-        <text x="${w - padR}" y="${h - 5}" font-size="10" fill="var(--text-dim)" text-anchor="end">${dailyHistory[n - 1].d}</text>
+        <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">${dailyHistory[0].d}</text>
+        <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">${dailyHistory[n - 1].d}</text>
       </svg>
     `;
   }
@@ -745,7 +745,7 @@
               <b>${r.book.shortTitle}</b>
             </div>
           </td>
-          <td><span style="font-size:11px;color:var(--text-sub);">${r.book.status === 'done' ? '完結' : '連載中'}</span></td>
+          <td><span style="font-size:12.5px;color:var(--text-sub);font-weight:600;">${r.book.status === 'done' ? '完結' : '連載中'}</span></td>
           <td><span class="cell-pill" style="background:${heatNaro.bg};color:${heatNaro.color};">${r.naro.toLocaleString()}</span></td>
           <td><span class="cell-pill" style="background:${heatKaku.bg};color:${heatKaku.color};">${r.kaku.toLocaleString()}</span></td>
           <td class="row-total">${r.total.toLocaleString()}</td>
@@ -784,8 +784,8 @@
     const dateHeaders = recentDates.map(dIso => {
       const [y, m, d] = dIso.split('-').map(Number);
       const dow = new Date(y, m - 1, d).getDay();
-      const dowCls = dow === 6 ? 'color:#2563EB;' : dow === 0 ? 'color:#DC2626;' : '';
-      return `<th>${m}/${d}<br><span style="font-size:10px;${dowCls}">(${DOW_JP[dow]})</span></th>`;
+      const dowCls = dow === 6 ? 'color:#1D4ED8;font-weight:700;' : dow === 0 ? 'color:#B91C1C;font-weight:700;' : 'font-weight:600;';
+      return `<th>${m}/${d}<br><span style="font-size:12px;${dowCls}">(${DOW_JP[dow]})</span></th>`;
     }).join('');
 
     let rowsHtml = BOOKS.map(b => {
