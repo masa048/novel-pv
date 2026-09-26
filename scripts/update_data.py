@@ -73,7 +73,7 @@ def load_json_cache(path):
 def save_json_cache(path, cache):
     """JSONキャッシュを保存"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(cache, f, ensure_ascii=False, indent=2, sort_keys=True)
 
 
@@ -784,7 +784,7 @@ const BOOKS = [
 ];
 """
 
-    with open("data.js", "w", encoding="utf-8") as f:
+    with open("data.js", "w", encoding="utf-8", newline="\n") as f:
         f.write(output)
 
     print(f"Wrote data.js with {len(rendered_books)} books.", file=sys.stderr)
