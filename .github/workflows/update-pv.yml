@@ -1,0 +1,51 @@
+name: Update Novel PV
+
+on:
+  schedule:
+    # 1時間に1回実行（GitHub Actionsの混雑を避けるため毎時23分に設定）
+    - cron: '23 * * * *'
+  # GitHub上の「Run workflow」ボタンから手動でいつでも実行可能
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-pv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run PV Scraper & Aggregator
+        run: python scripts/update_data.py
+
+      - name: Commit and push changes if updated
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # 更新対象のファイルをステージング
+          git add data.js scripts/*.json
+          
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: auto-update PV data ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+            # 他のコミットとの競合を防止してリトライ
+            for i in 1 2 3; do
+              git pull --rebase --autostash origin main && git push && break
+              echo "Push failed, retrying in 5 seconds (attempt $i)..."
+              sleep 5
+            done
+          else
+            echo "No data changes detected. Skipping commit."
+          fi

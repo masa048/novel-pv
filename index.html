@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本棚 PVモニタ — 小説家になろう × カクヨム リアルタイムアクセス解析</title>
+  <meta name="description" content="小説家になろうとカクヨムに投稿した自作のPVを1時間おきに自動集計・追跡するWebダッシュボード。今日・日付指定PV、累計PV、読了率、ランキング推移を美しく可視化します。">
+  <meta name="keywords" content="小説家になろう, カクヨム, PVチェッカー, アクセス解析, 小説執筆, GitHub Pages">
+  <meta name="theme-color" content="#462536">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="wrap">
+    
+    <!-- サイトヘッダー -->
+    <header class="header">
+      <div class="header-left">
+        <div class="eyebrow">
+          <span class="badge-pulse"></span>
+          <span>NOVEL ACCESS MONITOR</span>
+        </div>
+        <h1>
+          本棚 PVモニタ
+          <span class="sub-title">小説家になろう × カクヨム リアルタイム解析</span>
+        </h1>
+      </div>
+
+      <div class="header-right">
+        <div class="header-controls">
+          <button id="themeToggleBtn" class="icon-btn" aria-label="テーマ切り替え">
+            🌙 墨色モード
+          </button>
+          <button id="guideModalBtn" class="icon-btn" aria-label="設定ガイドを開く">
+            ⚙️ 作品設定・公開手順
+          </button>
+        </div>
+        <div class="header-date-badge">
+          <span>最終取得:</span>
+          <span id="lastUpdated" class="date-val">取得中...</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      
+      <!-- KPI 全体サマリーグリッド -->
+      <section class="kpi-section" aria-label="全体サマリー">
+        <div class="kpi-grid">
+          
+          <!-- 指定日(本日)の総PV -->
+          <div class="kpi-card total" id="kpiDateTotalCard">
+            <div class="kpi-title">
+              <span id="kpiDateTotalTitle">本日の総閲覧数 (PV)</span>
+              <span style="font-size:16px;">📊</span>
+            </div>
+            <div class="kpi-value-wrap">
+              <span class="kpi-value" id="kpiDateTotalVal">0</span>
+              <span class="kpi-unit">PV</span>
+            </div>
+            <div class="kpi-sub">
+              <span class="sub-tag narou" id="kpiDateNaroSub">なろう: 0 PV</span>
+              <span class="sub-tag kakuyomu" id="kpiDateKakuSub">カクヨム: 0 PV</span>
+            </div>
+          </div>
+
+          <!-- 全作品 累計総PV -->
+          <div class="kpi-card" id="kpiCumulCard">
+            <div class="kpi-title">
+              <span>全期間 累計総PV</span>
+              <span style="font-size:16px;">📚</span>
+            </div>
+            <div class="kpi-value-wrap">
+              <span class="kpi-value" id="kpiCumulTotalVal">0</span>
+              <span class="kpi-unit">PV</span>
+            </div>
+            <div class="kpi-sub">
+              <span class="sub-tag narou" id="kpiCumulNaroSub">なろう: 0 PV</span>
+              <span class="sub-tag kakuyomu" id="kpiCumulKakuSub">カクヨム: 0 PV</span>
+            </div>
+          </div>
+
+          <!-- 登録作品数 -->
+          <div class="kpi-card" id="kpiWorksCard">
+            <div class="kpi-title">
+              <span>監視中作品数</span>
+              <span style="font-size:16px;">📑</span>
+            </div>
+            <div class="kpi-value-wrap">
+              <span class="kpi-value" id="kpiWorksCountVal">0</span>
+              <span class="kpi-unit">作品</span>
+            </div>
+            <div class="kpi-sub">
+              <span>1時間に1回 自動取得・同期中</span>
+            </div>
+          </div>
+
+          <!-- 本日のトップ作品 -->
+          <div class="kpi-card" id="kpiTopCard">
+            <div class="kpi-title">
+              <span>最多閲覧作品 (本日)</span>
+              <span style="font-size:16px;">✨</span>
+            </div>
+            <div style="font-family:var(--font-serif);font-size:16px;font-weight:700;color:var(--plum);margin-bottom:6px;line-height:1.3;" id="kpiTopBookTitle">
+              -
+            </div>
+            <div class="kpi-sub">
+              <span style="color:var(--rose-deep);font-weight:700;" id="kpiTopBookPv">0 PV</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 日付指定 コントロールバー (コア機能) -->
+      <section class="date-toolbar" aria-label="日付指定コントローラー">
+        <div class="date-toolbar-left">
+          <div class="date-status-badge" id="selectedDateStatus">
+            📅 <b>集計日を読み込み中...</b>
+          </div>
+          <div class="date-btn-group">
+            <button type="button" id="btnDateToday" class="date-btn active">今日</button>
+            <button type="button" id="btnDateYesterday" class="date-btn">昨日</button>
+            <button type="button" id="btnPrevDay" class="date-btn" title="前の日へ">← 前日</button>
+            <button type="button" id="btnNextDay" class="date-btn" title="次の日へ">翌日 →</button>
+          </div>
+        </div>
+
+        <div class="date-toolbar-right">
+          <div class="date-picker-wrap">
+            <label for="datePicker">日付指定:</label>
+            <input type="date" id="datePicker" class="date-input" aria-label="集計日付の指定">
+          </div>
+        </div>
+      </section>
+
+      <!-- 本棚 (Bookshelf View) -->
+      <section class="shelf-section" aria-label="作品本棚">
+        <div class="section-head">
+          <h2>
+            <span>本棚一覧</span>
+          </h2>
+          <span class="en">Interactive Bookshelf</span>
+        </div>
+
+        <div class="shelf">
+          <div class="shelf-scroll" id="shelfScroll">
+            <!-- JavaScript で作品カードを動的描画 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 選択作品 詳細ダッシュボード -->
+      <section class="detail-section" aria-label="選択作品詳細">
+        <div class="section-head">
+          <h2>
+            <span>作品詳細アクセス解析</span>
+          </h2>
+          <span class="en">Work Performance Analytics</span>
+        </div>
+
+        <div class="detail-panel" id="detailPanel">
+          <!-- JavaScript で選択作品の詳細情報を描画 -->
+        </div>
+      </section>
+
+      <!-- 一覧比較テーブルセクション (3タブ) -->
+      <section class="table-section" aria-label="データ一覧テーブル">
+        <div class="section-head">
+          <h2>
+            <span>集計データ一覧</span>
+          </h2>
+          <span class="en">Cross-Platform Tables</span>
+        </div>
+
+        <div class="table-tabs" role="tablist">
+          <button class="tab-btn active" data-tab="daily" role="tab" id="tabBtnDaily">
+            📅 指定日(今日)の作品別PV
+          </button>
+          <button class="tab-btn" data-tab="cumulative" role="tab" id="tabBtnCumulative">
+            📚 全期間 累計PV一覧
+          </button>
+          <button class="tab-btn" data-tab="history" role="tab" id="tabBtnHistory">
+            📈 直近7日間の日別PV推移
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <div id="tabDailyTable" style="display:block;"></div>
+          <div id="tabCumulativeTable" style="display:none;"></div>
+          <div id="tabHistoryTable" style="display:none;"></div>
+        </div>
+
+        <div class="table-legend">
+          <span>PV熱度（相対値）:</span>
+          <span>低</span>
+          <span class="legend-bar"></span>
+          <span>高</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+      <p>
+        データ出典：KASASAGI（小説家になろう アクセス解析）／ なろう公式API ／ カクヨム作品ページ<br>
+        1時間に1回 GitHub Actions が自動巡回・更新しています。
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- 作品設定・GitHub Pages公開ガイド モーダル -->
+  <div class="modal-overlay" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="guideCloseBtn" aria-label="閉じる">&times;</button>
+      <h3 id="guideTitle">本棚 PVモニタ 設定＆公開ガイド</h3>
+      
+      <h4>1. 自分の作品を追加・変更する方法</h4>
+      <p>
+        リポジトリ直下の <code>config.json</code> を開いて、ご自身の作品のなろうNコード (<code>ncode</code>) とカクヨム作品ID (<code>kakuyomuId</code>) を編集・追加してください。
+      </p>
+      <pre><code>{
+  "books": [
+    {
+      "ncode": "n1234ab", // なろうの作品URLにあるNコード (例: n1234ab)
+      "kakuyomuId": "1681692786028123456", // カクヨムのURLにある作品ID
+      "title": "作品の正式タイトル",
+      "shortTitle": "本棚に表示する短縮タイトル",
+      "status": "ongoing", // "ongoing" (連載中) または "done" (完結)
+      "genre": "女性向け", // "女性向け", "男性向け", "歴史", "ファンタジー" 等
+      "order": 1, // 本棚の並び順
+      "cover": "covers/my_cover.jpg", // 書影画像 (なしでも美しい和風装丁になります)
+      "tags": ["異世界", "ざまぁ", "溺愛"],
+      "mood": "作品の雰囲気・キャッチコピー"
+    }
+  ]
+}</code></pre>
+
+      <h4>2. GitHub Pages の公開手順</h4>
+      <ol style="margin-left: 20px; margin-bottom: 16px;">
+        <li>本フォルダの内容をご自身の GitHub リポジトリ（例: <code>novel-pv</code>）にプッシュします。</li>
+        <li>GitHubリポジトリの <b>Settings</b> &gt; <b>Pages</b> を開きます。</li>
+        <li><b>Build and deployment</b> の Source で <code>Deploy from a branch</code> を選択します。</li>
+        <li>Branch で <code>main</code> ブランチ、フォルダは <code>/ (root)</code> を選んで <b>Save</b> を押します。</li>
+        <li>数分で <code>https://&lt;ユーザー名&gt;.github.io/&lt;リポジトリ名&gt;/</code> でWebサイトが世界に公開されます！</li>
+      </ol>
+
+      <h4>3. 1時間ごとの自動取得 (GitHub Actions)</h4>
+      <p>
+        <code>.github/workflows/update-pv.yml</code> が設定されているため、GitHubにプッシュするだけで、GitHubのサーバーが1時間に1回自動で最新のPVを取得し、サイトを自動更新します。
+      </p>
+      <p>
+        今すぐ手動で更新したいときは、GitHubリポジトリの <b>Actions</b> タブ &gt; <b>Update Novel PV</b> &gt; <b>Run workflow</b> を押すと約1分で最新データが反映されます。
+      </p>
+    </div>
+  </div>
+
+  <!-- 集計データスクリプト -->
+  <script src="data.js"></script>
+  <!-- アプリケーションロジック -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
