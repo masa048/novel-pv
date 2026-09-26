@@ -69,6 +69,33 @@
     return `${parts[0]}年${parseInt(parts[1])}月${parseInt(parts[2])}日 (${dow})`;
   }
 
+  // 連載開始日関連ユーティリティ
+  function formatStartDate(isoStr) {
+    if (!isoStr) return '-';
+    const parts = isoStr.split('-');
+    if (parts.length !== 3) return isoStr;
+    return `${parts[0]}/${parts[1]}/${parts[2]}`;
+  }
+
+  function formatStartDateShort(isoStr) {
+    if (!isoStr) return '';
+    const parts = isoStr.split('-');
+    if (parts.length !== 3) return isoStr;
+    return `${parseInt(parts[1])}/${parseInt(parts[2])}`;
+  }
+
+  // 指定日までの経過日数を算出（連載開始当日を1日目とする）
+  function getDaysElapsed(startDateStr, targetDateStr = state.selectedDate) {
+    if (!startDateStr) return null;
+    const [sy, sm, sd] = startDateStr.split('-').map(Number);
+    const [ty, tm, td] = targetDateStr.split('-').map(Number);
+    const start = new Date(sy, sm - 1, sd);
+    const target = new Date(ty, tm - 1, td);
+    const diffMs = target.getTime() - start.getTime();
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
+    return Math.max(1, diffDays);
+  }
+
   function sum(arr) {
     return arr.reduce((a, b) => a + b, 0);
   }
@@ -251,11 +278,15 @@
 
       const isToday = state.selectedDate === TODAY_ISO;
       const dateLabel = isToday ? '本日' : formatDisplayDate(state.selectedDate).slice(5);
+      const epCount = b.episodes || 0;
+      const startShort = formatStartDateShort(b.startDate);
 
       btn.innerHTML = `
         <div class="selector-btn-top">
           <span class="selector-order">${b.order || idx + 1}</span>
           <span class="selector-status ${statusCls}">${statusText}</span>
+          ${epCount > 0 ? `<span class="selector-episodes">全${epCount}話</span>` : ''}
+          ${startShort ? `<span class="selector-start-date">${startShort}〜</span>` : ''}
           ${b.hot ? `<span class="badge hot" style="padding:2px 7px;font-size:12px;font-weight:700;">急上昇</span>` : ''}
           <span style="font-size:12px;color:var(--text-dim);margin-left:auto;font-weight:500;">${b.genre || ''}</span>
         </div>
@@ -304,6 +335,9 @@
 
     const isToday = state.selectedDate === TODAY_ISO;
     const dateLabel = isToday ? '本日' : formatDisplayDate(state.selectedDate).slice(5);
+    const daysElapsed = getDaysElapsed(b.startDate, state.selectedDate);
+    const epCount = b.episodes || 0;
+    const avgDailyPv = daysElapsed > 0 ? Math.round(totalCumul / daysElapsed) : null;
 
     // 書影画像のHTML
     const coverHtml = b.cover ? `
@@ -322,6 +356,9 @@
             ${(b.tags || []).map(t => `<span class="tag">#${t}</span>`).join('')}
             ${b.genre ? `<span class="tag" style="color:var(--green-deep);font-weight:700;">${b.genre}</span>` : ''}
             <span class="tag" style="color:var(--gold);font-weight:700;">${b.status === 'done' ? '完結済み' : '連載中'}</span>
+            ${b.startDate ? `<span class="tag tag-highlight" title="連載開始日と経過日数">📅 連載開始: ${formatStartDate(b.startDate)} (${daysElapsed}日目)</span>` : ''}
+            ${epCount > 0 ? `<span class="tag tag-episodes" title="全公開話数">📖 公開話数: 全${epCount}話</span>` : ''}
+            ${avgDailyPv !== null ? `<span class="tag tag-highlight" title="全期間累計PV ÷ 連載日数">⚡ 累計日速: ${avgDailyPv.toLocaleString()} PV/日</span>` : ''}
           </div>
           <div class="detail-links">
             <a href="https://ncode.syosetu.com/${b.ncode}/" target="_blank" rel="noopener noreferrer" class="ext-link narou">
@@ -354,6 +391,14 @@
             <div class="metric-item">
               <span class="m-label">全期間 累計PV</span>
               <span class="m-value">${naroCumul.toLocaleString()}<span class="m-unit">PV</span></span>
+            </div>
+            <div class="metric-item">
+              <span class="m-label">初回掲載日</span>
+              <span class="m-value" style="font-size:16px;padding-top:4px;">${b.narou?.startDate ? formatStartDate(b.narou.startDate) : (b.startDate ? formatStartDate(b.startDate) : '-')}</span>
+            </div>
+            <div class="metric-item">
+              <span class="m-label">公開話数</span>
+              <span class="m-value">${b.narou?.episodes ? b.narou.episodes + '<span class="m-unit">話</span>' : (epCount ? epCount + '<span class="m-unit">話</span>' : '-')}</span>
             </div>
             <div class="metric-item">
               <span class="m-label">累計ユニーク</span>
@@ -391,6 +436,14 @@
             <div class="metric-item">
               <span class="m-label">全期間 累計PV</span>
               <span class="m-value">${kakuCumul.toLocaleString()}<span class="m-unit">PV</span></span>
+            </div>
+            <div class="metric-item">
+              <span class="m-label">連載開始日</span>
+              <span class="m-value" style="font-size:16px;padding-top:4px;">${b.kakuyomu?.startDate ? formatStartDate(b.kakuyomu.startDate) : (b.kakuyomu?.periodStart ? formatStartDate(b.kakuyomu.periodStart) : '-')}</span>
+            </div>
+            <div class="metric-item">
+              <span class="m-label">公開話数</span>
+              <span class="m-value">${b.kakuyomu?.episodes?.length ? b.kakuyomu.episodes.length + '<span class="m-unit">話</span>' : (epCount ? epCount + '<span class="m-unit">話</span>' : '-')}</span>
             </div>
             <div class="metric-item">
               <span class="m-label">フォロワー数</span>
@@ -1184,6 +1237,10 @@
               <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${r.book.status === 'done' ? 'var(--gold)' : 'var(--lilac)'}"></span>
               <b>${r.book.shortTitle}</b>
             </div>
+            <div class="table-sub-meta">
+              ${r.book.startDate ? `<span>📅 ${formatStartDateShort(r.book.startDate)}開始 (${getDaysElapsed(r.book.startDate, state.selectedDate)}日目)</span>` : ''}
+              ${r.book.episodes ? `<span>・ 全${r.book.episodes}話</span>` : ''}
+            </div>
           </td>
           <td><span class="cell-pill" style="background:var(--narou-bg);color:var(--narou-color);">${r.naro.toLocaleString()}</span></td>
           <td><span class="cell-pill" style="background:var(--kakuyomu-bg);color:var(--kakuyomu-color);">${r.kaku.toLocaleString()}</span></td>
@@ -1210,7 +1267,7 @@
     wrap.innerHTML = html;
   }
 
-  // タブ2: 累計PV一覧
+  // タブ2: 累計PV一覧 (連載開始日・公開期間・日速平均・話数の相関比較対応)
   function renderCumulativeTable() {
     const wrap = document.getElementById('tabCumulativeTable');
     if (!wrap) return;
@@ -1232,12 +1289,21 @@
     const maxKaku = Math.max(...kakuVals, 1);
     const grandTotal = sum(rowsData.map(r => r.total));
 
+    const maxSpeed = Math.max(...rowsData.map(r => {
+      const days = getDaysElapsed(r.book.startDate, state.selectedDate) || 1;
+      return r.total / days;
+    }), 1);
+
     let html = `
       <table>
         <thead>
           <tr>
-            <th style="min-width:220px;">作品名</th>
+            <th style="min-width:200px;">作品名</th>
             <th>ステータス</th>
+            <th>連載開始日</th>
+            <th>公開期間</th>
+            <th>日速平均 (1日あたり)</th>
+            <th>公開話数</th>
             <th>なろう累計PV</th>
             <th>カクヨム累計PV</th>
             <th>合算累計PV</th>
@@ -1252,6 +1318,11 @@
       const heatNaro = getHeatColor(naroRatio);
       const heatKaku = getHeatColor(kakuRatio);
 
+      const daysElapsed = getDaysElapsed(r.book.startDate, state.selectedDate) || 1;
+      const dailySpeed = Math.round(r.total / daysElapsed);
+      const speedRatio = dailySpeed / maxSpeed;
+      const heatSpeed = getHeatColor(speedRatio);
+
       html += `
         <tr style="cursor:pointer;" onclick="window.selectBookApp('${r.book.ncode}')">
           <td>
@@ -1261,6 +1332,10 @@
             </div>
           </td>
           <td><span style="font-size:12.5px;color:var(--text-sub);font-weight:600;">${r.book.status === 'done' ? '完結' : '連載中'}</span></td>
+          <td style="font-size:13px;font-weight:600;color:var(--text-main);white-space:nowrap;">${formatStartDate(r.book.startDate)}</td>
+          <td><span class="period-badge">${daysElapsed}日目</span></td>
+          <td><span class="daily-speed-pill" style="background:${heatSpeed.bg};color:${heatSpeed.color};" title="合算累計PV ÷ 公開期間">${dailySpeed.toLocaleString()} PV/日</span></td>
+          <td style="font-size:13px;font-weight:600;color:var(--text-sub);white-space:nowrap;">全${r.book.episodes || '-'}話</td>
           <td><span class="cell-pill" style="background:${heatNaro.bg};color:${heatNaro.color};">${r.naro.toLocaleString()}</span></td>
           <td><span class="cell-pill" style="background:${heatKaku.bg};color:${heatKaku.color};">${r.kaku.toLocaleString()}</span></td>
           <td class="row-total">${r.total.toLocaleString()}</td>
@@ -1272,7 +1347,7 @@
         </tbody>
         <tfoot>
           <tr style="background:rgba(55,138,84,0.08);font-weight:700;">
-            <td colspan="2">全作品累計合算</td>
+            <td colspan="6">全作品累計合算</td>
             <td>${sum(naroVals).toLocaleString()}</td>
             <td>${sum(kakuVals).toLocaleString()}</td>
             <td class="row-total">${grandTotal.toLocaleString()}</td>
@@ -1316,7 +1391,16 @@
 
       return `
         <tr style="cursor:pointer;" onclick="window.selectBookApp('${b.ncode}')">
-          <td><b>${b.shortTitle}</b></td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${b.status === 'done' ? 'var(--gold)' : 'var(--lilac)'}"></span>
+              <b>${b.shortTitle}</b>
+            </div>
+            <div class="table-sub-meta">
+              ${b.startDate ? `<span>📅 ${formatStartDateShort(b.startDate)}〜</span>` : ''}
+              ${b.episodes ? `<span>・ 全${b.episodes}話</span>` : ''}
+            </div>
+          </td>
           ${cells}
           <td class="row-total">${rowSum.toLocaleString()}</td>
         </tr>

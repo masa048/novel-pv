@@ -287,7 +287,7 @@ def build_naro_episode_cumulative(ncode, period_start, chapter_cache):
 
 
 def fetch_narou_api_stats(ncodes):
-    """なろう公式APIから総合点・ブックマーク数・感想数等を取得"""
+    """なろう公式APIから総合点・ブックマーク数・感想数・初回掲載日・話数等を取得"""
     joined = "-".join(ncodes)
     url = f"https://api.syosetu.com/novelapi/api/?ncode={joined}&out=json"
     r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
@@ -301,6 +301,9 @@ def fetch_narou_api_stats(ncodes):
         all_hyoka_cnt = row.get("all_hyoka_cnt", 0)
         all_point = row.get("all_point", 0)
         rating_avg = round(all_point / all_hyoka_cnt, 1) if all_hyoka_cnt else None
+        firstup_raw = row.get("general_firstup", "")
+        firstup_date = firstup_raw.split(" ")[0] if firstup_raw else None
+        all_no = row.get("general_all_no", 0)
         result[ncode_lower] = {
             "bookmarks": row.get("fav_novel_cnt", 0),
             "globalPoint": row.get("global_point", 0),
@@ -309,6 +312,8 @@ def fetch_narou_api_stats(ncodes):
             "impressionCnt": row.get("impression_cnt", 0),
             "ratingAvg": rating_avg,
             "ratingCnt": all_hyoka_cnt,
+            "firstup": firstup_date,
+            "episodes": all_no,
         }
     return result
 
@@ -543,6 +548,17 @@ def render_book_data(book, kasasagi, kakuyomu, kakuyomu_daily, naro_cumulative, 
         f'{{ d: {js_string(h["d"])}, date: {js_string(h["date"])}, pv: {h["pv"]} }}' for h in kakuyomu_daily["dailyHistory"]
     )
 
+    # 連載開始日
+    naro_start = narou_extra.get("firstup") or kasasagi.get("periodStart") or ""
+    kaku_start = kakuyomu.get("periodStart") or ""
+    start_candidates = [d for d in [naro_start, kaku_start] if d]
+    start_date = min(start_candidates) if start_candidates else ""
+
+    # 話数
+    naro_episodes = narou_extra.get("episodes") or len(naro_cumulative)
+    kaku_episodes = len(kakuyomu["episodes"]) if kakuyomu.get("episodes") else 0
+    total_episodes = max(naro_episodes, kaku_episodes)
+
     return f"""  {{
     ncode: {js_string(book["ncode"])},
     title: {js_string(book["title"])},
@@ -551,7 +567,8 @@ def render_book_data(book, kasasagi, kakuyomu, kakuyomu_daily, naro_cumulative, 
     genre: {js_string(book.get("genre", ""))},
     order: {book.get("order", 99)},
     cover: {js_string(book.get("cover", ""))},
-    episodes: {len(kakuyomu["episodes"]) if kakuyomu.get("episodes") else 0},
+    startDate: {js_string(start_date)},
+    episodes: {total_episodes},
     tags: [{", ".join(js_string(t) for t in tags)}],
     mood: {js_string(book.get("mood", ""))},
 
@@ -564,6 +581,8 @@ def render_book_data(book, kasasagi, kakuyomu, kakuyomu_daily, naro_cumulative, 
       todayPv: {naro_today_pv},
       yesterdayPv: {naro_yesterday_pv},
       cumulativePv: {naro_cumulative_pv},
+      startDate: {js_string(naro_start)},
+      episodes: {naro_episodes},
       unique: {kasasagi["unique"]},
       pc: {kasasagi["pc"]},
       sp: {kasasagi["sp"]},
@@ -593,7 +612,9 @@ def render_book_data(book, kasasagi, kakuyomu, kakuyomu_daily, naro_cumulative, 
       workId: {js_string(book["kakuyomuId"])},
       todayPv: {kakuyomu_today_pv},
       totalPv: {kakuyomu_total_pv},
-      periodStart: {js_string(kakuyomu["periodStart"] or "")},
+      startDate: {js_string(kaku_start)},
+      periodStart: {js_string(kaku_start)},
+      episodesCount: {kaku_episodes},
       dailyHistory: [{kakuyomu_hist_line}],
       episodes: [{ep_line}],
       followers: {kakuyomu.get("followers", 0)},
@@ -627,6 +648,7 @@ def render_prerelease_book(book):
     status: {js_string(book.get("status", "ongoing"))},
     prerelease: true,
     releaseDate: {js_string(book.get("releaseDate", ""))},
+    startDate: {js_string(book.get("releaseDate", ""))},
     genre: {js_string(book.get("genre", ""))},
     order: {book.get("order", 99)},
     cover: {js_string(book.get("cover", ""))},
@@ -636,14 +658,14 @@ def render_prerelease_book(book):
     todayPv: 0,
     cumulativePv: 0,
     narou: {{
-      todayPv: 0, yesterdayPv: 0, cumulativePv: 0, unique: 0, pc: 0, sp: 0, app: 0,
+      todayPv: 0, yesterdayPv: 0, cumulativePv: 0, startDate: "", episodes: 0, unique: 0, pc: 0, sp: 0, app: 0,
       week: [], hourly: {{ todayDate: "", yesterdayDate: "", today: [], yesterday: [] }},
       dailyHistory: [], episodeCumulative: [],
       stats: {{ bookmarks: 0, globalPoint: 0, weeklyPoint: 0, reviewCnt: 0, impressionCnt: 0, ratingAvg: null, ratingCnt: 0 }}
     }},
     kakuyomu: {{
       workId: {js_string(book["kakuyomuId"])},
-      todayPv: 0, totalPv: 0, periodStart: "", dailyHistory: [], episodes: [],
+      todayPv: 0, totalPv: 0, startDate: "", periodStart: "", episodesCount: 0, dailyHistory: [], episodes: [],
       followers: 0, reviewPoints: 0, reviewAvg: null, reviewCount: 0, comments: 0, cheers: 0
     }},
     hot: false,
