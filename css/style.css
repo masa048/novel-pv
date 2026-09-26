@@ -54,6 +54,11 @@
   --kakuyomu-bg: rgba(30, 102, 43, 0.10);
   --kakuyomu-border: rgba(30, 102, 43, 0.35);
 
+  /* なろうKASASAGI デバイス別カラー (棒グラフ準拠) */
+  --device-pc: #637BDE;   /* 濃い青 (PC) */
+  --device-sp: #8BC5F2;   /* 薄い青 (スマートフォン) */
+  --device-app: #7FDBC0;  /* 薄いグリーン (公式アプリ) */
+
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -107,6 +112,11 @@
   --kakuyomu-color: #72D283;
   --kakuyomu-bg: rgba(114, 210, 131, 0.16);
   --kakuyomu-border: rgba(114, 210, 131, 0.4);
+
+  /* なろうKASASAGI デバイス別カラー (ダークモード) */
+  --device-pc: #758CEE;
+  --device-sp: #9BD0F5;
+  --device-app: #8FE8CF;
 }
 
 /* リセット & 基本設定 */
@@ -865,10 +875,12 @@ body {
 
 .donut-dot {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 7px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14);
+  vertical-align: -1px;
 }
 
 /* 全期間・エピソード推移 */

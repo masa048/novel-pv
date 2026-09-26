@@ -506,40 +506,40 @@
     const r = 42;
     const c = 2 * Math.PI * r;
 
-    const spLen = (spPct / 100) * c;
     const pcLen = (pcPct / 100) * c;
+    const spLen = (spPct / 100) * c;
     const appLen = (appPct / 100) * c;
 
-    const spOffset = 0;
-    const pcOffset = -spLen;
-    const appOffset = -(spLen + pcLen);
+    const pcOffset = 0;
+    const spOffset = -pcLen;
+    const appOffset = -(pcLen + spLen);
 
     return `
       <div class="donut-container">
         <svg width="110" height="110" viewBox="0 0 100 100" style="transform: rotate(-90deg);">
           <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--bg-color)" stroke-width="16" />
-          <!-- SP -->
-          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--rose-deep)" stroke-width="16"
-            stroke-dasharray="${spLen} ${c - spLen}" stroke-dashoffset="${spOffset}" />
-          <!-- PC -->
-          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--narou-color)" stroke-width="16"
+          <!-- PC (濃い青) -->
+          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-pc)" stroke-width="16"
             stroke-dasharray="${pcLen} ${c - pcLen}" stroke-dashoffset="${pcOffset}" />
-          <!-- App -->
-          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--gold)" stroke-width="16"
+          <!-- SP (薄い青) -->
+          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-sp)" stroke-width="16"
+            stroke-dasharray="${spLen} ${c - spLen}" stroke-dashoffset="${spOffset}" />
+          <!-- 公式アプリ (薄いグリーン) -->
+          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--device-app)" stroke-width="16"
             stroke-dasharray="${appLen} ${c - appLen}" stroke-dashoffset="${appOffset}" />
         </svg>
 
         <div class="donut-legend-list">
           <div class="donut-legend-item">
-            <span><span class="donut-dot" style="background:var(--rose-deep);"></span>スマートフォン</span>
-            <b>${spPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${sp.toLocaleString()}PV)</span></b>
-          </div>
-          <div class="donut-legend-item">
-            <span><span class="donut-dot" style="background:var(--narou-color);"></span>パソコン (PC)</span>
+            <span><span class="donut-dot" style="background:var(--device-pc);"></span>パソコン (PC)</span>
             <b>${pcPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${pc.toLocaleString()}PV)</span></b>
           </div>
           <div class="donut-legend-item">
-            <span><span class="donut-dot" style="background:var(--gold);"></span>公式アプリ</span>
+            <span><span class="donut-dot" style="background:var(--device-sp);"></span>スマートフォン</span>
+            <b>${spPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${sp.toLocaleString()}PV)</span></b>
+          </div>
+          <div class="donut-legend-item">
+            <span><span class="donut-dot" style="background:var(--device-app);"></span>公式アプリ</span>
             <b>${appPct}% <span style="font-weight:normal;font-size:12px;color:var(--text-dim);">(${app.toLocaleString()}PV)</span></b>
           </div>
         </div>
