@@ -3,7 +3,7 @@
 // （自動生成: scripts/update_data.py / 毎時自動実行）
 // ============================================================
 
-const LAST_UPDATED = "2026年09月27日 01:37 時点（自動取得）";
+const LAST_UPDATED = "2026年09月27日 01:43 時点（自動取得）";
 const TODAY_ISO = "2026-09-27";
 const YEAR = 2026;
 
@@ -22,8 +22,8 @@ const BOOKS = [
     mood: "今度こそ幸せに。神絵師（ママ）とVTuber（娘）の、騒がしい日々。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 479,
-    cumulativePv: 17290,
+    todayPv: 274,
+    cumulativePv: 17301,
 
     // 小説家になろう データ
     narou: {
@@ -59,19 +59,19 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662753158532",
-      todayPv: 434,
-      totalPv: 12466,
+      todayPv: 229,
+      totalPv: 12477,
       startDate: "2026-09-20",
       periodStart: "2026-09-20",
       episodesCount: 14,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 525 }, { d: "9/27", date: "2026-09-27", pv: 434 }],
-      episodes: [1409, 1100, 1040, 1015, 941, 997, 935, 876, 884, 807, 848, 766, 605, 243],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 741 }, { d: "9/27", date: "2026-09-27", pv: 229 }],
+      episodes: [1410, 1100, 1040, 1016, 943, 999, 937, 877, 885, 807, 848, 766, 605, 244],
       followers: 359,
       reviewPoints: 111,
       reviewAvg: 2.6,
       reviewCount: 42,
       comments: 2,
-      cheers: 270,
+      cheers: 273,
     },
 
     // 互換用フラグ・注記
