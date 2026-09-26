@@ -10,8 +10,47 @@
     selectedDate: typeof TODAY_ISO !== 'undefined' ? TODAY_ISO : getTodayIsoString(),
     selectedNcode: null,
     activeTab: 'daily-table', // 'daily-table' | 'cumulative-table' | 'history-table'
+    dailyHistoryRange: '30', // '30' | '90' | 'all' (なろう日別推移の表示期間)
     theme: localStorage.getItem('novel_pv_theme') || 'light',
   };
+
+  // 日別PV履歴 期間別サブセット取得
+  function getDailyHistorySubset(dailyHistory, rangeMode) {
+    if (!dailyHistory || !dailyHistory.length) return [];
+    if (rangeMode === '7') return dailyHistory.slice(-7);
+    if (rangeMode === '30') return dailyHistory.slice(-30);
+    if (rangeMode === '90') return dailyHistory.slice(-90);
+    return dailyHistory;
+  }
+
+  // 日別PV履歴 期間説明ラベル
+  function getDailyRangeDesc(dailyHistory, rangeMode) {
+    if (!dailyHistory || !dailyHistory.length) return '';
+    const totalDays = dailyHistory.length;
+    const startStr = dailyHistory[0].d;
+
+    if (totalDays <= 7) {
+      if (rangeMode === 'all') {
+        return `連載開始(${startStr})〜現在（全${totalDays}日間・全体トレンド折れ線）`;
+      }
+      return `連載開始(${startStr})から${totalDays}日目のため、全${totalDays}日分を表示中（棒グラフ）`;
+    }
+
+    if (rangeMode === '7') {
+      return `直近7日間の推移（棒グラフ）`;
+    }
+    if (rangeMode === '30') {
+      return totalDays <= 30
+        ? `連載開始(${startStr})〜現在（全${totalDays}日間・棒グラフ）`
+        : `直近30日間の推移（棒グラフ）`;
+    }
+    if (rangeMode === '90') {
+      return totalDays <= 90
+        ? `連載開始(${startStr})〜現在（全${totalDays}日間・棒グラフ）`
+        : `直近90日間の推移（棒グラフ）`;
+    }
+    return `連載開始(${startStr})〜現在（全${totalDays}日間・全体トレンド折れ線）`;
+  }
 
   // ユーティリティ
   function getTodayIsoString() {
@@ -406,14 +445,26 @@
         ${renderRetentionSvg(b.kakuyomu.episodes, 'var(--kakuyomu-color)')}
       </div>` : ''}
 
-      <!-- なろう 日別PV推移 (連載開始〜現在) -->
+      <!-- なろう 日別PV推移 (期間切り替え対応) -->
       ${b.narou && b.narou.dailyHistory && b.narou.dailyHistory.length ? `
-      <div class="wide-chart-card">
-        <div class="chart-head">
-          <span class="chart-title">📅 なろう 日別PV推移（全期間）</span>
-          <span style="font-size:12.5px;color:var(--text-sub);">連載開始日〜現在までの日次推移</span>
+      <div class="wide-chart-card" id="narouDailyCard">
+        <div class="chart-head" style="align-items:center;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="chart-title">📅 なろう 日別PV推移</span>
+            <span class="chart-sub-label" id="narouDailyDesc" style="font-size:12.5px;color:var(--text-sub);font-weight:500;">
+              ${getDailyRangeDesc(b.narou.dailyHistory, state.dailyHistoryRange)}
+            </span>
+          </div>
+          <div class="chart-tab-group" id="dailyRangeTabs" role="group" aria-label="日別PVの表示期間">
+            <button type="button" class="chart-tab-btn ${state.dailyHistoryRange === '7' ? 'active' : ''}" data-range="7">直近7日</button>
+            <button type="button" class="chart-tab-btn ${state.dailyHistoryRange === '30' ? 'active' : ''}" data-range="30">直近30日</button>
+            <button type="button" class="chart-tab-btn ${state.dailyHistoryRange === '90' ? 'active' : ''}" data-range="90">直近90日</button>
+            <button type="button" class="chart-tab-btn ${state.dailyHistoryRange === 'all' ? 'active' : ''}" data-range="all">全期間</button>
+          </div>
         </div>
-        ${renderDailyHistorySvg(b.narou.dailyHistory)}
+        <div id="narouDailySvgWrap">
+          ${renderDailyHistorySvg(b.narou.dailyHistory, state.dailyHistoryRange)}
+        </div>
       </div>` : ''}
 
       <!-- ランキング履歴 -->
@@ -658,40 +709,95 @@
     `;
   }
 
-  function renderDailyHistorySvg(dailyHistory) {
+  function renderDailyHistorySvg(dailyHistory, rangeMode = '30') {
     if (!dailyHistory || !dailyHistory.length) return '';
-    const maxVal = Math.max(...dailyHistory.map(d => d.pv), 1);
-    const n = dailyHistory.length;
+    const subset = getDailyHistorySubset(dailyHistory, rangeMode);
+    const n = subset.length;
+    if (n === 0) return '';
+
+    const maxVal = Math.max(...subset.map(d => d.pv), 1);
     const w = 700, h = 140;
     const padL = 35, padR = 20, padT = 15, padB = 22;
     const plotW = w - padL - padR;
     const plotH = h - padT - padB;
 
-    const barW = Math.max(2, (plotW / n) * 0.7);
+    const isAreaMode = (rangeMode === 'all');
 
-    const bars = dailyHistory.map((d, i) => {
-      const x = padL + (i / n) * plotW;
-      const barH = (d.pv / maxVal) * plotH;
-      const y = padT + plotH - barH;
-      const isSelected = d.date === state.selectedDate;
-      const fillColor = isSelected ? 'var(--rose-deep)' : 'var(--lilac)';
-      return `<rect class="daily-bar" data-idx="${i}" x="${x}" y="${y}" width="${barW}" height="${barH}" rx="1" fill="${fillColor}" opacity="${isSelected ? '1' : '0.8'}">
-      </rect>`;
-    }).join('');
+    let chartContent = '';
+    let hoverElements = '';
+
+    if (!isAreaMode) {
+      // --- 棒グラフモード (直近30日 / 90日) ---
+      const barW = Math.max(2, (plotW / n) * 0.7);
+      const bars = subset.map((d, i) => {
+        const x = padL + (i / n) * plotW;
+        const barH = (d.pv / maxVal) * plotH;
+        const y = padT + plotH - barH;
+        const isSelected = d.date === state.selectedDate;
+        const fillColor = isSelected ? 'var(--rose-deep)' : 'var(--lilac)';
+        return `<rect class="daily-bar" data-idx="${i}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${barH.toFixed(1)}" rx="1" fill="${fillColor}" opacity="${isSelected ? '1' : '0.82'}"></rect>`;
+      }).join('');
+
+      chartContent = bars;
+      hoverElements = `
+        <rect class="daily-highlight-bar" x="0" y="0" width="${barW.toFixed(1)}" height="0" rx="1" fill="var(--rose-deep)" stroke="#FFF" stroke-width="1.5" style="display:none;pointer-events:none;" />
+      `;
+    } else {
+      // --- エリアチャートモード (全期間: 何年経っても破綻しない滑らかな推移曲線) ---
+      const pts = subset.map((d, i) => {
+        const x = padL + (i / Math.max(1, n - 1)) * plotW;
+        const y = padT + plotH - (d.pv / maxVal) * plotH;
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(' ');
+
+      const areaPts = `${padL},${padT + plotH} ${pts} ${padL + plotW},${padT + plotH}`;
+
+      const dots = (n <= 60) ? subset.map((d, i) => {
+        const x = padL + (i / Math.max(1, n - 1)) * plotW;
+        const y = padT + plotH - (d.pv / maxVal) * plotH;
+        const isSelected = d.date === state.selectedDate;
+        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isSelected ? '4.5' : '2.5'}" fill="${isSelected ? 'var(--rose-deep)' : '#FFFFFF'}" stroke="var(--rose-deep)" stroke-width="1.8" />`;
+      }).join('') : '';
+
+      chartContent = `
+        <defs>
+          <linearGradient id="narouDailyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--rose-deep)" stop-opacity="0.38" />
+            <stop offset="100%" stop-color="var(--rose-deep)" stop-opacity="0.02" />
+          </linearGradient>
+        </defs>
+        <polygon points="${areaPts}" fill="url(#narouDailyGrad)" />
+        <polyline points="${pts}" fill="none" stroke="var(--rose-deep)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+        ${dots}
+      `;
+
+      hoverElements = `
+        <g class="daily-hover-group" style="display:none;pointer-events:none;">
+          <line class="daily-v-line" x1="0" y1="${padT}" x2="0" y2="${padT + plotH}" stroke="var(--rose-deep)" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.85" />
+          <circle class="daily-hover-pt" cx="0" cy="0" r="5" fill="var(--rose-deep)" stroke="#FFF" stroke-width="2" />
+        </g>
+      `;
+    }
+
+    // 中間日ラベル (十分な日数がある場合に中央にも表示)
+    const midIdx = Math.floor(n / 2);
+    const midLabel = (n >= 14 && subset[midIdx])
+      ? `<text x="${padL + plotW / 2}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="middle">${subset[midIdx].d}</text>`
+      : '';
 
     return `
-      <div class="interactive-chart-wrap" id="dailyHistoryChartWrap">
+      <div class="interactive-chart-wrap" id="dailyHistoryChartWrap" data-range="${rangeMode}">
         <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" class="svg-chart" id="dailyHistorySvg">
           <!-- 全域マウス検知用透明ヒットエリア -->
-          <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:pointer;" />
+          <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:crosshair;" />
 
           <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
-          ${bars}
-          <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">${dailyHistory[0].d}</text>
-          <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">${dailyHistory[n - 1].d}</text>
+          ${chartContent}
+          <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">${subset[0].d}</text>
+          ${midLabel}
+          <text x="${w - padR}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="end">${subset[n - 1].d}</text>
 
-          <!-- マウスオーバー用ハイライトバー -->
-          <rect class="daily-highlight-bar" x="0" y="0" width="${barW}" height="0" rx="1" fill="var(--rose-deep)" stroke="#FFF" stroke-width="1.5" style="display:none;pointer-events:none;" />
+          ${hoverElements}
         </svg>
       </div>
     `;
@@ -862,70 +968,9 @@
       retWrap.addEventListener('pointerleave', handleLeave);
     }
 
-    // --- 3. なろう 日別PV推移グラフ (棒グラフ) ---
-    const dailyWrap = document.getElementById('dailyHistoryChartWrap');
-    const dailySvg = document.getElementById('dailyHistorySvg');
-    if (dailyWrap && dailySvg && b.narou && b.narou.dailyHistory && b.narou.dailyHistory.length) {
-      const dailyHistory = b.narou.dailyHistory;
-      const n = dailyHistory.length;
-      const maxVal = Math.max(...dailyHistory.map(d => d.pv), 1);
-
-      const w = 700, h = 140;
-      const padL = 35, padR = 20, padT = 15, padB = 22;
-      const plotW = w - padL - padR;
-      const plotH = h - padT - padB;
-      const barW = Math.max(2, (plotW / n) * 0.7);
-
-      const highlightBar = dailySvg.querySelector('.daily-highlight-bar');
-
-      const handleMove = (e) => {
-        const rect = dailySvg.getBoundingClientRect();
-        const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null);
-        const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : null);
-        if (clientX === null || clientY === null) return;
-
-        const relX = (clientX - rect.left) / rect.width;
-        const padLNorm = padL / w;
-        const plotWNorm = plotW / w;
-        const frac = (relX - padLNorm) / plotWNorm;
-        const idx = Math.max(0, Math.min(n - 1, Math.floor(frac * n)));
-
-        const item = dailyHistory[idx];
-        if (!item) return;
-
-        const x = padL + (idx / n) * plotW;
-        const barH = (item.pv / maxVal) * plotH;
-        const y = padT + plotH - barH;
-
-        if (highlightBar) {
-          highlightBar.setAttribute('x', x);
-          highlightBar.setAttribute('y', y);
-          highlightBar.setAttribute('height', Math.max(barH, 3));
-          highlightBar.style.display = 'block';
-        }
-
-        const isSelected = item.date === state.selectedDate;
-
-        const html = `
-          <div class="chart-tooltip-title">📅 ${item.date} (${item.d}) ${isSelected ? '<span class="chart-tooltip-badge up">選択日</span>' : ''}</div>
-          <div class="chart-tooltip-row">
-            <span><span class="chart-tooltip-dot" style="background:var(--rose-deep);"></span>なろう閲覧数:</span>
-            <b>${item.pv.toLocaleString()} PV</b>
-          </div>
-        `;
-        showChartTooltip(clientX, clientY, html);
-      };
-
-      const handleLeave = () => {
-        if (highlightBar) highlightBar.style.display = 'none';
-        hideChartTooltip();
-      };
-
-      dailyWrap.addEventListener('mousemove', handleMove);
-      dailyWrap.addEventListener('pointermove', handleMove);
-      dailyWrap.addEventListener('mouseleave', handleLeave);
-      dailyWrap.addEventListener('pointerleave', handleLeave);
-    }
+    // --- 3. なろう 日別PV推移グラフ & 期間切り替えタブ ---
+    setupDailyRangeTabs(b);
+    setupDailyHistoryInteractions(b);
 
     // --- 4. デバイス構成比 ドーナツグラフ & 凡例 ---
     const donutContainer = document.getElementById('donutChartContainer');
@@ -958,6 +1003,129 @@
         el.addEventListener('pointerleave', hideChartTooltip);
       });
     }
+  }
+
+  // なろう 日別PV推移の期間タブ初期化
+  function setupDailyRangeTabs(b) {
+    const tabsWrap = document.getElementById('dailyRangeTabs');
+    if (!tabsWrap || !b || !b.narou || !b.narou.dailyHistory) return;
+
+    tabsWrap.addEventListener('click', (e) => {
+      const btn = e.target.closest('.chart-tab-btn');
+      if (!btn) return;
+      const range = btn.dataset.range;
+      if (!range || range === state.dailyHistoryRange) return;
+
+      state.dailyHistoryRange = range;
+
+      // タブボタンのアクティブ状態更新
+      tabsWrap.querySelectorAll('.chart-tab-btn').forEach(bEl => {
+        bEl.classList.toggle('active', bEl.dataset.range === range);
+      });
+
+      // 期間説明ラベルの更新
+      const descEl = document.getElementById('narouDailyDesc');
+      if (descEl) {
+        descEl.textContent = getDailyRangeDesc(b.narou.dailyHistory, range);
+      }
+
+      // グラフSVGの再描画 & インタラクション再バインド
+      const svgWrap = document.getElementById('narouDailySvgWrap');
+      if (svgWrap) {
+        svgWrap.innerHTML = renderDailyHistorySvg(b.narou.dailyHistory, range);
+        setupDailyHistoryInteractions(b);
+      }
+    });
+  }
+
+  // なろう 日別PV推移のインタラクション (棒グラフ / エリアチャート両対応)
+  function setupDailyHistoryInteractions(b) {
+    const dailyWrap = document.getElementById('dailyHistoryChartWrap');
+    const dailySvg = document.getElementById('dailyHistorySvg');
+    if (!dailyWrap || !dailySvg || !b || !b.narou || !b.narou.dailyHistory || !b.narou.dailyHistory.length) return;
+
+    const rangeMode = state.dailyHistoryRange || '30';
+    const subset = getDailyHistorySubset(b.narou.dailyHistory, rangeMode);
+    const n = subset.length;
+    if (n === 0) return;
+
+    const maxVal = Math.max(...subset.map(d => d.pv), 1);
+    const w = 700, h = 140;
+    const padL = 35, padR = 20, padT = 15, padB = 22;
+    const plotW = w - padL - padR;
+    const plotH = h - padT - padB;
+    const isAreaMode = (rangeMode === 'all');
+
+    const highlightBar = dailySvg.querySelector('.daily-highlight-bar');
+    const hoverGroup = dailySvg.querySelector('.daily-hover-group');
+    const vLine = dailySvg.querySelector('.daily-v-line');
+    const hoverPt = dailySvg.querySelector('.daily-hover-pt');
+
+    const handleMove = (e) => {
+      const rect = dailySvg.getBoundingClientRect();
+      const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+      const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+      if (clientX === null || clientY === null) return;
+
+      const relX = (clientX - rect.left) / rect.width;
+      const padLNorm = padL / w;
+      const plotWNorm = plotW / w;
+      const frac = (relX - padLNorm) / plotWNorm;
+
+      // エリアチャートモードなら最寄りのデータ点(round)、棒グラフなら区間(floor)
+      const idx = isAreaMode
+        ? Math.max(0, Math.min(n - 1, Math.round(frac * Math.max(1, n - 1))))
+        : Math.max(0, Math.min(n - 1, Math.floor(frac * n)));
+
+      const item = subset[idx];
+      if (!item) return;
+
+      if (!isAreaMode) {
+        // 棒グラフハイライト
+        const x = padL + (idx / n) * plotW;
+        const barH = (item.pv / maxVal) * plotH;
+        const y = padT + plotH - barH;
+        if (highlightBar) {
+          highlightBar.setAttribute('x', x.toFixed(1));
+          highlightBar.setAttribute('y', y.toFixed(1));
+          highlightBar.setAttribute('height', Math.max(barH, 3).toFixed(1));
+          highlightBar.style.display = 'block';
+        }
+      } else {
+        // エリアチャートハイライト（垂直ガイド線 + ハイライトポイント）
+        const x = padL + (idx / Math.max(1, n - 1)) * plotW;
+        const y = padT + plotH - (item.pv / maxVal) * plotH;
+        if (hoverGroup && vLine && hoverPt) {
+          vLine.setAttribute('x1', x.toFixed(1));
+          vLine.setAttribute('x2', x.toFixed(1));
+          hoverPt.setAttribute('cx', x.toFixed(1));
+          hoverPt.setAttribute('cy', y.toFixed(1));
+          hoverGroup.style.display = 'block';
+        }
+      }
+
+      const isSelected = item.date === state.selectedDate;
+
+      const html = `
+        <div class="chart-tooltip-title">📅 ${item.date} (${item.d}) ${isSelected ? '<span class="chart-tooltip-badge up">選択日</span>' : ''}</div>
+        <div class="chart-tooltip-row">
+          <span><span class="chart-tooltip-dot" style="background:var(--rose-deep);"></span>なろう閲覧数:</span>
+          <b>${item.pv.toLocaleString()} PV</b>
+        </div>
+      `;
+      showChartTooltip(clientX, clientY, html);
+    };
+
+    const handleLeave = () => {
+      if (highlightBar) highlightBar.style.display = 'none';
+      if (hoverGroup) hoverGroup.style.display = 'none';
+      hideChartTooltip();
+    };
+
+    dailyWrap.addEventListener('mousemove', handleMove);
+    dailyWrap.addEventListener('pointermove', handleMove);
+    dailyWrap.addEventListener('mouseleave', handleLeave);
+    dailyWrap.addEventListener('pointerleave', handleLeave);
   }
 
   // ============================================================
