@@ -228,21 +228,35 @@
   // レンダリング: 日付コントロール
   // ============================================================
   function renderDateToolbar() {
-    const isToday = state.selectedDate === TODAY_ISO;
+    const yesterdayIso = getRelativeDateIso(TODAY_ISO, -1);
+    const dateHtml = `📅 <b>${formatDisplayDate(state.selectedDate)}</b> の集計を表示中`;
+
+    // 1) 集計データ一覧の上部ツールバー
     const statusEl = document.getElementById('selectedDateStatus');
-    statusEl.innerHTML = `📅 <b>${formatDisplayDate(state.selectedDate)}</b> の集計を表示中`;
+    if (statusEl) statusEl.innerHTML = dateHtml;
 
     const todayBtn = document.getElementById('btnDateToday');
     const yesterdayBtn = document.getElementById('btnDateYesterday');
-
-    const yesterdayIso = getRelativeDateIso(TODAY_ISO, -1);
-
-    todayBtn.classList.toggle('active', state.selectedDate === TODAY_ISO);
-    yesterdayBtn.classList.toggle('active', state.selectedDate === yesterdayIso);
+    if (todayBtn) todayBtn.classList.toggle('active', state.selectedDate === TODAY_ISO);
+    if (yesterdayBtn) yesterdayBtn.classList.toggle('active', state.selectedDate === yesterdayIso);
 
     const picker = document.getElementById('datePicker');
     if (picker) {
       picker.value = state.selectedDate;
+    }
+
+    // 2) 作品別 詳細アクセス解析の個別作品ツールバー
+    const detailStatusEl = document.getElementById('detailSelectedDateStatus');
+    if (detailStatusEl) detailStatusEl.innerHTML = dateHtml;
+
+    const detailTodayBtn = document.getElementById('detailBtnDateToday');
+    const detailYesterdayBtn = document.getElementById('detailBtnDateYesterday');
+    if (detailTodayBtn) detailTodayBtn.classList.toggle('active', state.selectedDate === TODAY_ISO);
+    if (detailYesterdayBtn) detailYesterdayBtn.classList.toggle('active', state.selectedDate === yesterdayIso);
+
+    const detailPicker = document.getElementById('detailDatePicker');
+    if (detailPicker) {
+      detailPicker.value = state.selectedDate;
     }
   }
 
@@ -333,6 +347,7 @@
     const kakuCumul = getKakuCumulative(b);
     const totalCumul = naroCumul + kakuCumul;
 
+    const yesterdayIso = getRelativeDateIso(TODAY_ISO, -1);
     const isToday = state.selectedDate === TODAY_ISO;
     const dateLabel = isToday ? '本日' : formatDisplayDate(state.selectedDate).slice(5);
     const daysElapsed = getDaysElapsed(b.startDate, state.selectedDate);
@@ -368,6 +383,28 @@
             <a href="https://kakuyomu.jp/works/${b.kakuyomu.workId}" target="_blank" rel="noopener noreferrer" class="ext-link kakuyomu">
               📘 カクヨムで読む (${b.kakuyomu.workId})
             </a>` : ''}
+          </div>
+        </div>
+      </div>
+
+      <!-- 日付指定 コントロールバー (作品別詳細) -->
+      <div class="date-toolbar detail-date-toolbar" aria-label="作品別 日付指定コントローラー">
+        <div class="date-toolbar-left">
+          <div class="date-status-badge" id="detailSelectedDateStatus">
+            📅 <b>${formatDisplayDate(state.selectedDate)}</b> の集計を表示中
+          </div>
+          <div class="date-btn-group">
+            <button type="button" id="detailBtnDateToday" class="date-btn ${state.selectedDate === TODAY_ISO ? 'active' : ''}">今日</button>
+            <button type="button" id="detailBtnDateYesterday" class="date-btn ${state.selectedDate === yesterdayIso ? 'active' : ''}">昨日</button>
+            <button type="button" id="detailBtnPrevDay" class="date-btn" title="前の日へ">← 前日</button>
+            <button type="button" id="detailBtnNextDay" class="date-btn" title="次の日へ">翌日 →</button>
+          </div>
+        </div>
+
+        <div class="date-toolbar-right">
+          <div class="date-picker-wrap">
+            <label for="detailDatePicker">日付指定:</label>
+            <input type="date" id="detailDatePicker" class="date-input" aria-label="作品別の集計日付指定" value="${state.selectedDate}">
           </div>
         </div>
       </div>
@@ -541,6 +578,9 @@
 
     // チャートのマウスオーバー・インタラクション設定
     setupChartInteractions(b);
+
+    // 作品詳細内の日付ツールバー状態を同期
+    renderDateToolbar();
   }
 
   // ============================================================
@@ -1625,6 +1665,35 @@
       });
     }
 
+    // 作品詳細内の日付コントロール (イベントデリゲーション)
+    const detailPanel = document.getElementById('detailPanel');
+    if (detailPanel) {
+      detailPanel.addEventListener('click', (e) => {
+        if (e.target.closest('#detailBtnDateToday')) {
+          state.selectedDate = TODAY_ISO;
+          onDateChanged();
+        } else if (e.target.closest('#detailBtnDateYesterday')) {
+          state.selectedDate = getRelativeDateIso(TODAY_ISO, -1);
+          onDateChanged();
+        } else if (e.target.closest('#detailBtnPrevDay')) {
+          state.selectedDate = getRelativeDateIso(state.selectedDate, -1);
+          onDateChanged();
+        } else if (e.target.closest('#detailBtnNextDay')) {
+          state.selectedDate = getRelativeDateIso(state.selectedDate, 1);
+          onDateChanged();
+        }
+      });
+
+      detailPanel.addEventListener('change', (e) => {
+        if (e.target && e.target.id === 'detailDatePicker') {
+          if (e.target.value) {
+            state.selectedDate = e.target.value;
+            onDateChanged();
+          }
+        }
+      });
+    }
+
     // テーブルのタブ切り替え
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
@@ -1646,6 +1715,7 @@
     renderWorkSelector();
     renderDetailPanel();
     renderTables();
+    renderDateToolbar();
   }
 
   // グローバル公開 (行クリックから詳細を開くため)

@@ -400,6 +400,12 @@ body {
   flex-wrap: wrap;
 }
 
+/* 作品詳細パネル内の日付ツールバー（親パネルの背景に美しく調和） */
+.detail-date-toolbar {
+  background: var(--panel-card);
+  margin-bottom: 24px;
+}
+
 .date-toolbar-left {
   display: flex;
   align-items: center;
