@@ -1425,6 +1425,46 @@
   // イベントリスナーのセットアップ
   // ============================================================
   function setupEventListeners() {
+    // 最新データ更新ボタン & 最終取得バッジのクリック
+    const reloadLatest = () => {
+      const btn = document.getElementById('refreshDataBtn');
+      if (btn) btn.classList.add('loading');
+      const badge = document.getElementById('headerDateBadge');
+      if (badge) badge.style.opacity = '0.5';
+      // 動的キャッシュバスターが埋め込まれているため、再読み込みで確実に最新データを取得
+      window.location.reload();
+    };
+
+    const refreshBtn = document.getElementById('refreshDataBtn');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', reloadLatest);
+    }
+
+    const dateBadge = document.getElementById('headerDateBadge');
+    if (dateBadge) {
+      dateBadge.addEventListener('click', reloadLatest);
+    }
+
+    // タブ復帰（バックグラウンドから戻った際）の自動更新チェック (10分以上経過していれば自動リフレッシュ)
+    let lastActiveTime = Date.now();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        const elapsedMinutes = (Date.now() - lastActiveTime) / (1000 * 60);
+        if (elapsedMinutes >= 10) {
+          console.log('[Novel-PV] 10分以上経過後のタブ復帰を検知したため最新データを取得します');
+          reloadLatest();
+        } else {
+          lastActiveTime = Date.now();
+        }
+      }
+    });
+
+    // ページを開きっぱなしの場合の定期自動更新 (15分ごと)
+    setInterval(() => {
+      console.log('[Novel-PV] 定期自動更新を実行します');
+      reloadLatest();
+    }, 15 * 60 * 1000);
+
     // テーマ切り替え
     const themeBtn = document.getElementById('themeToggleBtn');
     if (themeBtn) {

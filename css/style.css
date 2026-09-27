@@ -247,11 +247,44 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.header-date-badge:hover {
+  background: var(--green-light);
+  color: var(--green-deep);
 }
 
 .header-date-badge .date-val {
   color: var(--green-deep);
   font-weight: 800;
+}
+
+/* 更新ボタン用スタイル */
+.refresh-btn {
+  background: var(--green-light);
+  border-color: rgba(36, 117, 64, 0.35);
+  color: var(--green-deep);
+}
+
+.refresh-btn:hover {
+  background: var(--green);
+  color: #FFFFFF;
+  border-color: var(--green-deep);
+}
+
+.refresh-btn:hover .refresh-spinner,
+.refresh-btn.loading .refresh-spinner {
+  display: inline-block;
+  animation: spinIcon 0.8s linear infinite;
+}
+
+@keyframes spinIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ============================================================

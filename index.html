@@ -14,8 +14,13 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   
+  <!-- キャッシュ制御 (常に最新の集計データを取得) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2.1">
 </head>
 <body>
 
@@ -36,6 +41,10 @@
 
       <div class="header-right">
         <div class="header-controls">
+          <button id="refreshDataBtn" class="icon-btn refresh-btn" aria-label="最新データに更新" title="GitHub上の最新集計データを取得して再表示します">
+            <span class="refresh-spinner">🔄</span>
+            <span>最新データに更新</span>
+          </button>
           <button id="themeToggleBtn" class="icon-btn" aria-label="テーマ切り替え">
             🌙 墨色モード
           </button>
@@ -43,7 +52,7 @@
             ⚙️ 作品設定・公開手順
           </button>
         </div>
-        <div class="header-date-badge">
+        <div class="header-date-badge" id="headerDateBadge" title="クリックで最新データに再更新">
           <span>最終取得:</span>
           <span id="lastUpdated" class="date-val">取得中...</span>
         </div>
@@ -266,10 +275,35 @@
     </div>
   </div>
 
-  <!-- 集計データスクリプト -->
-  <script src="data.js"></script>
-  <!-- アプリケーションロジック -->
-  <script src="js/app.js"></script>
+  <!-- キャッシュバスティングによる最新スクリプトの動的読み込み -->
+  <script>
+    (function () {
+      // 毎回一意なミリ秒タイムスタンプを付与し、ブラウザキャッシュを100%回避して常に最新データを取得
+      var cacheBuster = Date.now();
+      
+      function loadScript(src, callback) {
+        var s = document.createElement('script');
+        s.src = src + '?t=' + cacheBuster;
+        s.async = false;
+        if (callback) {
+          s.onload = callback;
+        }
+        s.onerror = function () {
+          console.error('Failed to load script: ' + src);
+          var lastUpdatedEl = document.getElementById('lastUpdated');
+          if (lastUpdatedEl) {
+            lastUpdatedEl.textContent = '読込エラー (再読み込みしてください)';
+          }
+        };
+        document.body.appendChild(s);
+      }
+
+      // data.js を読み込み完了した後に app.js を実行して順序性を保証
+      loadScript('data.js', function () {
+        loadScript('js/app.js');
+      });
+    })();
+  </script>
 
 </body>
 </html>
