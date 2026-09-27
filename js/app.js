@@ -592,26 +592,113 @@
   }
 
   // ============================================================
-  // SVG チャート描画関数群 (インタラクティブ対応)
+  // SVG チャート描画関数群 (インタラクティブ対応 & Y軸目盛り数値対応)
   // ============================================================
+  const CHART_CONFIG = {
+    hourly:    { w: 600, h: 160, padL: 54, padR: 16, padT: 16, padB: 25 },
+    retention: { w: 700, h: 140, padL: 58, padR: 18, padT: 16, padB: 24 },
+    daily:     { w: 700, h: 140, padL: 58, padR: 18, padT: 16, padB: 24 },
+  };
+
+  // Y軸の目安数値（目盛り）スケール計算（キリの良い数値を算出）
+  function calcYAxisScale(rawMax) {
+    if (!rawMax || rawMax <= 0) {
+      return { scaleMax: 10, ticks: [0, 5, 10] };
+    }
+    if (rawMax <= 2) {
+      return { scaleMax: 2, ticks: [0, 1, 2] };
+    }
+    if (rawMax <= 5) {
+      return { scaleMax: 6, ticks: [0, 3, 6] };
+    }
+    if (rawMax <= 10) {
+      return { scaleMax: 10, ticks: [0, 5, 10] };
+    }
+
+    // 目安として 2〜3 区間の刻み幅 (step) を決定
+    const roughStep = rawMax / 2;
+    const power = Math.floor(Math.log10(roughStep));
+    const magnitude = Math.pow(10, power);
+    const normalized = roughStep / magnitude; // 1.0 〜 9.99
+
+    let step;
+    if (normalized < 1.5) {
+      step = 1 * magnitude;
+    } else if (normalized < 3.5) {
+      step = 2 * magnitude;
+    } else if (normalized < 7.5) {
+      step = 5 * magnitude;
+    } else {
+      step = 10 * magnitude;
+    }
+
+    let count = Math.ceil(rawMax / step);
+    if (count < 2) count = 2;
+    if (count > 4) {
+      step *= 2;
+      count = Math.ceil(rawMax / step);
+    }
+
+    const scaleMax = step * count;
+    const ticks = [];
+    for (let i = 0; i <= count; i++) {
+      ticks.push(i * step);
+    }
+    return { scaleMax, ticks };
+  }
+
+  // Y軸目盛りの数値フォーマット表示 (例: 100, 1,000, 1.5万)
+  function formatYValue(val) {
+    if (val === 0) return '0';
+    if (val >= 10000) {
+      return (val % 10000 === 0)
+        ? (val / 10000) + '万'
+        : (val % 1000 === 0)
+          ? (val / 10000).toFixed(1) + '万'
+          : val.toLocaleString();
+    }
+    return val.toLocaleString();
+  }
+
+  // Y軸の水平グリッド線・目安数値ラベルを生成（最上段にPV単位を明記）
+  function renderYAxis(ticks, scaleMax, cfg) {
+    const { w, padL, padR, padT, padB, h } = cfg;
+    const plotH = h - padT - padB;
+    const maxTick = ticks[ticks.length - 1];
+    return ticks.map(val => {
+      const y = padT + plotH - (val / scaleMax) * plotH;
+      const isBase = (val === 0);
+      const isTop = (val === maxTick && val > 0);
+      const lineStroke = isBase
+        ? 'stroke="var(--line-soft)" stroke-width="1.2"'
+        : 'stroke="var(--line-soft)" stroke-dasharray="3,3" stroke-width="1" opacity="0.75"';
+      const labelText = isTop ? `${formatYValue(val)} PV` : formatYValue(val);
+      return `
+        <line x1="${padL}" y1="${y.toFixed(1)}" x2="${w - padR}" y2="${y.toFixed(1)}" ${lineStroke} />
+        <text x="${padL - 6}" y="${(y + 3.5).toFixed(1)}" font-size="11" font-weight="600" fill="var(--text-dim)" text-anchor="end" font-family="var(--font-sans)">${labelText}</text>
+      `;
+    }).join('');
+  }
+
   function renderHourlySvg(hourly) {
     if (!hourly || !hourly.today || !hourly.today.length) {
       return '<div style="text-align:center;padding:40px;color:var(--text-dim);font-size:12px;">時間帯別データがありません</div>';
     }
     const todayData = hourly.today;
     const yestData = hourly.yesterday;
-    const maxVal = Math.max(...todayData, ...yestData, 1);
+    const rawMax = Math.max(...todayData, ...yestData, 1);
 
-    const w = 600, h = 160;
-    const padL = 30, padR = 15, padT = 15, padB = 25;
+    const cfg = CHART_CONFIG.hourly;
+    const { w, h, padL, padR, padT, padB } = cfg;
     const plotW = w - padL - padR;
     const plotH = h - padT - padB;
+    const { scaleMax, ticks } = calcYAxisScale(rawMax);
 
     function getPoints(data) {
       return data.map((v, i) => {
         const x = padL + (i / 23) * plotW;
-        const y = padT + plotH - (v / maxVal) * plotH;
-        return `${x},${y}`;
+        const y = padT + plotH - (v / scaleMax) * plotH;
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
       }).join(' ');
     }
 
@@ -621,7 +708,7 @@
     // 時間軸ラベル (0, 6, 12, 18, 23時)
     const axisLabels = [0, 6, 12, 18, 23].map(hour => {
       const x = padL + (hour / 23) * plotW;
-      return `<text x="${x}" y="${h - 6}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="middle">${hour}時</text>`;
+      return `<text x="${x.toFixed(1)}" y="${h - 6}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="middle">${hour}時</text>`;
     }).join('');
 
     return `
@@ -630,9 +717,8 @@
           <!-- 全域マウス検知用透明ヒットエリア -->
           <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:crosshair;" />
 
-          <!-- グリッド線 -->
-          <line x1="${padL}" y1="${padT + plotH * 0.5}" x2="${w - padR}" y2="${padT + plotH * 0.5}" stroke="var(--line-soft)" stroke-dasharray="3,3" />
-          <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
+          <!-- Y軸 目安数値とグリッド線 -->
+          ${renderYAxis(ticks, scaleMax, cfg)}
 
           <!-- 昨日ライン -->
           <polyline points="${yestPts}" fill="none" stroke="var(--lilac)" stroke-width="2" opacity="0.65" stroke-dasharray="4,2" />
@@ -644,8 +730,8 @@
           ${todayData.map((v, i) => {
             if (v === 0) return '';
             const x = padL + (i / 23) * plotW;
-            const y = padT + plotH - (v / maxVal) * plotH;
-            return `<circle cx="${x}" cy="${y}" r="3" fill="var(--rose-deep)"></circle>`;
+            const y = padT + plotH - (v / scaleMax) * plotH;
+            return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="var(--rose-deep)"></circle>`;
           }).join('')}
 
           ${axisLabels}
@@ -719,17 +805,19 @@
 
   function renderRetentionSvg(episodes, strokeColor) {
     if (!episodes || !episodes.length) return '';
-    const maxVal = Math.max(...episodes, 1);
+    const rawMax = Math.max(...episodes, 1);
     const n = episodes.length;
-    const w = 700, h = 140;
-    const padL = 35, padR = 20, padT = 15, padB = 22;
+
+    const cfg = CHART_CONFIG.retention;
+    const { w, h, padL, padR, padT, padB } = cfg;
     const plotW = w - padL - padR;
     const plotH = h - padT - padB;
+    const { scaleMax, ticks } = calcYAxisScale(rawMax);
 
     const pts = episodes.map((v, i) => {
       const x = padL + (i / Math.max(1, n - 1)) * plotW;
-      const y = padT + plotH - (v / maxVal) * plotH;
-      return `${x},${y}`;
+      const y = padT + plotH - (v / scaleMax) * plotH;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
     }).join(' ');
 
     const areaPts = `${padL},${padT + plotH} ${pts} ${padL + plotW},${padT + plotH}`;
@@ -746,7 +834,9 @@
           <!-- 全域マウス検知用透明ヒットエリア -->
           <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:crosshair;" />
 
-          <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
+          <!-- Y軸 目安数値とグリッド線 -->
+          ${renderYAxis(ticks, scaleMax, cfg)}
+
           <polygon points="${areaPts}" fill="url(#retGrad)" />
           <polyline points="${pts}" fill="none" stroke="${strokeColor}" stroke-width="2.5" stroke-linejoin="round" />
           <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">第1話 (${episodes[0].toLocaleString()}PV)</text>
@@ -768,11 +858,12 @@
     const n = subset.length;
     if (n === 0) return '';
 
-    const maxVal = Math.max(...subset.map(d => d.pv), 1);
-    const w = 700, h = 140;
-    const padL = 35, padR = 20, padT = 15, padB = 22;
+    const rawMax = Math.max(...subset.map(d => d.pv), 1);
+    const cfg = CHART_CONFIG.daily;
+    const { w, h, padL, padR, padT, padB } = cfg;
     const plotW = w - padL - padR;
     const plotH = h - padT - padB;
+    const { scaleMax, ticks } = calcYAxisScale(rawMax);
 
     const isAreaMode = (rangeMode === 'all');
 
@@ -780,11 +871,11 @@
     let hoverElements = '';
 
     if (!isAreaMode) {
-      // --- 棒グラフモード (直近30日 / 90日) ---
+      // --- 棒グラフモード (直近7日 / 30日 / 90日) ---
       const barW = Math.max(2, (plotW / n) * 0.7);
       const bars = subset.map((d, i) => {
         const x = padL + (i / n) * plotW;
-        const barH = (d.pv / maxVal) * plotH;
+        const barH = (d.pv / scaleMax) * plotH;
         const y = padT + plotH - barH;
         const isSelected = d.date === state.selectedDate;
         const fillColor = isSelected ? 'var(--rose-deep)' : 'var(--lilac)';
@@ -799,7 +890,7 @@
       // --- エリアチャートモード (全期間: 何年経っても破綻しない滑らかな推移曲線) ---
       const pts = subset.map((d, i) => {
         const x = padL + (i / Math.max(1, n - 1)) * plotW;
-        const y = padT + plotH - (d.pv / maxVal) * plotH;
+        const y = padT + plotH - (d.pv / scaleMax) * plotH;
         return `${x.toFixed(1)},${y.toFixed(1)}`;
       }).join(' ');
 
@@ -807,7 +898,7 @@
 
       const dots = (n <= 60) ? subset.map((d, i) => {
         const x = padL + (i / Math.max(1, n - 1)) * plotW;
-        const y = padT + plotH - (d.pv / maxVal) * plotH;
+        const y = padT + plotH - (d.pv / scaleMax) * plotH;
         const isSelected = d.date === state.selectedDate;
         return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isSelected ? '4.5' : '2.5'}" fill="${isSelected ? 'var(--rose-deep)' : '#FFFFFF'}" stroke="var(--rose-deep)" stroke-width="1.8" />`;
       }).join('') : '';
@@ -835,7 +926,7 @@
     // 中間日ラベル (十分な日数がある場合に中央にも表示)
     const midIdx = Math.floor(n / 2);
     const midLabel = (n >= 14 && subset[midIdx])
-      ? `<text x="${padL + plotW / 2}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="middle">${subset[midIdx].d}</text>`
+      ? `<text x="${(padL + plotW / 2).toFixed(1)}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)" text-anchor="middle">${subset[midIdx].d}</text>`
       : '';
 
     return `
@@ -844,7 +935,9 @@
           <!-- 全域マウス検知用透明ヒットエリア -->
           <rect x="0" y="0" width="${w}" height="${h}" fill="transparent" pointer-events="all" style="cursor:crosshair;" />
 
-          <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="var(--line-soft)" />
+          <!-- Y軸 目安数値とグリッド線 -->
+          ${renderYAxis(ticks, scaleMax, cfg)}
+
           ${chartContent}
           <text x="${padL}" y="${h - 5}" font-size="12" font-weight="600" fill="var(--text-dim)">${subset[0].d}</text>
           ${midLabel}
@@ -869,12 +962,13 @@
       const hourly = b.narou.hourly;
       const todayData = hourly.today || [];
       const yestData = hourly.yesterday || [];
-      const maxVal = Math.max(...todayData, ...yestData, 1);
+      const rawMax = Math.max(...todayData, ...yestData, 1);
 
-      const w = 600, h = 160;
-      const padL = 30, padR = 15, padT = 15, padB = 25;
+      const cfg = CHART_CONFIG.hourly;
+      const { w, h, padL, padR, padT, padB } = cfg;
       const plotW = w - padL - padR;
       const plotH = h - padT - padB;
+      const { scaleMax } = calcYAxisScale(rawMax);
 
       const hoverGroup = hourlySvg.querySelector('.hourly-hover-group');
       const vLine = hourlySvg.querySelector('.hourly-v-line');
@@ -904,20 +998,20 @@
             : '<span class="chart-tooltip-badge" style="background:var(--line-soft);color:var(--text-sub);">±0</span>';
 
         const ptX = padL + (hour / 23) * plotW;
-        const todayY = padT + plotH - (todayVal / maxVal) * plotH;
-        const yestY = padT + plotH - (yestVal / maxVal) * plotH;
+        const todayY = padT + plotH - (todayVal / scaleMax) * plotH;
+        const yestY = padT + plotH - (yestVal / scaleMax) * plotH;
 
         if (vLine) {
-          vLine.setAttribute('x1', ptX);
-          vLine.setAttribute('x2', ptX);
+          vLine.setAttribute('x1', ptX.toFixed(1));
+          vLine.setAttribute('x2', ptX.toFixed(1));
         }
         if (todayPt) {
-          todayPt.setAttribute('cx', ptX);
-          todayPt.setAttribute('cy', todayY);
+          todayPt.setAttribute('cx', ptX.toFixed(1));
+          todayPt.setAttribute('cy', todayY.toFixed(1));
         }
         if (yestPt) {
-          yestPt.setAttribute('cx', ptX);
-          yestPt.setAttribute('cy', yestY);
+          yestPt.setAttribute('cx', ptX.toFixed(1));
+          yestPt.setAttribute('cy', yestY.toFixed(1));
         }
         if (hoverGroup) hoverGroup.style.display = 'block';
 
@@ -956,12 +1050,13 @@
     if (retWrap && retSvg && b.kakuyomu && b.kakuyomu.episodes && b.kakuyomu.episodes.length) {
       const episodes = b.kakuyomu.episodes;
       const n = episodes.length;
-      const maxVal = Math.max(...episodes, 1);
+      const rawMax = Math.max(...episodes, 1);
 
-      const w = 700, h = 140;
-      const padL = 35, padR = 20, padT = 15, padB = 22;
+      const cfg = CHART_CONFIG.retention;
+      const { w, h, padL, padR, padT, padB } = cfg;
       const plotW = w - padL - padR;
       const plotH = h - padT - padB;
+      const { scaleMax } = calcYAxisScale(rawMax);
 
       const hoverGroup = retSvg.querySelector('.retention-hover-group');
       const vLine = retSvg.querySelector('.retention-v-line');
@@ -984,15 +1079,15 @@
         const retentionPct = ((pv / firstPv) * 100).toFixed(1);
 
         const ptX = padL + (idx / Math.max(1, n - 1)) * plotW;
-        const ptY = padT + plotH - (pv / maxVal) * plotH;
+        const ptY = padT + plotH - (pv / scaleMax) * plotH;
 
         if (vLine) {
-          vLine.setAttribute('x1', ptX);
-          vLine.setAttribute('x2', ptX);
+          vLine.setAttribute('x1', ptX.toFixed(1));
+          vLine.setAttribute('x2', ptX.toFixed(1));
         }
         if (retPt) {
-          retPt.setAttribute('cx', ptX);
-          retPt.setAttribute('cy', ptY);
+          retPt.setAttribute('cx', ptX.toFixed(1));
+          retPt.setAttribute('cy', ptY.toFixed(1));
         }
         if (hoverGroup) hoverGroup.style.display = 'block';
 
@@ -1102,11 +1197,12 @@
     const n = subset.length;
     if (n === 0) return;
 
-    const maxVal = Math.max(...subset.map(d => d.pv), 1);
-    const w = 700, h = 140;
-    const padL = 35, padR = 20, padT = 15, padB = 22;
+    const rawMax = Math.max(...subset.map(d => d.pv), 1);
+    const cfg = CHART_CONFIG.daily;
+    const { w, h, padL, padR, padT, padB } = cfg;
     const plotW = w - padL - padR;
     const plotH = h - padT - padB;
+    const { scaleMax } = calcYAxisScale(rawMax);
     const isAreaMode = (rangeMode === 'all');
 
     const highlightBar = dailySvg.querySelector('.daily-highlight-bar');
@@ -1136,7 +1232,7 @@
       if (!isAreaMode) {
         // 棒グラフハイライト
         const x = padL + (idx / n) * plotW;
-        const barH = (item.pv / maxVal) * plotH;
+        const barH = (item.pv / scaleMax) * plotH;
         const y = padT + plotH - barH;
         if (highlightBar) {
           highlightBar.setAttribute('x', x.toFixed(1));
@@ -1147,7 +1243,7 @@
       } else {
         // エリアチャートハイライト（垂直ガイド線 + ハイライトポイント）
         const x = padL + (idx / Math.max(1, n - 1)) * plotW;
-        const y = padT + plotH - (item.pv / maxVal) * plotH;
+        const y = padT + plotH - (item.pv / scaleMax) * plotH;
         if (hoverGroup && vLine && hoverPt) {
           vLine.setAttribute('x1', x.toFixed(1));
           vLine.setAttribute('x2', x.toFixed(1));
