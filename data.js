@@ -3,7 +3,7 @@
 // （自動生成: scripts/update_data.py / 毎時自動実行）
 // ============================================================
 
-const LAST_UPDATED = "2026年09月27日 08:54 時点（自動取得）";
+const LAST_UPDATED = "2026年09月27日 09:16 時点（自動取得）";
 const TODAY_ISO = "2026-09-27";
 const YEAR = 2026;
 
@@ -22,28 +22,28 @@ const BOOKS = [
     mood: "今度こそ幸せに。神絵師（ママ）とVTuber（娘）の、騒がしい日々。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 1178,
-    cumulativePv: 18205,
+    todayPv: 1252,
+    cumulativePv: 18279,
 
     // 小説家になろう データ
     narou: {
-      todayPv: 285,
+      todayPv: 301,
       yesterdayPv: 845,
-      cumulativePv: 5064,
+      cumulativePv: 5080,
       startDate: "2026-09-20",
       episodes: 14,
       unique: 865,
-      pc: 1652,
-      sp: 3104,
+      pc: 1656,
+      sp: 3116,
       app: 55,
-      week: [{ d: "9/21", pv: 474 }, { d: "9/22", pv: 823 }, { d: "9/23", pv: 948 }, { d: "9/24", pv: 695 }, { d: "9/25", pv: 741 }, { d: "9/26", pv: 845 }, { d: "9/27", pv: 285 }],
+      week: [{ d: "9/21", pv: 474 }, { d: "9/22", pv: 823 }, { d: "9/23", pv: 948 }, { d: "9/24", pv: 695 }, { d: "9/25", pv: 741 }, { d: "9/26", pv: 845 }, { d: "9/27", pv: 301 }],
       hourly: {
         todayDate: "09/27",
         yesterdayDate: "09/26",
-        today:     [30, 27, 67, 44, 13, 26, 22, 26, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        today:     [30, 27, 67, 44, 13, 26, 22, 26, 38, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         yesterday: [26, 33, 8, 16, 31, 44, 30, 35, 20, 35, 21, 29, 33, 10, 21, 10, 18, 35, 46, 48, 89, 139, 42, 26],
       },
-      dailyHistory: [{ d: "9/20", date: "2026-09-20", pv: 253 }, { d: "9/21", date: "2026-09-21", pv: 474 }, { d: "9/22", date: "2026-09-22", pv: 823 }, { d: "9/23", date: "2026-09-23", pv: 948 }, { d: "9/24", date: "2026-09-24", pv: 695 }, { d: "9/25", date: "2026-09-25", pv: 741 }, { d: "9/26", date: "2026-09-26", pv: 845 }, { d: "9/27", date: "2026-09-27", pv: 285 }],
+      dailyHistory: [{ d: "9/20", date: "2026-09-20", pv: 253 }, { d: "9/21", date: "2026-09-21", pv: 474 }, { d: "9/22", date: "2026-09-22", pv: 823 }, { d: "9/23", date: "2026-09-23", pv: 948 }, { d: "9/24", date: "2026-09-24", pv: 695 }, { d: "9/25", date: "2026-09-25", pv: 741 }, { d: "9/26", date: "2026-09-26", pv: 845 }, { d: "9/27", date: "2026-09-27", pv: 301 }],
       episodeCumulative: [291, 287, 258, 246, 246, 261, 237, 222, 224, 194, 220, 174, 58, 0],
       stats: {
         bookmarks: 27,
@@ -59,19 +59,90 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662753158532",
-      todayPv: 893,
-      totalPv: 13141,
+      todayPv: 951,
+      totalPv: 13199,
       startDate: "2026-09-20",
       periodStart: "2026-09-20",
       episodesCount: 14,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 741 }, { d: "9/27", date: "2026-09-27", pv: 893 }],
-      episodes: [1476, 1149, 1081, 1055, 981, 1036, 971, 915, 917, 838, 882, 823, 670, 347],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 741 }, { d: "9/27", date: "2026-09-27", pv: 951 }],
+      episodes: [1483, 1154, 1087, 1061, 986, 1038, 973, 919, 920, 841, 885, 828, 672, 352],
       followers: 359,
       reviewPoints: 111,
       reviewAvg: 2.6,
       reviewCount: 42,
       comments: 2,
-      cheers: 286,
+      cheers: 301,
+    },
+
+    // 互換用フラグ・注記
+    hot: false,
+    note: "",
+    rankHistory: [],
+  },
+  {
+    ncode: "n7267mu",
+    title: "お兄ちゃんが完璧すぎるのが悪い〜私の恋愛基準を壊した責任、取ってもらいます〜",
+    shortTitle: "お兄ちゃんが完璧すぎるのが悪い",
+    status: "ongoing",
+    genre: "恋愛",
+    order: 2,
+    cover: "covers/n7267mu.jpg",
+    startDate: "2026-09-27",
+    episodes: 1,
+    tags: ["恋愛", "兄妹", "ラブコメ", "執着"],
+    mood: "恋愛基準を壊したお兄ちゃん、合鍵侵食で責任取ってもらいます",
+
+    // 集計サマリー (本日 & 累計)
+    todayPv: 2,
+    cumulativePv: 2,
+
+    // 小説家になろう データ
+    narou: {
+      todayPv: 0,
+      yesterdayPv: 0,
+      cumulativePv: 0,
+      startDate: "",
+      episodes: 0,
+      unique: 0,
+      pc: 0,
+      sp: 0,
+      app: 0,
+      week: [],
+      hourly: {
+        todayDate: "",
+        yesterdayDate: "",
+        today:     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        yesterday: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      dailyHistory: [],
+      episodeCumulative: [],
+      stats: {
+        bookmarks: 0,
+        globalPoint: 0,
+        weeklyPoint: 0,
+        reviewCnt: 0,
+        impressionCnt: 0,
+        ratingAvg: null,
+        ratingCnt: 0,
+      }
+    },
+
+    // カクヨム データ
+    kakuyomu: {
+      workId: "11054822663306412112",
+      todayPv: 2,
+      totalPv: 2,
+      startDate: "2026-09-27",
+      periodStart: "2026-09-27",
+      episodesCount: 1,
+      dailyHistory: [{ d: "9/27", date: "2026-09-27", pv: 2 }],
+      episodes: [2],
+      followers: 0,
+      reviewPoints: 0,
+      reviewAvg: null,
+      reviewCount: 0,
+      comments: 0,
+      cheers: 0,
     },
 
     // 互換用フラグ・注記
@@ -85,7 +156,7 @@ const BOOKS = [
     shortTitle: "絶対カウンターの失格者",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 2,
+    order: 3,
     cover: "covers/n0973mu.jpg",
     startDate: "2026-09-22",
     episodes: 10,
@@ -156,7 +227,7 @@ const BOOKS = [
     shortTitle: "魔王城の最深部で喫茶店を開く",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 3,
+    order: 4,
     cover: "covers/n9355mt.jpg",
     startDate: "2026-09-21",
     episodes: 11,
@@ -164,28 +235,28 @@ const BOOKS = [
     mood: "元勇者と元魔王。二人の喫茶店経営は、前途多難。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 15,
-    cumulativePv: 430,
+    todayPv: 16,
+    cumulativePv: 431,
 
     // 小説家になろう データ
     narou: {
-      todayPv: 13,
+      todayPv: 14,
       yesterdayPv: 41,
-      cumulativePv: 360,
+      cumulativePv: 361,
       startDate: "2026-09-21",
       episodes: 11,
       unique: 153,
-      pc: 223,
+      pc: 224,
       sp: 137,
       app: 0,
-      week: [{ d: "9/21", pv: 77 }, { d: "9/22", pv: 27 }, { d: "9/23", pv: 100 }, { d: "9/24", pv: 57 }, { d: "9/25", pv: 45 }, { d: "9/26", pv: 41 }, { d: "9/27", pv: 13 }],
+      week: [{ d: "9/21", pv: 77 }, { d: "9/22", pv: 27 }, { d: "9/23", pv: 100 }, { d: "9/24", pv: 57 }, { d: "9/25", pv: 45 }, { d: "9/26", pv: 41 }, { d: "9/27", pv: 14 }],
       hourly: {
         todayDate: "09/27",
         yesterdayDate: "09/26",
-        today:     [0, 0, 0, 7, 1, 2, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        today:     [0, 0, 0, 7, 1, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         yesterday: [1, 2, 4, 1, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 11, 7, 4, 5, 1],
       },
-      dailyHistory: [{ d: "9/21", date: "2026-09-21", pv: 77 }, { d: "9/22", date: "2026-09-22", pv: 27 }, { d: "9/23", date: "2026-09-23", pv: 100 }, { d: "9/24", date: "2026-09-24", pv: 57 }, { d: "9/25", date: "2026-09-25", pv: 45 }, { d: "9/26", date: "2026-09-26", pv: 41 }, { d: "9/27", date: "2026-09-27", pv: 13 }],
+      dailyHistory: [{ d: "9/21", date: "2026-09-21", pv: 77 }, { d: "9/22", date: "2026-09-22", pv: 27 }, { d: "9/23", date: "2026-09-23", pv: 100 }, { d: "9/24", date: "2026-09-24", pv: 57 }, { d: "9/25", date: "2026-09-25", pv: 45 }, { d: "9/26", date: "2026-09-26", pv: 41 }, { d: "9/27", date: "2026-09-27", pv: 14 }],
       episodeCumulative: [32, 26, 21, 25, 19, 18, 21, 14, 16, 12, 0],
       stats: {
         bookmarks: 0,
@@ -227,7 +298,7 @@ const BOOKS = [
     shortTitle: "現代ダンジョン最深部の純喫茶",
     status: "ongoing",
     genre: "ローファンタジー",
-    order: 4,
+    order: 5,
     cover: "covers/n2286mu.jpg",
     startDate: "2026-09-23",
     episodes: 6,
@@ -298,7 +369,7 @@ const BOOKS = [
     shortTitle: "元受付嬢、孤高の最強剣士を全肯定して伝説になる",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 5,
+    order: 6,
     cover: "covers/n7303mt.jpg",
     startDate: "2026-09-19",
     episodes: 15,
@@ -369,7 +440,7 @@ const BOOKS = [
     shortTitle: "転生したら全肯定お姉ちゃんでした",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 6,
+    order: 7,
     cover: "covers/n8198ms.jpg",
     startDate: "2026-09-11",
     episodes: 21,
@@ -377,28 +448,28 @@ const BOOKS = [
     mood: "がんばり屋の妹を、とことん甘やかす。姉妹の辺境スローライフ。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 22,
-    cumulativePv: 1325,
+    todayPv: 23,
+    cumulativePv: 1326,
 
     // 小説家になろう データ
     narou: {
-      todayPv: 22,
+      todayPv: 23,
       yesterdayPv: 121,
-      cumulativePv: 1175,
+      cumulativePv: 1176,
       startDate: "2026-09-11",
       episodes: 21,
       unique: 404,
-      pc: 284,
+      pc: 285,
       sp: 303,
       app: 0,
-      week: [{ d: "9/21", pv: 68 }, { d: "9/22", pv: 92 }, { d: "9/23", pv: 92 }, { d: "9/24", pv: 122 }, { d: "9/25", pv: 70 }, { d: "9/26", pv: 121 }, { d: "9/27", pv: 22 }],
+      week: [{ d: "9/21", pv: 68 }, { d: "9/22", pv: 92 }, { d: "9/23", pv: 92 }, { d: "9/24", pv: 122 }, { d: "9/25", pv: 70 }, { d: "9/26", pv: 121 }, { d: "9/27", pv: 23 }],
       hourly: {
         todayDate: "09/27",
         yesterdayDate: "09/26",
-        today:     [7, 2, 4, 1, 0, 1, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        today:     [7, 2, 4, 1, 0, 1, 3, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         yesterday: [0, 1, 8, 1, 0, 1, 0, 0, 0, 2, 2, 1, 1, 1, 11, 12, 2, 1, 17, 31, 6, 2, 6, 15],
       },
-      dailyHistory: [{ d: "9/11", date: "2026-09-11", pv: 31 }, { d: "9/12", date: "2026-09-12", pv: 84 }, { d: "9/13", date: "2026-09-13", pv: 31 }, { d: "9/14", date: "2026-09-14", pv: 45 }, { d: "9/15", date: "2026-09-15", pv: 27 }, { d: "9/16", date: "2026-09-16", pv: 64 }, { d: "9/17", date: "2026-09-17", pv: 82 }, { d: "9/18", date: "2026-09-18", pv: 42 }, { d: "9/19", date: "2026-09-19", pv: 93 }, { d: "9/20", date: "2026-09-20", pv: 89 }, { d: "9/21", date: "2026-09-21", pv: 68 }, { d: "9/22", date: "2026-09-22", pv: 92 }, { d: "9/23", date: "2026-09-23", pv: 92 }, { d: "9/24", date: "2026-09-24", pv: 122 }, { d: "9/25", date: "2026-09-25", pv: 70 }, { d: "9/26", date: "2026-09-26", pv: 121 }, { d: "9/27", date: "2026-09-27", pv: 22 }],
+      dailyHistory: [{ d: "9/11", date: "2026-09-11", pv: 31 }, { d: "9/12", date: "2026-09-12", pv: 84 }, { d: "9/13", date: "2026-09-13", pv: 31 }, { d: "9/14", date: "2026-09-14", pv: 45 }, { d: "9/15", date: "2026-09-15", pv: 27 }, { d: "9/16", date: "2026-09-16", pv: 64 }, { d: "9/17", date: "2026-09-17", pv: 82 }, { d: "9/18", date: "2026-09-18", pv: 42 }, { d: "9/19", date: "2026-09-19", pv: 93 }, { d: "9/20", date: "2026-09-20", pv: 89 }, { d: "9/21", date: "2026-09-21", pv: 68 }, { d: "9/22", date: "2026-09-22", pv: 92 }, { d: "9/23", date: "2026-09-23", pv: 92 }, { d: "9/24", date: "2026-09-24", pv: 122 }, { d: "9/25", date: "2026-09-25", pv: 70 }, { d: "9/26", date: "2026-09-26", pv: 121 }, { d: "9/27", date: "2026-09-27", pv: 23 }],
       episodeCumulative: [64, 53, 47, 58, 45, 43, 46, 43, 38, 39, 47, 48, 32, 41, 27, 24, 17, 14, 11, 6, 0],
       stats: {
         bookmarks: 2,
@@ -440,7 +511,7 @@ const BOOKS = [
     shortTitle: "リアルオンラインを完全解約したい俺",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 7,
+    order: 8,
     cover: "covers/n8256ms.jpg",
     startDate: "2026-09-11",
     episodes: 21,
@@ -511,7 +582,7 @@ const BOOKS = [
     shortTitle: "くっ殺せの感情エネルギーでオーク軍を無双させる",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 8,
+    order: 9,
     cover: "covers/n0071ms.jpg",
     startDate: "2026-09-04",
     episodes: 49,
@@ -582,7 +653,7 @@ const BOOKS = [
     shortTitle: "婚約破棄されたデバフ令嬢は、無敵の厄災をじわじわ裁く",
     status: "done",
     genre: "ハイファンタジー",
-    order: 9,
+    order: 10,
     cover: "covers/n3926mr.jpg",
     startDate: "2026-08-30",
     episodes: 50,

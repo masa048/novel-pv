@@ -133,6 +133,24 @@ def parse_kasasagi(ncode):
     }
 
 
+def empty_kasasagi():
+    """未公開作品用などの空のなろうアクセス解析データ"""
+    return {
+        "week": [],
+        "unique": 0,
+        "pc": 0,
+        "sp": 0,
+        "app": 0,
+        "periodStart": None,
+        "hourly": {
+            "todayDate": None,
+            "yesterdayDate": None,
+            "today": [0] * 24,
+            "yesterday": [0] * 24,
+        },
+    }
+
+
 def parse_kasasagi_day_page(ncode):
     """
     なろうの「日別」ページを取得し、当月の日別PVを返す
@@ -723,15 +741,35 @@ def main():
 
         try:
             print(f"Processing: {ncode} (Kakuyomu: {book['kakuyomuId']})...", file=sys.stderr)
-            kasasagi = parse_kasasagi(ncode)
-            time.sleep(0.8)
-            naro_cumulative = build_naro_episode_cumulative(ncode, kasasagi["periodStart"], chapter_cache)
-            naro_history = build_naro_daily_history(ncode, kasasagi, daily_cache)
-            time.sleep(0.8)
             
-            kakuyomu = parse_kakuyomu(book["kakuyomuId"])
-            time.sleep(0.8)
-            kakuyomu_daily = track_kakuyomu_daily(book["kakuyomuId"], kakuyomu["totalPv"], kakuyomu_daily_cache)
+            # なろうデータ取得（未公開やKASASAGIアクセス不可時は空データにフォールバック）
+            try:
+                kasasagi = parse_kasasagi(ncode)
+                time.sleep(0.8)
+                naro_cumulative = build_naro_episode_cumulative(ncode, kasasagi["periodStart"], chapter_cache)
+                naro_history = build_naro_daily_history(ncode, kasasagi, daily_cache)
+                time.sleep(0.8)
+            except Exception as e:
+                print(f"  narou fetch failed (possibly unpublished) {ncode}: {e}", file=sys.stderr)
+                kasasagi = empty_kasasagi()
+                naro_cumulative = []
+                naro_history = []
+
+            # カクヨムデータ取得
+            try:
+                kakuyomu = parse_kakuyomu(book["kakuyomuId"])
+                time.sleep(0.8)
+                kakuyomu_daily = track_kakuyomu_daily(book["kakuyomuId"], kakuyomu["totalPv"], kakuyomu_daily_cache)
+            except Exception as e:
+                print(f"  kakuyomu fetch failed {book['kakuyomuId']}: {e}", file=sys.stderr)
+                kakuyomu = {
+                    "totalPv": 0,
+                    "periodStart": None,
+                    "episodes": [],
+                    "episodeCheers": [],
+                    "totalCheers": 0,
+                }
+                kakuyomu_daily = {"todayPv": 0, "dailyHistory": []}
 
             # カクヨム統計
             today_str = datetime.now(JST).strftime("%Y-%m-%d")
