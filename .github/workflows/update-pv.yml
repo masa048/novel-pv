@@ -2,8 +2,8 @@ name: Update Novel PV
 
 on:
   schedule:
-    # 1時間に1回実行（GitHub Actionsの混雑を避けるため毎時23分に設定）
-    - cron: '23 * * * *'
+    # 毎時8分と38分に自動実行（1時間に2回）
+    - cron: '8,38 * * * *'
   # GitHub上の「Run workflow」ボタンから手動でいつでも実行可能
   workflow_dispatch: {}
 
