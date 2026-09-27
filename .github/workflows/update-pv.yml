@@ -1,9 +1,9 @@
 name: Update Novel PV
 
 on:
-  schedule:
-    # 毎時8分と38分に自動実行（1時間に2回）
-    - cron: '8,38 * * * *'
+  # cron-job.org 等の外部Webhookから発火
+  repository_dispatch:
+    types: [hourly-job]
   # GitHub上の「Run workflow」ボタンから手動でいつでも実行可能
   workflow_dispatch: {}
 
