@@ -151,21 +151,29 @@ def empty_kasasagi():
     }
 
 
-def parse_kasasagi_day_page(ncode):
+def parse_kasasagi_day_page(ncode, month=None):
     """
-    なろうの「日別」ページを取得し、当月の日別PVを返す
+    なろうの「日別」ページを取得し、指定月（または当月）の日別PVを返す
+    month: 'YYYYMM' 形式の文字列（例: '202609'）または None
     """
     url = f"https://kasasagi.hinaproject.com/access/day/ncode/{ncode}/"
+    if month:
+        url += f"?month={month}"
     html = fetch(url)
     allpv = extract_js_array(html, "chart_data_allpv")
     if not allpv:
         raise ValueError(f"chart_data_allpv not found for {ncode}")
 
     text = strip_tags(html)
-    ym_m = re.search(r"(\d{4})年(\d{2})月のページビュー", text)
+    ym_m = re.search(r"(\d{4})年(\d{1,2})月のページビュー", text)
     if not ym_m:
-        ym_m = re.search(r"(\d{4})年(\d{2})月", text)
-    year = ym_m.group(1) if ym_m else str(datetime.now(JST).year)
+        ym_m = re.search(r"(\d{4})年(\d{1,2})月", text)
+    if ym_m:
+        year = ym_m.group(1)
+    elif month:
+        year = str(month)[:4]
+    else:
+        year = str(datetime.now(JST).year)
 
     result = {}
     for row in allpv[1:]:
@@ -183,21 +191,37 @@ def parse_kasasagi_day_page(ncode):
 def build_naro_daily_history(ncode, kasasagi, daily_cache):
     """
     確定済みの日（2日前以前）をキャッシュに保存し、直近2日はライブ値（hourly合計）を反映して
-    全期間の日別PV履歴（昇順）を返す
+    全期間の日別PV履歴（昇順）を返す。
+    月初や月跨ぎ時は前月（?month=YYYYMM）も取得して月末の確定漏れを防止する。
     """
     today = datetime.now(JST).date()
     finalized_cutoff = today - timedelta(days=2)
 
     book_days = daily_cache.setdefault(ncode, {}).setdefault("days", {})
 
-    try:
-        month_data = parse_kasasagi_day_page(ncode)
-        for date_str, v in month_data.items():
-            d = datetime.strptime(date_str, "%Y-%m-%d").date()
-            if d <= finalized_cutoff:
-                book_days[date_str] = v
-    except Exception as e:
-        print(f"  day page fetch failed {ncode}: {e}", file=sys.stderr)
+    # 取得対象月（当月は基本取得。月初や確定日が前月にまたがる場合は前月も取得）
+    months_to_fetch = [None]
+    prev_month_date = today.replace(day=1) - timedelta(days=1)
+    prev_month_str = prev_month_date.strftime("%Y%m")
+    current_month_str = today.strftime("%Y%m")
+    cutoff_month_str = finalized_cutoff.strftime("%Y%m")
+    last_day_of_prev_month = prev_month_date.strftime("%Y-%m-%d")
+
+    if today.day <= 5 or cutoff_month_str != current_month_str or last_day_of_prev_month not in book_days:
+        months_to_fetch.insert(0, prev_month_str)
+
+    for m in months_to_fetch:
+        try:
+            month_data = parse_kasasagi_day_page(ncode, month=m)
+            for date_str, v in month_data.items():
+                d = datetime.strptime(date_str, "%Y-%m-%d").date()
+                if d <= finalized_cutoff:
+                    book_days[date_str] = v
+            if m:
+                time.sleep(0.3)
+        except Exception as e:
+            m_label = m or "current"
+            print(f"  day page fetch failed {ncode} ({m_label}): {e}", file=sys.stderr)
 
     # 確定キャッシュ + 直近2日のライブ値を合成
     combined = dict(book_days)
@@ -229,12 +253,16 @@ def build_naro_daily_history(ncode, kasasagi, daily_cache):
 
 
 def _mmdd_to_iso(mmdd, today):
-    """'MM/DD' を 'YYYY-MM-DD' に変換"""
+    """'MM/DD' を 'YYYY-MM-DD' に変換（年跨ぎ対応）"""
     m = re.match(r"(\d{1,2})/(\d{1,2})", mmdd)
     if not m:
         return None
     mm, dd = int(m.group(1)), int(m.group(2))
-    return f"{today.year}-{mm:02d}-{dd:02d}"
+    year = today.year
+    # 1月に前年12月の日付を参照している場合の年跨ぎ補正
+    if today.month == 1 and mm == 12:
+        year -= 1
+    return f"{year}-{mm:02d}-{dd:02d}"
 
 
 def parse_kasasagi_chapter_for_date(ncode, date_str):
