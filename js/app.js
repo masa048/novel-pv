@@ -383,6 +383,10 @@
             <a href="https://kakuyomu.jp/works/${b.kakuyomu.workId}" target="_blank" rel="noopener noreferrer" class="ext-link kakuyomu">
               📘 カクヨムで読む (${b.kakuyomu.workId})
             </a>` : ''}
+            ${b.ncode ? `
+            <a href="https://kasasagi.hinaproject.com/access/top/ncode/${b.ncode}/" target="_blank" rel="noopener noreferrer" class="ext-link kasasagi">
+              📊 KASASAGIで見る
+            </a>` : ''}
           </div>
         </div>
       </div>

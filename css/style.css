@@ -53,6 +53,9 @@
   --kakuyomu-color: #1E662B; /* コントラスト比 6.5:1 */
   --kakuyomu-bg: rgba(30, 102, 43, 0.10);
   --kakuyomu-border: rgba(30, 102, 43, 0.35);
+  --kasasagi-color: #1C655C; /* コントラスト比 6.8:1 */
+  --kasasagi-bg: rgba(28, 101, 92, 0.10);
+  --kasasagi-border: rgba(28, 101, 92, 0.35);
 
   /* なろうKASASAGI デバイス別カラー (棒グラフ準拠) */
   --device-pc: #637BDE;   /* 濃い青 (PC) */
@@ -112,6 +115,9 @@
   --kakuyomu-color: #72D283;
   --kakuyomu-bg: rgba(114, 210, 131, 0.16);
   --kakuyomu-border: rgba(114, 210, 131, 0.4);
+  --kasasagi-color: #64C5D0;
+  --kasasagi-bg: rgba(100, 197, 208, 0.16);
+  --kasasagi-border: rgba(100, 197, 208, 0.4);
 
   /* なろうKASASAGI デバイス別カラー (ダークモード) */
   --device-pc: #758CEE;
@@ -739,6 +745,17 @@ body {
   background: var(--kakuyomu-color);
   color: #FFF;
   outline: 2px solid var(--kakuyomu-color);
+}
+
+.ext-link.kasasagi {
+  background: var(--kasasagi-bg);
+  color: var(--kasasagi-color);
+  border: 1.5px solid var(--kasasagi-border);
+}
+.ext-link.kasasagi:hover, .ext-link.kasasagi:focus-visible {
+  background: var(--kasasagi-color);
+  color: #FFF;
+  outline: 2px solid var(--kasasagi-color);
 }
 
 /* 比較メトリクスグリッド (なろう vs カクヨム) */

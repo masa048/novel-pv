@@ -3,7 +3,7 @@
 // （自動生成: scripts/update_data.py / 毎時自動実行）
 // ============================================================
 
-const LAST_UPDATED = "2026年10月02日 19:45 時点（自動取得）";
+const LAST_UPDATED = "2026年10月02日 19:50 時点（自動取得）";
 const TODAY_ISO = "2026-10-02";
 const YEAR = 2026;
 
@@ -22,8 +22,8 @@ const BOOKS = [
     mood: "今度こそ幸せに。神絵師（ママ）とVTuber（娘）の、騒がしい日々。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 2529,
-    cumulativePv: 41538,
+    todayPv: 2530,
+    cumulativePv: 41539,
 
     // 小説家になろう データ
     narou: {
@@ -59,13 +59,13 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662753158532",
-      todayPv: 1770,
-      totalPv: 29923,
+      todayPv: 1771,
+      totalPv: 29924,
       startDate: "2026-09-20",
       periodStart: "2026-09-20",
       episodesCount: 19,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 741 }, { d: "9/27", date: "2026-09-27", pv: 3286 }, { d: "9/28", date: "2026-09-28", pv: 3623 }, { d: "9/29", date: "2026-09-29", pv: 3097 }, { d: "9/30", date: "2026-09-30", pv: 2996 }, { d: "10/1", date: "2026-10-01", pv: 2903 }, { d: "10/2", date: "2026-10-02", pv: 1770 }],
-      episodes: [2696, 2137, 1974, 1936, 1817, 1926, 1812, 1713, 1643, 1553, 1613, 1625, 1467, 1327, 1221, 1057, 944, 897, 565],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 741 }, { d: "9/27", date: "2026-09-27", pv: 3286 }, { d: "9/28", date: "2026-09-28", pv: 3623 }, { d: "9/29", date: "2026-09-29", pv: 3097 }, { d: "9/30", date: "2026-09-30", pv: 2996 }, { d: "10/1", date: "2026-10-01", pv: 2903 }, { d: "10/2", date: "2026-10-02", pv: 1771 }],
+      episodes: [2696, 2137, 1974, 1936, 1817, 1926, 1812, 1713, 1643, 1553, 1613, 1625, 1467, 1327, 1221, 1057, 944, 898, 565],
       followers: 611,
       reviewPoints: 189,
       reviewAvg: 2.7,
@@ -151,12 +151,83 @@ const BOOKS = [
     rankHistory: [{ date: "2026-10-02", label: "カクヨム 週間 ラブコメ", rank: 1370, note: "1459位→1370位", source: "manual" }, { date: "2026-10-02", label: "なろう 日間 現実世界(連載中)", rank: 86, note: "11-12時更新", source: "manual" }],
   },
   {
+    ncode: "n2286mu",
+    title: "現代ダンジョン最深部の純喫茶、看板娘は世界滅亡級のラスボス美少女でした〜客ゼロなのに配信では大人気です〜",
+    shortTitle: "現代ダンジョン最深部の純喫茶",
+    status: "ongoing",
+    genre: "ローファンタジー",
+    order: 3,
+    cover: "covers/n2286mu.jpg",
+    startDate: "2026-09-23",
+    episodes: 12,
+    tags: ["配信", "現代ダンジョン", "最強ラスボス"],
+    mood: "客ゼロの純喫茶に、世界を滅ぼせる少女がいる。店を救うのは、まさかの配信人気。",
+
+    // 集計サマリー (本日 & 累計)
+    todayPv: 167,
+    cumulativePv: 2047,
+
+    // 小説家になろう データ
+    narou: {
+      todayPv: 93,
+      yesterdayPv: 218,
+      cumulativePv: 1508,
+      startDate: "2026-09-23",
+      episodes: 12,
+      unique: 416,
+      pc: 511,
+      sp: 545,
+      app: 0,
+      week: [{ d: "9/26", pv: 152 }, { d: "9/27", pv: 135 }, { d: "9/28", pv: 149 }, { d: "9/29", pv: 161 }, { d: "9/30", pv: 148 }, { d: "10/1", pv: 218 }, { d: "10/2", pv: 93 }],
+      hourly: {
+        todayDate: "10/02",
+        yesterdayDate: "10/01",
+        today:     [1, 2, 5, 3, 2, 1, 3, 1, 7, 1, 8, 0, 14, 3, 0, 0, 1, 5, 32, 4, 0, 0, 0, 0],
+        yesterday: [13, 1, 3, 0, 0, 1, 23, 3, 2, 0, 0, 5, 4, 1, 0, 8, 0, 10, 66, 10, 17, 14, 34, 3],
+      },
+      dailyHistory: [{ d: "9/23", date: "2026-09-23", pv: 232 }, { d: "9/24", date: "2026-09-24", pv: 114 }, { d: "9/25", date: "2026-09-25", pv: 106 }, { d: "9/26", date: "2026-09-26", pv: 152 }, { d: "9/27", date: "2026-09-27", pv: 135 }, { d: "9/28", date: "2026-09-28", pv: 149 }, { d: "9/29", date: "2026-09-29", pv: 161 }, { d: "9/30", date: "2026-09-30", pv: 148 }, { d: "10/1", date: "2026-10-01", pv: 218 }, { d: "10/2", date: "2026-10-02", pv: 93 }],
+      episodeCumulative: [133, 109, 113, 95, 93, 74, 67, 46, 44, 30, 0],
+      stats: {
+        bookmarks: 4,
+        globalPoint: 8,
+        weeklyPoint: 2,
+        reviewCnt: 0,
+        impressionCnt: 0,
+        ratingAvg: null,
+        ratingCnt: 0,
+      }
+    },
+
+    // カクヨム データ
+    kakuyomu: {
+      workId: "11054822662997355534",
+      todayPv: 74,
+      totalPv: 539,
+      startDate: "2026-09-23",
+      periodStart: "2026-09-23",
+      episodesCount: 12,
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 1 }, { d: "9/27", date: "2026-09-27", pv: 88 }, { d: "9/28", date: "2026-09-28", pv: 48 }, { d: "9/29", date: "2026-09-29", pv: 88 }, { d: "9/30", date: "2026-09-30", pv: 56 }, { d: "10/1", date: "2026-10-01", pv: 64 }, { d: "10/2", date: "2026-10-02", pv: 74 }],
+      episodes: [71, 66, 68, 58, 48, 52, 38, 42, 35, 29, 24, 8],
+      followers: 13,
+      reviewPoints: 5,
+      reviewAvg: 2.5,
+      reviewCount: 2,
+      comments: 0,
+      cheers: 16,
+    },
+
+    // 互換用フラグ・注記
+    hot: false,
+    note: "",
+    rankHistory: [{ date: "2026-09-28", label: "カクヨム 週間 現代ファンタジー", rank: 962, note: "", source: "manual" }],
+  },
+  {
     ncode: "n0973mu",
     title: "絶対カウンターの失格者 〜先手無能と蔑まれた少年、殴ってきた相手をすべて一撃で返り討ちにする〜",
     shortTitle: "絶対カウンターの失格者",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 3,
+    order: 4,
     cover: "covers/n0973mu.jpg",
     startDate: "2026-09-22",
     episodes: 20,
@@ -227,7 +298,7 @@ const BOOKS = [
     shortTitle: "魔王城の最深部で喫茶店を開く",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 4,
+    order: 5,
     cover: "covers/n9355mt.jpg",
     startDate: "2026-09-21",
     episodes: 16,
@@ -293,77 +364,6 @@ const BOOKS = [
     rankHistory: [{ date: "2026-10-02", label: "カクヨム 週間 異世界ファンタジー", rank: 3515, note: "3520位→3515位", source: "manual" }, { date: "2026-09-28", label: "カクヨム 週間 異世界ファンタジー", rank: 3310, note: "", source: "manual" }],
   },
   {
-    ncode: "n2286mu",
-    title: "現代ダンジョン最深部の純喫茶、看板娘は世界滅亡級のラスボス美少女でした〜客ゼロなのに配信では大人気です〜",
-    shortTitle: "現代ダンジョン最深部の純喫茶",
-    status: "ongoing",
-    genre: "ローファンタジー",
-    order: 5,
-    cover: "covers/n2286mu.jpg",
-    startDate: "2026-09-23",
-    episodes: 12,
-    tags: ["配信", "現代ダンジョン", "最強ラスボス"],
-    mood: "客ゼロの純喫茶に、世界を滅ぼせる少女がいる。店を救うのは、まさかの配信人気。",
-
-    // 集計サマリー (本日 & 累計)
-    todayPv: 165,
-    cumulativePv: 2045,
-
-    // 小説家になろう データ
-    narou: {
-      todayPv: 93,
-      yesterdayPv: 218,
-      cumulativePv: 1508,
-      startDate: "2026-09-23",
-      episodes: 12,
-      unique: 416,
-      pc: 511,
-      sp: 545,
-      app: 0,
-      week: [{ d: "9/26", pv: 152 }, { d: "9/27", pv: 135 }, { d: "9/28", pv: 149 }, { d: "9/29", pv: 161 }, { d: "9/30", pv: 148 }, { d: "10/1", pv: 218 }, { d: "10/2", pv: 93 }],
-      hourly: {
-        todayDate: "10/02",
-        yesterdayDate: "10/01",
-        today:     [1, 2, 5, 3, 2, 1, 3, 1, 7, 1, 8, 0, 14, 3, 0, 0, 1, 5, 32, 4, 0, 0, 0, 0],
-        yesterday: [13, 1, 3, 0, 0, 1, 23, 3, 2, 0, 0, 5, 4, 1, 0, 8, 0, 10, 66, 10, 17, 14, 34, 3],
-      },
-      dailyHistory: [{ d: "9/23", date: "2026-09-23", pv: 232 }, { d: "9/24", date: "2026-09-24", pv: 114 }, { d: "9/25", date: "2026-09-25", pv: 106 }, { d: "9/26", date: "2026-09-26", pv: 152 }, { d: "9/27", date: "2026-09-27", pv: 135 }, { d: "9/28", date: "2026-09-28", pv: 149 }, { d: "9/29", date: "2026-09-29", pv: 161 }, { d: "9/30", date: "2026-09-30", pv: 148 }, { d: "10/1", date: "2026-10-01", pv: 218 }, { d: "10/2", date: "2026-10-02", pv: 93 }],
-      episodeCumulative: [133, 109, 113, 95, 93, 74, 67, 46, 44, 30, 0],
-      stats: {
-        bookmarks: 4,
-        globalPoint: 8,
-        weeklyPoint: 2,
-        reviewCnt: 0,
-        impressionCnt: 0,
-        ratingAvg: null,
-        ratingCnt: 0,
-      }
-    },
-
-    // カクヨム データ
-    kakuyomu: {
-      workId: "11054822662997355534",
-      todayPv: 72,
-      totalPv: 537,
-      startDate: "2026-09-23",
-      periodStart: "2026-09-23",
-      episodesCount: 12,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 1 }, { d: "9/27", date: "2026-09-27", pv: 88 }, { d: "9/28", date: "2026-09-28", pv: 48 }, { d: "9/29", date: "2026-09-29", pv: 88 }, { d: "9/30", date: "2026-09-30", pv: 56 }, { d: "10/1", date: "2026-10-01", pv: 64 }, { d: "10/2", date: "2026-10-02", pv: 72 }],
-      episodes: [71, 66, 68, 58, 48, 52, 38, 41, 34, 29, 24, 8],
-      followers: 13,
-      reviewPoints: 5,
-      reviewAvg: 2.5,
-      reviewCount: 2,
-      comments: 0,
-      cheers: 16,
-    },
-
-    // 互換用フラグ・注記
-    hot: false,
-    note: "",
-    rankHistory: [{ date: "2026-09-28", label: "カクヨム 週間 現代ファンタジー", rank: 962, note: "", source: "manual" }],
-  },
-  {
     ncode: "n7303mt",
     title: "後ろで回復だけしていればいいと言われた元受付嬢、孤高の最強剣士を全肯定して伝説になる 〜100万人組んでくれる人がいたって、私はあなたを選びます〜",
     shortTitle: "元受付嬢、孤高の最強剣士を全肯定して伝説になる",
@@ -372,7 +372,7 @@ const BOOKS = [
     order: 6,
     cover: "covers/n7303mt.jpg",
     startDate: "2026-09-19",
-    episodes: 20,
+    episodes: 21,
     tags: ["全肯定", "剣士", "パーティー", "女性向け"],
     mood: "全肯定の力で、孤高の剣士とともに伝説へ。",
 
@@ -418,9 +418,9 @@ const BOOKS = [
       totalPv: 130,
       startDate: "2026-09-19",
       periodStart: "2026-09-19",
-      episodesCount: 20,
+      episodesCount: 21,
       dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 0 }, { d: "9/27", date: "2026-09-27", pv: 9 }, { d: "9/28", date: "2026-09-28", pv: 6 }, { d: "9/29", date: "2026-09-29", pv: 23 }, { d: "9/30", date: "2026-09-30", pv: 3 }, { d: "10/1", date: "2026-10-01", pv: 6 }, { d: "10/2", date: "2026-10-02", pv: 1 }],
-      episodes: [21, 13, 9, 9, 7, 6, 5, 6, 7, 9, 9, 6, 5, 4, 4, 3, 3, 1, 2, 1],
+      episodes: [21, 13, 9, 9, 7, 6, 5, 6, 7, 9, 9, 6, 5, 4, 4, 3, 3, 1, 2, 1, 0],
       followers: 8,
       reviewPoints: 3,
       reviewAvg: 3.0,
@@ -435,83 +435,12 @@ const BOOKS = [
     rankHistory: [],
   },
   {
-    ncode: "n8198ms",
-    title: "転生したら全肯定お姉ちゃんでした 〜不遇な妹を甘やかして最果ての村で幸せに暮らします〜",
-    shortTitle: "転生したら全肯定お姉ちゃんでした",
-    status: "ongoing",
-    genre: "ハイファンタジー",
-    order: 7,
-    cover: "covers/n8198ms.jpg",
-    startDate: "2026-09-11",
-    episodes: 27,
-    tags: ["姉妹愛", "全肯定", "スローライフ"],
-    mood: "がんばり屋の妹を、とことん甘やかす。姉妹の辺境スローライフ。",
-
-    // 集計サマリー (本日 & 累計)
-    todayPv: 50,
-    cumulativePv: 1944,
-
-    // 小説家になろう データ
-    narou: {
-      todayPv: 38,
-      yesterdayPv: 94,
-      cumulativePv: 1720,
-      startDate: "2026-09-11",
-      episodes: 27,
-      unique: 605,
-      pc: 358,
-      sp: 299,
-      app: 31,
-      week: [{ d: "9/26", pv: 121 }, { d: "9/27", pv: 92 }, { d: "9/28", pv: 131 }, { d: "9/29", pv: 111 }, { d: "9/30", pv: 101 }, { d: "10/1", pv: 94 }, { d: "10/2", pv: 38 }],
-      hourly: {
-        todayDate: "10/02",
-        yesterdayDate: "10/01",
-        today:     [6, 2, 1, 0, 1, 2, 0, 0, 0, 0, 2, 4, 4, 0, 0, 0, 0, 2, 13, 1, 0, 0, 0, 0],
-        yesterday: [0, 1, 3, 1, 0, 3, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 25, 0, 2, 28, 6, 21],
-      },
-      dailyHistory: [{ d: "9/11", date: "2026-09-11", pv: 31 }, { d: "9/12", date: "2026-09-12", pv: 84 }, { d: "9/13", date: "2026-09-13", pv: 31 }, { d: "9/14", date: "2026-09-14", pv: 45 }, { d: "9/15", date: "2026-09-15", pv: 27 }, { d: "9/16", date: "2026-09-16", pv: 64 }, { d: "9/17", date: "2026-09-17", pv: 82 }, { d: "9/18", date: "2026-09-18", pv: 42 }, { d: "9/19", date: "2026-09-19", pv: 93 }, { d: "9/20", date: "2026-09-20", pv: 89 }, { d: "9/21", date: "2026-09-21", pv: 68 }, { d: "9/22", date: "2026-09-22", pv: 92 }, { d: "9/23", date: "2026-09-23", pv: 92 }, { d: "9/24", date: "2026-09-24", pv: 122 }, { d: "9/25", date: "2026-09-25", pv: 70 }, { d: "9/26", date: "2026-09-26", pv: 121 }, { d: "9/27", date: "2026-09-27", pv: 92 }, { d: "9/28", date: "2026-09-28", pv: 131 }, { d: "9/29", date: "2026-09-29", pv: 111 }, { d: "9/30", date: "2026-09-30", pv: 101 }, { d: "10/1", date: "2026-10-01", pv: 94 }, { d: "10/2", date: "2026-10-02", pv: 38 }],
-      episodeCumulative: [85, 74, 69, 80, 64, 62, 66, 61, 65, 58, 65, 64, 53, 63, 43, 39, 28, 27, 26, 16, 16, 16, 9, 24, 12, 0],
-      stats: {
-        bookmarks: 3,
-        globalPoint: 6,
-        weeklyPoint: 2,
-        reviewCnt: 0,
-        impressionCnt: 0,
-        ratingAvg: null,
-        ratingCnt: 0,
-      }
-    },
-
-    // カクヨム データ
-    kakuyomu: {
-      workId: "11054822662133404717",
-      todayPv: 12,
-      totalPv: 224,
-      startDate: "2026-09-11",
-      periodStart: "2026-09-11",
-      episodesCount: 27,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 4 }, { d: "9/27", date: "2026-09-27", pv: 0 }, { d: "9/28", date: "2026-09-28", pv: 2 }, { d: "9/29", date: "2026-09-29", pv: 13 }, { d: "9/30", date: "2026-09-30", pv: 31 }, { d: "10/1", date: "2026-10-01", pv: 16 }, { d: "10/2", date: "2026-10-02", pv: 12 }],
-      episodes: [23, 19, 16, 15, 15, 15, 13, 11, 9, 9, 11, 10, 15, 6, 8, 6, 4, 4, 3, 3, 4, 3, 1, 1, 0, 0, 0],
-      followers: 4,
-      reviewPoints: 3,
-      reviewAvg: 3.0,
-      reviewCount: 1,
-      comments: 0,
-      cheers: 15,
-    },
-
-    // 互換用フラグ・注記
-    hot: false,
-    note: "",
-    rankHistory: [],
-  },
-  {
     ncode: "n8256ms",
     title: "リアルオンラインを完全解約したい俺、女神の手違いで永久サ終阻止の英雄に認定される 〜カルマ残高ゼロで成仏したいのに、無欲すぎて勝手に徳が振り込まれるんだが〜",
     shortTitle: "リアルオンラインを完全解約したい俺",
     status: "ongoing",
     genre: "ハイファンタジー",
-    order: 8,
+    order: 7,
     cover: "covers/n8256ms.jpg",
     startDate: "2026-09-11",
     episodes: 27,
@@ -569,6 +498,77 @@ const BOOKS = [
       reviewCount: 0,
       comments: 0,
       cheers: 27,
+    },
+
+    // 互換用フラグ・注記
+    hot: false,
+    note: "",
+    rankHistory: [],
+  },
+  {
+    ncode: "n8198ms",
+    title: "転生したら全肯定お姉ちゃんでした 〜不遇な妹を甘やかして最果ての村で幸せに暮らします〜",
+    shortTitle: "転生したら全肯定お姉ちゃんでした",
+    status: "ongoing",
+    genre: "ハイファンタジー",
+    order: 8,
+    cover: "covers/n8198ms.jpg",
+    startDate: "2026-09-11",
+    episodes: 27,
+    tags: ["姉妹愛", "全肯定", "スローライフ"],
+    mood: "がんばり屋の妹を、とことん甘やかす。姉妹の辺境スローライフ。",
+
+    // 集計サマリー (本日 & 累計)
+    todayPv: 50,
+    cumulativePv: 1944,
+
+    // 小説家になろう データ
+    narou: {
+      todayPv: 38,
+      yesterdayPv: 94,
+      cumulativePv: 1720,
+      startDate: "2026-09-11",
+      episodes: 27,
+      unique: 605,
+      pc: 358,
+      sp: 299,
+      app: 31,
+      week: [{ d: "9/26", pv: 121 }, { d: "9/27", pv: 92 }, { d: "9/28", pv: 131 }, { d: "9/29", pv: 111 }, { d: "9/30", pv: 101 }, { d: "10/1", pv: 94 }, { d: "10/2", pv: 38 }],
+      hourly: {
+        todayDate: "10/02",
+        yesterdayDate: "10/01",
+        today:     [6, 2, 1, 0, 1, 2, 0, 0, 0, 0, 2, 4, 4, 0, 0, 0, 0, 2, 13, 1, 0, 0, 0, 0],
+        yesterday: [0, 1, 3, 1, 0, 3, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 25, 0, 2, 28, 6, 21],
+      },
+      dailyHistory: [{ d: "9/11", date: "2026-09-11", pv: 31 }, { d: "9/12", date: "2026-09-12", pv: 84 }, { d: "9/13", date: "2026-09-13", pv: 31 }, { d: "9/14", date: "2026-09-14", pv: 45 }, { d: "9/15", date: "2026-09-15", pv: 27 }, { d: "9/16", date: "2026-09-16", pv: 64 }, { d: "9/17", date: "2026-09-17", pv: 82 }, { d: "9/18", date: "2026-09-18", pv: 42 }, { d: "9/19", date: "2026-09-19", pv: 93 }, { d: "9/20", date: "2026-09-20", pv: 89 }, { d: "9/21", date: "2026-09-21", pv: 68 }, { d: "9/22", date: "2026-09-22", pv: 92 }, { d: "9/23", date: "2026-09-23", pv: 92 }, { d: "9/24", date: "2026-09-24", pv: 122 }, { d: "9/25", date: "2026-09-25", pv: 70 }, { d: "9/26", date: "2026-09-26", pv: 121 }, { d: "9/27", date: "2026-09-27", pv: 92 }, { d: "9/28", date: "2026-09-28", pv: 131 }, { d: "9/29", date: "2026-09-29", pv: 111 }, { d: "9/30", date: "2026-09-30", pv: 101 }, { d: "10/1", date: "2026-10-01", pv: 94 }, { d: "10/2", date: "2026-10-02", pv: 38 }],
+      episodeCumulative: [85, 74, 69, 80, 64, 62, 66, 61, 65, 58, 65, 64, 53, 63, 43, 39, 28, 27, 26, 16, 16, 16, 9, 24, 12, 0],
+      stats: {
+        bookmarks: 3,
+        globalPoint: 6,
+        weeklyPoint: 2,
+        reviewCnt: 0,
+        impressionCnt: 0,
+        ratingAvg: null,
+        ratingCnt: 0,
+      }
+    },
+
+    // カクヨム データ
+    kakuyomu: {
+      workId: "11054822662133404717",
+      todayPv: 12,
+      totalPv: 224,
+      startDate: "2026-09-11",
+      periodStart: "2026-09-11",
+      episodesCount: 27,
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 4 }, { d: "9/27", date: "2026-09-27", pv: 0 }, { d: "9/28", date: "2026-09-28", pv: 2 }, { d: "9/29", date: "2026-09-29", pv: 13 }, { d: "9/30", date: "2026-09-30", pv: 31 }, { d: "10/1", date: "2026-10-01", pv: 16 }, { d: "10/2", date: "2026-10-02", pv: 12 }],
+      episodes: [23, 19, 16, 15, 15, 15, 13, 11, 9, 9, 11, 10, 15, 6, 8, 6, 4, 4, 3, 3, 4, 3, 1, 1, 0, 0, 0],
+      followers: 4,
+      reviewPoints: 3,
+      reviewAvg: 3.0,
+      reviewCount: 1,
+      comments: 0,
+      cheers: 15,
     },
 
     // 互換用フラグ・注記
