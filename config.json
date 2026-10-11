@@ -35,13 +35,30 @@
       "mood": "裏では早口反省会の元おっさん、画面越しには息を呑むほど可憐な天使！神絵師ママと目指す完璧なわたしの作り方。"
     },
     {
+      "ncode": "n2953mw",
+      "kakuyomuId": "11054822664326849337",
+      "title": "デスゲーム業界に菩薩が来た〜菩薩系インフルエンサーの迷惑で慈悲深いダンジョン救済配信〜",
+      "shortTitle": "デスゲーム業界に菩薩が来た",
+      "status": "ongoing",
+      "genre": "ローファンタジー",
+      "order": 3,
+      "cover": "covers/n2953mw.jpg",
+      "tags": [
+        "配信",
+        "現代ダンジョン",
+        "コメディ",
+        "聖女"
+      ],
+      "mood": "善意100％の菩薩系聖女、現代ダンジョンの理不尽を笑顔で物理浄化！"
+    },
+    {
       "ncode": "n7267mu",
       "kakuyomuId": "11054822663306412112",
       "title": "お兄ちゃんが完璧すぎるのが悪い〜私の恋愛基準を壊した責任、取ってもらいます〜",
       "shortTitle": "お兄ちゃんが完璧すぎるのが悪い",
       "status": "done",
       "genre": "恋愛",
-      "order": 3,
+      "order": 4,
       "cover": "covers/n7267mu.jpg",
       "tags": [
         "恋愛",
@@ -58,7 +75,7 @@
       "shortTitle": "現代ダンジョン最深部の純喫茶",
       "status": "ongoing",
       "genre": "ローファンタジー",
-      "order": 4,
+      "order": 5,
       "cover": "covers/n2286mu.jpg",
       "tags": [
         "配信",
@@ -74,7 +91,7 @@
       "shortTitle": "絶対カウンターの失格者",
       "status": "ongoing",
       "genre": "ハイファンタジー",
-      "order": 5,
+      "order": 6,
       "cover": "covers/n0973mu.jpg",
       "tags": [
         "カウンター",
@@ -90,7 +107,7 @@
       "shortTitle": "魔王城の最深部で喫茶店を開く",
       "status": "ongoing",
       "genre": "ハイファンタジー",
-      "order": 6,
+      "order": 7,
       "cover": "covers/n9355mt.jpg",
       "tags": [
         "喫茶店",
@@ -107,7 +124,7 @@
       "shortTitle": "元受付嬢、孤高の最強剣士を全肯定して伝説になる",
       "status": "ongoing",
       "genre": "ハイファンタジー",
-      "order": 7,
+      "order": 8,
       "cover": "covers/n7303mt.jpg",
       "tags": [
         "全肯定",
@@ -124,7 +141,7 @@
       "shortTitle": "リアルオンラインを完全解約したい俺",
       "status": "ongoing",
       "genre": "ハイファンタジー",
-      "order": 8,
+      "order": 9,
       "cover": "covers/n8256ms.jpg",
       "tags": [
         "転生",
@@ -141,7 +158,7 @@
       "shortTitle": "転生したら全肯定お姉ちゃんでした",
       "status": "ongoing",
       "genre": "ハイファンタジー",
-      "order": 9,
+      "order": 10,
       "cover": "covers/n8198ms.jpg",
       "tags": [
         "姉妹愛",
@@ -157,7 +174,7 @@
       "shortTitle": "くっ殺せの感情エネルギーでオーク軍を無双させる",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 10,
+      "order": 11,
       "cover": "covers/n0071ms.jpg",
       "tags": [
         "無双",
@@ -174,7 +191,7 @@
       "shortTitle": "婚約破棄されたデバフ令嬢は、無敵の厄災をじわじわ裁く",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 11,
+      "order": 12,
       "cover": "covers/n3926mr.jpg",
       "tags": [
         "婚約破棄",

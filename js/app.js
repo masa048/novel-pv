@@ -357,7 +357,7 @@
     // 書影画像のHTML
     const coverHtml = b.cover ? `
       <div class="detail-cover-wrap">
-        <img class="detail-cover-img" src="${b.cover}" alt="${b.shortTitle}">
+        <img class="detail-cover-img" src="${b.cover}" alt="${b.shortTitle}" onerror="this.parentElement.style.display='none'">
       </div>
     ` : '';
 
