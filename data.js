@@ -3,7 +3,7 @@
 // （自動生成: scripts/update_data.py / 毎時自動実行）
 // ============================================================
 
-const LAST_UPDATED = "2026年10月12日 08:58 時点（自動取得）";
+const LAST_UPDATED = "2026年10月12日 09:24 時点（自動取得）";
 const TODAY_ISO = "2026-10-12";
 const YEAR = 2026;
 
@@ -22,28 +22,28 @@ const BOOKS = [
     mood: "今度こそ幸せに。神絵師（ママ）とVTuber（娘）の、騒がしい日々。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 1807,
-    cumulativePv: 90800,
+    todayPv: 1957,
+    cumulativePv: 90950,
 
     // 小説家になろう データ
     narou: {
-      todayPv: 466,
+      todayPv: 481,
       yesterdayPv: 1704,
-      cumulativePv: 26542,
+      cumulativePv: 26557,
       startDate: "2026-09-20",
       episodes: 29,
       unique: 4558,
       pc: 2819,
-      sp: 7450,
+      sp: 7465,
       app: 171,
-      week: [{ d: "10/6", pv: 1671 }, { d: "10/7", pv: 1249 }, { d: "10/8", pv: 1405 }, { d: "10/9", pv: 2296 }, { d: "10/10", pv: 1649 }, { d: "10/11", pv: 1704 }, { d: "10/12", pv: 466 }],
+      week: [{ d: "10/6", pv: 1671 }, { d: "10/7", pv: 1249 }, { d: "10/8", pv: 1405 }, { d: "10/9", pv: 2296 }, { d: "10/10", pv: 1649 }, { d: "10/11", pv: 1704 }, { d: "10/12", pv: 481 }],
       hourly: {
         todayDate: "10/12",
         yesterdayDate: "10/11",
-        today:     [116, 98, 32, 37, 50, 27, 42, 18, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        today:     [116, 98, 32, 37, 50, 27, 42, 18, 48, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         yesterday: [54, 110, 30, 21, 3, 25, 22, 90, 79, 85, 78, 39, 99, 34, 45, 73, 78, 40, 56, 105, 186, 146, 111, 95],
       },
-      dailyHistory: [{ d: "9/20", date: "2026-09-20", pv: 253 }, { d: "9/21", date: "2026-09-21", pv: 474 }, { d: "9/22", date: "2026-09-22", pv: 823 }, { d: "9/23", date: "2026-09-23", pv: 948 }, { d: "9/24", date: "2026-09-24", pv: 695 }, { d: "9/25", date: "2026-09-25", pv: 741 }, { d: "9/26", date: "2026-09-26", pv: 845 }, { d: "9/27", date: "2026-09-27", pv: 1059 }, { d: "9/28", date: "2026-09-28", pv: 919 }, { d: "9/29", date: "2026-09-29", pv: 1405 }, { d: "9/30", date: "2026-09-30", pv: 1632 }, { d: "10/1", date: "2026-10-01", pv: 1062 }, { d: "10/2", date: "2026-10-02", pv: 1118 }, { d: "10/3", date: "2026-10-03", pv: 1295 }, { d: "10/4", date: "2026-10-04", pv: 1304 }, { d: "10/5", date: "2026-10-05", pv: 1529 }, { d: "10/6", date: "2026-10-06", pv: 1671 }, { d: "10/7", date: "2026-10-07", pv: 1249 }, { d: "10/8", date: "2026-10-08", pv: 1405 }, { d: "10/9", date: "2026-10-09", pv: 2296 }, { d: "10/10", date: "2026-10-10", pv: 1649 }, { d: "10/11", date: "2026-10-11", pv: 1704 }, { d: "10/12", date: "2026-10-12", pv: 466 }],
+      dailyHistory: [{ d: "9/20", date: "2026-09-20", pv: 253 }, { d: "9/21", date: "2026-09-21", pv: 474 }, { d: "9/22", date: "2026-09-22", pv: 823 }, { d: "9/23", date: "2026-09-23", pv: 948 }, { d: "9/24", date: "2026-09-24", pv: 695 }, { d: "9/25", date: "2026-09-25", pv: 741 }, { d: "9/26", date: "2026-09-26", pv: 845 }, { d: "9/27", date: "2026-09-27", pv: 1059 }, { d: "9/28", date: "2026-09-28", pv: 919 }, { d: "9/29", date: "2026-09-29", pv: 1405 }, { d: "9/30", date: "2026-09-30", pv: 1632 }, { d: "10/1", date: "2026-10-01", pv: 1062 }, { d: "10/2", date: "2026-10-02", pv: 1118 }, { d: "10/3", date: "2026-10-03", pv: 1295 }, { d: "10/4", date: "2026-10-04", pv: 1304 }, { d: "10/5", date: "2026-10-05", pv: 1529 }, { d: "10/6", date: "2026-10-06", pv: 1671 }, { d: "10/7", date: "2026-10-07", pv: 1249 }, { d: "10/8", date: "2026-10-08", pv: 1405 }, { d: "10/9", date: "2026-10-09", pv: 2296 }, { d: "10/10", date: "2026-10-10", pv: 1649 }, { d: "10/11", date: "2026-10-11", pv: 1704 }, { d: "10/12", date: "2026-10-12", pv: 481 }],
       episodeCumulative: [1118, 1035, 954, 936, 902, 973, 923, 877, 812, 790, 833, 830, 798, 741, 743, 737, 733, 710, 631, 573, 586, 561, 531, 511, 420, 306, 451, 92, 0],
       stats: {
         bookmarks: 107,
@@ -59,25 +59,25 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662753158532",
-      todayPv: 1341,
-      totalPv: 64258,
+      todayPv: 1476,
+      totalPv: 64393,
       startDate: "2026-09-20",
       periodStart: "2026-09-20",
       episodesCount: 29,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 741 }, { d: "9/27", date: "2026-09-27", pv: 3286 }, { d: "9/28", date: "2026-09-28", pv: 3623 }, { d: "9/29", date: "2026-09-29", pv: 3097 }, { d: "9/30", date: "2026-09-30", pv: 2996 }, { d: "10/1", date: "2026-10-01", pv: 2903 }, { d: "10/2", date: "2026-10-02", pv: 2562 }, { d: "10/3", date: "2026-10-03", pv: 2979 }, { d: "10/4", date: "2026-10-04", pv: 3245 }, { d: "10/5", date: "2026-10-05", pv: 3587 }, { d: "10/6", date: "2026-10-06", pv: 3375 }, { d: "10/7", date: "2026-10-07", pv: 3488 }, { d: "10/8", date: "2026-10-08", pv: 3566 }, { d: "10/9", date: "2026-10-09", pv: 3864 }, { d: "10/10", date: "2026-10-10", pv: 3651 }, { d: "10/11", date: "2026-10-11", pv: 4447 }, { d: "10/12", date: "2026-10-12", pv: 1341 }],
-      episodes: [4514, 3588, 3256, 3207, 3022, 3167, 3011, 2872, 2722, 2606, 2686, 2701, 2503, 2311, 2206, 2018, 1893, 1988, 1743, 1539, 1552, 1546, 1426, 1427, 1230, 1129, 1098, 863, 434],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 741 }, { d: "9/27", date: "2026-09-27", pv: 3286 }, { d: "9/28", date: "2026-09-28", pv: 3623 }, { d: "9/29", date: "2026-09-29", pv: 3097 }, { d: "9/30", date: "2026-09-30", pv: 2996 }, { d: "10/1", date: "2026-10-01", pv: 2903 }, { d: "10/2", date: "2026-10-02", pv: 2562 }, { d: "10/3", date: "2026-10-03", pv: 2979 }, { d: "10/4", date: "2026-10-04", pv: 3245 }, { d: "10/5", date: "2026-10-05", pv: 3587 }, { d: "10/6", date: "2026-10-06", pv: 3375 }, { d: "10/7", date: "2026-10-07", pv: 3488 }, { d: "10/8", date: "2026-10-08", pv: 3566 }, { d: "10/9", date: "2026-10-09", pv: 3864 }, { d: "10/10", date: "2026-10-10", pv: 3651 }, { d: "10/11", date: "2026-10-11", pv: 4447 }, { d: "10/12", date: "2026-10-12", pv: 1476 }],
+      episodes: [4518, 3591, 3259, 3211, 3026, 3171, 3015, 2879, 2727, 2609, 2689, 2706, 2507, 2314, 2210, 2023, 1898, 1993, 1746, 1542, 1556, 1551, 1428, 1430, 1233, 1132, 1102, 870, 457],
       followers: 1038,
       reviewPoints: 315,
       reviewAvg: 2.7,
       reviewCount: 115,
       comments: 46,
-      cheers: 1615,
+      cheers: 1616,
     },
 
     // 互換用フラグ・注記
     hot: false,
     note: "",
-    rankHistory: [{ date: "2026-10-11", label: "カクヨム 週間 総合", rank: 297, note: "309位→297位", source: "manual" }, { date: "2026-10-11", label: "カクヨム 週間 現代ファンタジー", rank: 84, note: "86位→84位", source: "manual" }, { date: "2026-10-11", label: "なろう 日間 ローファンタジー(連載中)", rank: 81, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 週間 ローファンタジー(すべて)", rank: 91, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 週間 ローファンタジー(連載中)", rank: 62, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 月間 ローファンタジー(連載中)", rank: 87, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "カクヨム 週間 総合", rank: 309, note: "336位→309位", source: "manual" }, { date: "2026-10-10", label: "カクヨム 週間 現代ファンタジー", rank: 86, note: "89位→86位", source: "manual" }, { date: "2026-10-10", label: "なろう 日間 ローファンタジー(連載中)", rank: 80, note: "18-19時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 日間 ローファンタジー(連載中)", rank: 71, note: "11-12時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 日間 ローファンタジー(連載中)", rank: 71, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 週間 ローファンタジー(すべて)", rank: 97, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 週間 ローファンタジー(連載中)", rank: 68, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 月間 ローファンタジー(連載中)", rank: 91, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "カクヨム 週間 現代ファンタジー", rank: 89, note: "93位→89位", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 総合(連載中)", rank: 244, note: "18-19時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(すべて)", rank: 62, note: "18-19時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(連載中)", rank: 44, note: "18-19時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 総合(連載中)", rank: 223, note: "11-12時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(すべて)", rank: 53, note: "11-12時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(連載中)", rank: 37, note: "11-12時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 総合(連載中)", rank: 230, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(すべて)", rank: 50, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(連載中)", rank: 36, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 週間 ローファンタジー(すべて)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 週間 ローファンタジー(連載中)", rank: 69, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 月間 ローファンタジー(連載中)", rank: 94, note: "04-07時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(すべて)", rank: 95, note: "18-19時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(連載中)", rank: 69, note: "18-19時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(連載中)", rank: 98, note: "11-12時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(連載中)", rank: 79, note: "04-07時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 週間 ローファンタジー(連載中)", rank: 77, note: "04-07時更新", source: "manual" }, { date: "2026-10-07", label: "カクヨム 週間 総合", rank: 335, note: "357位→335位", source: "manual" }, { date: "2026-10-07", label: "カクヨム 週間 現代ファンタジー", rank: 89, note: "94位→89位", source: "manual" }, { date: "2026-10-07", label: "なろう 週間 ローファンタジー(連載中)", rank: 74, note: "04-07時更新", source: "manual" }, { date: "2026-10-06", label: "カクヨム 週間 総合", rank: 357, note: "451位→357位", source: "manual" }, { date: "2026-10-06", label: "カクヨム 週間 現代ファンタジー", rank: 94, note: "115位→94位", source: "manual" }, { date: "2026-10-06", label: "なろう 日間 ローファンタジー(連載中)", rank: 70, note: "18-19時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 日間 ローファンタジー(連載中)", rank: 75, note: "11-12時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 日間 ローファンタジー(連載中)", rank: 92, note: "04-07時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 週間 ローファンタジー(すべて)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 週間 ローファンタジー(連載中)", rank: 70, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 日間 ローファンタジー(すべて)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 日間 ローファンタジー(連載中)", rank: 66, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 週間 ローファンタジー(すべて)", rank: 94, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 週間 ローファンタジー(連載中)", rank: 63, note: "04-07時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 日間 ローファンタジー(連載中)", rank: 71, note: "11-12時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 日間 ローファンタジー(連載中)", rank: 79, note: "04-07時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 週間 ローファンタジー(すべて)", rank: 98, note: "04-07時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 週間 ローファンタジー(連載中)", rank: 64, note: "04-07時更新", source: "manual" }, { date: "2026-10-03", label: "なろう 日間 ローファンタジー(連載中)", rank: 88, note: "18-19時更新", source: "manual" }, { date: "2026-10-03", label: "なろう 週間 ローファンタジー(すべて)", rank: 90, note: "04-07時更新", source: "manual" }, { date: "2026-10-03", label: "なろう 週間 ローファンタジー(連載中)", rank: 59, note: "04-07時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 日間 ローファンタジー(連載中)", rank: 100, note: "11-12時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 日間 ローファンタジー(連載中)", rank: 85, note: "04-07時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 週間 ローファンタジー(すべて)", rank: 93, note: "04-07時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 週間 ローファンタジー(連載中)", rank: 60, note: "04-07時更新", source: "manual" }, { date: "2026-10-01", label: "なろう 日間 ローファンタジー(連載中)", rank: 96, note: "18-19時更新", source: "manual" }, { date: "2026-10-01", label: "なろう 日間 ローファンタジー(連載中)", rank: 75, note: "04-07時更新", source: "manual" }, { date: "2026-10-01", label: "なろう 週間 ローファンタジー(連載中)", rank: 66, note: "04-07時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(連載中)", rank: 72, note: "18-19時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 総合(連載中)", rank: 244, note: "11-12時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(すべて)", rank: 59, note: "11-12時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(連載中)", rank: 38, note: "11-12時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(すべて)", rank: 75, note: "04-07時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(連載中)", rank: 50, note: "04-07時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 週間 ローファンタジー(連載中)", rank: 65, note: "04-07時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 総合(連載中)", rank: 230, note: "18-19時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(すべて)", rank: 56, note: "18-19時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(連載中)", rank: 37, note: "18-19時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(連載中)", rank: 55, note: "11-12時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(すべて)", rank: 92, note: "11-12時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(連載中)", rank: 50, note: "04-07時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 週間 ローファンタジー(連載中)", rank: 74, note: "04-07時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(すべて)", rank: 84, note: "04-07時更新", source: "manual" }, { date: "2026-09-28", label: "カクヨム 週間 総合", rank: 165, note: "", source: "manual" }, { date: "2026-09-28", label: "カクヨム 週間 現代ファンタジー", rank: 50, note: "", source: "manual" }, { date: "2026-09-28", label: "なろう 日間 ローファンタジー(連載中)", rank: 78, note: "18-19時更新", source: "manual" }, { date: "2026-09-28", label: "なろう 日間 ローファンタジー(連載中)", rank: 85, note: "11-12時更新", source: "manual" }, { date: "2026-09-28", label: "なろう 週間 ローファンタジー(連載中)", rank: 80, note: "04-07時更新", source: "manual" }, { date: "2026-09-28", label: "なろう 日間 ローファンタジー(連載中)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-09-27", label: "カクヨム 週間 総合", rank: 207, note: "258位→207位", source: "manual" }, { date: "2026-09-27", label: "なろう 日間 ローファンタジー(連載中)", rank: 43, note: "", source: "manual" }, { date: "2026-09-27", label: "なろう 日間 ローファンタジー(すべて)", rank: 76, note: "", source: "manual" }, { date: "2026-09-27", label: "なろう 週間 ローファンタジー(連載中)", rank: 91, note: "", source: "manual" }, { date: "2026-09-27", label: "なろう 日間 総合(連載中)", rank: 294, note: "", source: "manual" }],
+    rankHistory: [{ date: "2026-10-12", label: "なろう 週間 ローファンタジー(すべて)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-10-12", label: "なろう 週間 ローファンタジー(連載中)", rank: 70, note: "04-07時更新", source: "manual" }, { date: "2026-10-12", label: "なろう 月間 ローファンタジー(連載中)", rank: 89, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "カクヨム 週間 総合", rank: 297, note: "309位→297位", source: "manual" }, { date: "2026-10-11", label: "カクヨム 週間 現代ファンタジー", rank: 84, note: "86位→84位", source: "manual" }, { date: "2026-10-11", label: "なろう 日間 ローファンタジー(連載中)", rank: 75, note: "18-19時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 日間 ローファンタジー(すべて)", rank: 96, note: "11-12時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 日間 ローファンタジー(連載中)", rank: 66, note: "11-12時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 日間 ローファンタジー(連載中)", rank: 81, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 週間 ローファンタジー(すべて)", rank: 91, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 週間 ローファンタジー(連載中)", rank: 62, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 月間 ローファンタジー(連載中)", rank: 87, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "カクヨム 週間 総合", rank: 309, note: "336位→309位", source: "manual" }, { date: "2026-10-10", label: "カクヨム 週間 現代ファンタジー", rank: 86, note: "89位→86位", source: "manual" }, { date: "2026-10-10", label: "なろう 日間 ローファンタジー(連載中)", rank: 80, note: "18-19時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 日間 ローファンタジー(連載中)", rank: 71, note: "11-12時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 日間 ローファンタジー(連載中)", rank: 71, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 週間 ローファンタジー(すべて)", rank: 97, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 週間 ローファンタジー(連載中)", rank: 68, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 月間 ローファンタジー(連載中)", rank: 91, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "カクヨム 週間 現代ファンタジー", rank: 89, note: "93位→89位", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 総合(連載中)", rank: 244, note: "18-19時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(すべて)", rank: 62, note: "18-19時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(連載中)", rank: 44, note: "18-19時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 総合(連載中)", rank: 223, note: "11-12時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(すべて)", rank: 53, note: "11-12時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(連載中)", rank: 37, note: "11-12時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 総合(連載中)", rank: 230, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(すべて)", rank: 50, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 日間 ローファンタジー(連載中)", rank: 36, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 週間 ローファンタジー(すべて)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 週間 ローファンタジー(連載中)", rank: 69, note: "04-07時更新", source: "manual" }, { date: "2026-10-09", label: "なろう 月間 ローファンタジー(連載中)", rank: 94, note: "04-07時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(すべて)", rank: 95, note: "18-19時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(連載中)", rank: 69, note: "18-19時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(連載中)", rank: 98, note: "11-12時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 日間 ローファンタジー(連載中)", rank: 79, note: "04-07時更新", source: "manual" }, { date: "2026-10-08", label: "なろう 週間 ローファンタジー(連載中)", rank: 77, note: "04-07時更新", source: "manual" }, { date: "2026-10-07", label: "カクヨム 週間 総合", rank: 335, note: "357位→335位", source: "manual" }, { date: "2026-10-07", label: "カクヨム 週間 現代ファンタジー", rank: 89, note: "94位→89位", source: "manual" }, { date: "2026-10-07", label: "なろう 週間 ローファンタジー(連載中)", rank: 74, note: "04-07時更新", source: "manual" }, { date: "2026-10-06", label: "カクヨム 週間 総合", rank: 357, note: "451位→357位", source: "manual" }, { date: "2026-10-06", label: "カクヨム 週間 現代ファンタジー", rank: 94, note: "115位→94位", source: "manual" }, { date: "2026-10-06", label: "なろう 日間 ローファンタジー(連載中)", rank: 70, note: "18-19時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 日間 ローファンタジー(連載中)", rank: 75, note: "11-12時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 日間 ローファンタジー(連載中)", rank: 92, note: "04-07時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 週間 ローファンタジー(すべて)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-10-06", label: "なろう 週間 ローファンタジー(連載中)", rank: 70, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 日間 ローファンタジー(すべて)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 日間 ローファンタジー(連載中)", rank: 66, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 週間 ローファンタジー(すべて)", rank: 94, note: "04-07時更新", source: "manual" }, { date: "2026-10-05", label: "なろう 週間 ローファンタジー(連載中)", rank: 63, note: "04-07時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 日間 ローファンタジー(連載中)", rank: 71, note: "11-12時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 日間 ローファンタジー(連載中)", rank: 79, note: "04-07時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 週間 ローファンタジー(すべて)", rank: 98, note: "04-07時更新", source: "manual" }, { date: "2026-10-04", label: "なろう 週間 ローファンタジー(連載中)", rank: 64, note: "04-07時更新", source: "manual" }, { date: "2026-10-03", label: "なろう 日間 ローファンタジー(連載中)", rank: 88, note: "18-19時更新", source: "manual" }, { date: "2026-10-03", label: "なろう 週間 ローファンタジー(すべて)", rank: 90, note: "04-07時更新", source: "manual" }, { date: "2026-10-03", label: "なろう 週間 ローファンタジー(連載中)", rank: 59, note: "04-07時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 日間 ローファンタジー(連載中)", rank: 100, note: "11-12時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 日間 ローファンタジー(連載中)", rank: 85, note: "04-07時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 週間 ローファンタジー(すべて)", rank: 93, note: "04-07時更新", source: "manual" }, { date: "2026-10-02", label: "なろう 週間 ローファンタジー(連載中)", rank: 60, note: "04-07時更新", source: "manual" }, { date: "2026-10-01", label: "なろう 日間 ローファンタジー(連載中)", rank: 96, note: "18-19時更新", source: "manual" }, { date: "2026-10-01", label: "なろう 日間 ローファンタジー(連載中)", rank: 75, note: "04-07時更新", source: "manual" }, { date: "2026-10-01", label: "なろう 週間 ローファンタジー(連載中)", rank: 66, note: "04-07時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(連載中)", rank: 72, note: "18-19時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 総合(連載中)", rank: 244, note: "11-12時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(すべて)", rank: 59, note: "11-12時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(連載中)", rank: 38, note: "11-12時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(すべて)", rank: 75, note: "04-07時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 日間 ローファンタジー(連載中)", rank: 50, note: "04-07時更新", source: "manual" }, { date: "2026-09-30", label: "なろう 週間 ローファンタジー(連載中)", rank: 65, note: "04-07時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 総合(連載中)", rank: 230, note: "18-19時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(すべて)", rank: 56, note: "18-19時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(連載中)", rank: 37, note: "18-19時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(連載中)", rank: 55, note: "11-12時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(すべて)", rank: 92, note: "11-12時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(連載中)", rank: 50, note: "04-07時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 週間 ローファンタジー(連載中)", rank: 74, note: "04-07時更新", source: "manual" }, { date: "2026-09-29", label: "なろう 日間 ローファンタジー(すべて)", rank: 84, note: "04-07時更新", source: "manual" }, { date: "2026-09-28", label: "カクヨム 週間 総合", rank: 165, note: "", source: "manual" }, { date: "2026-09-28", label: "カクヨム 週間 現代ファンタジー", rank: 50, note: "", source: "manual" }, { date: "2026-09-28", label: "なろう 日間 ローファンタジー(連載中)", rank: 78, note: "18-19時更新", source: "manual" }, { date: "2026-09-28", label: "なろう 日間 ローファンタジー(連載中)", rank: 85, note: "11-12時更新", source: "manual" }, { date: "2026-09-28", label: "なろう 週間 ローファンタジー(連載中)", rank: 80, note: "04-07時更新", source: "manual" }, { date: "2026-09-28", label: "なろう 日間 ローファンタジー(連載中)", rank: 99, note: "04-07時更新", source: "manual" }, { date: "2026-09-27", label: "カクヨム 週間 総合", rank: 207, note: "258位→207位", source: "manual" }, { date: "2026-09-27", label: "なろう 日間 ローファンタジー(連載中)", rank: 43, note: "", source: "manual" }, { date: "2026-09-27", label: "なろう 日間 ローファンタジー(すべて)", rank: 76, note: "", source: "manual" }, { date: "2026-09-27", label: "なろう 週間 ローファンタジー(連載中)", rank: 91, note: "", source: "manual" }, { date: "2026-09-27", label: "なろう 日間 総合(連載中)", rank: 294, note: "", source: "manual" }],
   },
   {
     ncode: "n2175mw",
@@ -93,28 +93,28 @@ const BOOKS = [
     mood: "裏では早口反省会の元おっさん、画面越しには息を呑むほど可憐な天使！神絵師ママと目指す完璧なわたしの作り方。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 79,
-    cumulativePv: 582,
+    todayPv: 93,
+    cumulativePv: 596,
 
     // 小説家になろう データ
     narou: {
-      todayPv: 39,
+      todayPv: 40,
       yesterdayPv: 142,
-      cumulativePv: 302,
+      cumulativePv: 303,
       startDate: "2026-10-10",
       episodes: 6,
       unique: 74,
       pc: 181,
-      sp: 121,
+      sp: 122,
       app: 0,
-      week: [{ d: "10/6", pv: 0 }, { d: "10/7", pv: 0 }, { d: "10/8", pv: 0 }, { d: "10/9", pv: 0 }, { d: "10/10", pv: 121 }, { d: "10/11", pv: 142 }, { d: "10/12", pv: 39 }],
+      week: [{ d: "10/6", pv: 0 }, { d: "10/7", pv: 0 }, { d: "10/8", pv: 0 }, { d: "10/9", pv: 0 }, { d: "10/10", pv: 121 }, { d: "10/11", pv: 142 }, { d: "10/12", pv: 40 }],
       hourly: {
         todayDate: "10/12",
         yesterdayDate: "10/11",
-        today:     [5, 0, 8, 8, 0, 1, 1, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        today:     [5, 0, 8, 8, 0, 1, 1, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         yesterday: [0, 2, 1, 0, 3, 7, 1, 1, 1, 0, 0, 3, 23, 5, 11, 7, 7, 14, 0, 2, 12, 15, 23, 4],
       },
-      dailyHistory: [{ d: "10/10", date: "2026-10-10", pv: 121 }, { d: "10/11", date: "2026-10-11", pv: 142 }, { d: "10/12", date: "2026-10-12", pv: 39 }],
+      dailyHistory: [{ d: "10/10", date: "2026-10-10", pv: 121 }, { d: "10/11", date: "2026-10-11", pv: 142 }, { d: "10/12", date: "2026-10-12", pv: 40 }],
       episodeCumulative: [22, 18, 12, 12, 0, 0],
       stats: {
         bookmarks: 1,
@@ -130,25 +130,25 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822664287570198",
-      todayPv: 40,
-      totalPv: 280,
+      todayPv: 53,
+      totalPv: 293,
       startDate: "2026-10-10",
       periodStart: "2026-10-10",
       episodesCount: 6,
-      dailyHistory: [{ d: "10/10", date: "2026-10-10", pv: 65 }, { d: "10/11", date: "2026-10-11", pv: 174 }, { d: "10/12", date: "2026-10-12", pv: 40 }],
-      episodes: [99, 54, 44, 39, 30, 14],
+      dailyHistory: [{ d: "10/10", date: "2026-10-10", pv: 65 }, { d: "10/11", date: "2026-10-11", pv: 174 }, { d: "10/12", date: "2026-10-12", pv: 53 }],
+      episodes: [101, 56, 46, 41, 32, 17],
       followers: 17,
       reviewPoints: 5,
       reviewAvg: 2.5,
       reviewCount: 2,
       comments: 0,
-      cheers: 11,
+      cheers: 15,
     },
 
     // 互換用フラグ・注記
     hot: false,
     note: "",
-    rankHistory: [{ date: "2026-10-11", label: "カクヨム 週間 現代ファンタジー", rank: 1275, note: "ランクイン", source: "manual" }],
+    rankHistory: [{ date: "2026-10-12", label: "カクヨム 週間 現代ファンタジー", rank: 710, note: "1274位→710位", source: "manual" }, { date: "2026-10-11", label: "カクヨム 週間 現代ファンタジー", rank: 1275, note: "ランクイン", source: "manual" }],
   },
   {
     ncode: "n2953mw",
@@ -164,8 +164,8 @@ const BOOKS = [
     mood: "善意100％の菩薩系聖女、現代ダンジョンの理不尽を笑顔で物理浄化！",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 23,
-    cumulativePv: 69,
+    todayPv: 24,
+    cumulativePv: 70,
 
     // 小説家になろう データ
     narou: {
@@ -201,13 +201,13 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822664326849337",
-      todayPv: 2,
-      totalPv: 8,
+      todayPv: 3,
+      totalPv: 9,
       startDate: "2026-10-11",
       periodStart: "2026-10-11",
       episodesCount: 3,
-      dailyHistory: [{ d: "10/11", date: "2026-10-11", pv: 4 }, { d: "10/12", date: "2026-10-12", pv: 2 }],
-      episodes: [5, 2, 1],
+      dailyHistory: [{ d: "10/11", date: "2026-10-11", pv: 4 }, { d: "10/12", date: "2026-10-12", pv: 3 }],
+      episodes: [6, 2, 1],
       followers: 2,
       reviewPoints: 0,
       reviewAvg: null,
@@ -306,28 +306,28 @@ const BOOKS = [
     mood: "客ゼロの純喫茶に、世界を滅ぼせる少女がいる。店を救うのは、まさかの配信人気。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 214,
-    cumulativePv: 6128,
+    todayPv: 320,
+    cumulativePv: 6234,
 
     // 小説家になろう データ
     narou: {
-      todayPv: 161,
+      todayPv: 249,
       yesterdayPv: 668,
-      cumulativePv: 4549,
+      cumulativePv: 4637,
       startDate: "2026-09-23",
       episodes: 22,
       unique: 1105,
-      pc: 1034,
-      sp: 1130,
-      app: 61,
-      week: [{ d: "10/6", pv: 239 }, { d: "10/7", pv: 212 }, { d: "10/8", pv: 244 }, { d: "10/9", pv: 334 }, { d: "10/10", pv: 367 }, { d: "10/11", pv: 668 }, { d: "10/12", pv: 161 }],
+      pc: 1064,
+      sp: 1171,
+      app: 78,
+      week: [{ d: "10/6", pv: 239 }, { d: "10/7", pv: 212 }, { d: "10/8", pv: 244 }, { d: "10/9", pv: 334 }, { d: "10/10", pv: 367 }, { d: "10/11", pv: 668 }, { d: "10/12", pv: 249 }],
       hourly: {
         todayDate: "10/12",
         yesterdayDate: "10/11",
-        today:     [17, 10, 7, 11, 27, 2, 10, 24, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        today:     [17, 10, 7, 11, 27, 2, 10, 24, 63, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         yesterday: [0, 0, 7, 10, 3, 4, 16, 5, 39, 43, 7, 43, 10, 23, 26, 8, 20, 74, 60, 76, 97, 59, 16, 22],
       },
-      dailyHistory: [{ d: "9/23", date: "2026-09-23", pv: 232 }, { d: "9/24", date: "2026-09-24", pv: 114 }, { d: "9/25", date: "2026-09-25", pv: 106 }, { d: "9/26", date: "2026-09-26", pv: 152 }, { d: "9/27", date: "2026-09-27", pv: 135 }, { d: "9/28", date: "2026-09-28", pv: 149 }, { d: "9/29", date: "2026-09-29", pv: 161 }, { d: "9/30", date: "2026-09-30", pv: 148 }, { d: "10/1", date: "2026-10-01", pv: 218 }, { d: "10/2", date: "2026-10-02", pv: 137 }, { d: "10/3", date: "2026-10-03", pv: 270 }, { d: "10/4", date: "2026-10-04", pv: 304 }, { d: "10/5", date: "2026-10-05", pv: 198 }, { d: "10/6", date: "2026-10-06", pv: 239 }, { d: "10/7", date: "2026-10-07", pv: 212 }, { d: "10/8", date: "2026-10-08", pv: 244 }, { d: "10/9", date: "2026-10-09", pv: 334 }, { d: "10/10", date: "2026-10-10", pv: 367 }, { d: "10/11", date: "2026-10-11", pv: 668 }, { d: "10/12", date: "2026-10-12", pv: 161 }],
+      dailyHistory: [{ d: "9/23", date: "2026-09-23", pv: 232 }, { d: "9/24", date: "2026-09-24", pv: 114 }, { d: "9/25", date: "2026-09-25", pv: 106 }, { d: "9/26", date: "2026-09-26", pv: 152 }, { d: "9/27", date: "2026-09-27", pv: 135 }, { d: "9/28", date: "2026-09-28", pv: 149 }, { d: "9/29", date: "2026-09-29", pv: 161 }, { d: "9/30", date: "2026-09-30", pv: 148 }, { d: "10/1", date: "2026-10-01", pv: 218 }, { d: "10/2", date: "2026-10-02", pv: 137 }, { d: "10/3", date: "2026-10-03", pv: 270 }, { d: "10/4", date: "2026-10-04", pv: 304 }, { d: "10/5", date: "2026-10-05", pv: 198 }, { d: "10/6", date: "2026-10-06", pv: 239 }, { d: "10/7", date: "2026-10-07", pv: 212 }, { d: "10/8", date: "2026-10-08", pv: 244 }, { d: "10/9", date: "2026-10-09", pv: 334 }, { d: "10/10", date: "2026-10-10", pv: 367 }, { d: "10/11", date: "2026-10-11", pv: 668 }, { d: "10/12", date: "2026-10-12", pv: 249 }],
       episodeCumulative: [238, 207, 218, 208, 193, 175, 157, 150, 143, 144, 130, 99, 108, 112, 91, 98, 85, 78, 60, 39, 0],
       stats: {
         bookmarks: 11,
@@ -343,13 +343,13 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662997355534",
-      todayPv: 53,
-      totalPv: 1579,
+      todayPv: 71,
+      totalPv: 1597,
       startDate: "2026-09-23",
       periodStart: "2026-09-23",
       episodesCount: 22,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 1 }, { d: "9/27", date: "2026-09-27", pv: 88 }, { d: "9/28", date: "2026-09-28", pv: 48 }, { d: "9/29", date: "2026-09-29", pv: 88 }, { d: "9/30", date: "2026-09-30", pv: 56 }, { d: "10/1", date: "2026-10-01", pv: 64 }, { d: "10/2", date: "2026-10-02", pv: 97 }, { d: "10/3", date: "2026-10-03", pv: 144 }, { d: "10/4", date: "2026-10-04", pv: 79 }, { d: "10/5", date: "2026-10-05", pv: 108 }, { d: "10/6", date: "2026-10-06", pv: 77 }, { d: "10/7", date: "2026-10-07", pv: 96 }, { d: "10/8", date: "2026-10-08", pv: 69 }, { d: "10/9", date: "2026-10-09", pv: 75 }, { d: "10/10", date: "2026-10-10", pv: 161 }, { d: "10/11", date: "2026-10-11", pv: 155 }, { d: "10/12", date: "2026-10-12", pv: 53 }],
-      episodes: [130, 124, 133, 121, 103, 103, 87, 87, 79, 81, 76, 65, 54, 56, 51, 46, 44, 41, 36, 32, 26, 4],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 1 }, { d: "9/27", date: "2026-09-27", pv: 88 }, { d: "9/28", date: "2026-09-28", pv: 48 }, { d: "9/29", date: "2026-09-29", pv: 88 }, { d: "9/30", date: "2026-09-30", pv: 56 }, { d: "10/1", date: "2026-10-01", pv: 64 }, { d: "10/2", date: "2026-10-02", pv: 97 }, { d: "10/3", date: "2026-10-03", pv: 144 }, { d: "10/4", date: "2026-10-04", pv: 79 }, { d: "10/5", date: "2026-10-05", pv: 108 }, { d: "10/6", date: "2026-10-06", pv: 77 }, { d: "10/7", date: "2026-10-07", pv: 96 }, { d: "10/8", date: "2026-10-08", pv: 69 }, { d: "10/9", date: "2026-10-09", pv: 75 }, { d: "10/10", date: "2026-10-10", pv: 161 }, { d: "10/11", date: "2026-10-11", pv: 155 }, { d: "10/12", date: "2026-10-12", pv: 71 }],
+      episodes: [132, 124, 133, 121, 104, 104, 87, 87, 79, 82, 77, 66, 55, 57, 52, 47, 45, 42, 37, 33, 28, 5],
       followers: 24,
       reviewPoints: 11,
       reviewAvg: 2.8,
@@ -361,7 +361,7 @@ const BOOKS = [
     // 互換用フラグ・注記
     hot: false,
     note: "",
-    rankHistory: [{ date: "2026-10-11", label: "なろう 注目度(すべて)", rank: 48, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 注目度(連載中)", rank: 30, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "カクヨム 週間 現代ファンタジー", rank: 851, note: "1076位→851位", source: "manual" }, { date: "2026-10-10", label: "なろう 注目度(すべて)", rank: 94, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 注目度(連載中)", rank: 44, note: "04-07時更新", source: "manual" }, { date: "2026-10-08", label: "カクヨム 週間 現代ファンタジー", rank: 968, note: "1016位→968位", source: "manual" }, { date: "2026-10-07", label: "カクヨム 週間 現代ファンタジー", rank: 1017, note: "1155位→1017位", source: "manual" }, { date: "2026-10-06", label: "カクヨム 週間 現代ファンタジー", rank: 1155, note: "1245位→1155位", source: "manual" }, { date: "2026-10-05", label: "カクヨム 週間 現代ファンタジー", rank: 1247, note: "1285位→1247位", source: "manual" }, { date: "2026-10-04", label: "カクヨム 週間 現代ファンタジー", rank: 1287, note: "1325位→1287位", source: "manual" }, { date: "2026-09-28", label: "カクヨム 週間 現代ファンタジー", rank: 962, note: "", source: "manual" }],
+    rankHistory: [{ date: "2026-10-12", label: "なろう 注目度(すべて)", rank: 64, note: "04-07時更新", source: "manual" }, { date: "2026-10-12", label: "なろう 注目度(連載中)", rank: 36, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 注目度(すべて)", rank: 48, note: "04-07時更新", source: "manual" }, { date: "2026-10-11", label: "なろう 注目度(連載中)", rank: 30, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "カクヨム 週間 現代ファンタジー", rank: 851, note: "1076位→851位", source: "manual" }, { date: "2026-10-10", label: "なろう 注目度(すべて)", rank: 94, note: "04-07時更新", source: "manual" }, { date: "2026-10-10", label: "なろう 注目度(連載中)", rank: 44, note: "04-07時更新", source: "manual" }, { date: "2026-10-08", label: "カクヨム 週間 現代ファンタジー", rank: 968, note: "1016位→968位", source: "manual" }, { date: "2026-10-07", label: "カクヨム 週間 現代ファンタジー", rank: 1017, note: "1155位→1017位", source: "manual" }, { date: "2026-10-06", label: "カクヨム 週間 現代ファンタジー", rank: 1155, note: "1245位→1155位", source: "manual" }, { date: "2026-10-05", label: "カクヨム 週間 現代ファンタジー", rank: 1247, note: "1285位→1247位", source: "manual" }, { date: "2026-10-04", label: "カクヨム 週間 現代ファンタジー", rank: 1287, note: "1325位→1287位", source: "manual" }, { date: "2026-09-28", label: "カクヨム 週間 現代ファンタジー", rank: 962, note: "", source: "manual" }],
   },
   {
     ncode: "n0973mu",
@@ -448,8 +448,8 @@ const BOOKS = [
     mood: "元勇者と元魔王。二人の喫茶店経営は、前途多難。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 10,
-    cumulativePv: 1848,
+    todayPv: 14,
+    cumulativePv: 1852,
 
     // 小説家になろう データ
     narou: {
@@ -485,13 +485,13 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662829188082",
-      todayPv: 3,
-      totalPv: 433,
+      todayPv: 7,
+      totalPv: 437,
       startDate: "2026-09-21",
       periodStart: "2026-09-21",
       episodesCount: 26,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 2 }, { d: "9/27", date: "2026-09-27", pv: 18 }, { d: "9/28", date: "2026-09-28", pv: 47 }, { d: "9/29", date: "2026-09-29", pv: 3 }, { d: "9/30", date: "2026-09-30", pv: 45 }, { d: "10/1", date: "2026-10-01", pv: 24 }, { d: "10/2", date: "2026-10-02", pv: 18 }, { d: "10/3", date: "2026-10-03", pv: 20 }, { d: "10/4", date: "2026-10-04", pv: 25 }, { d: "10/5", date: "2026-10-05", pv: 38 }, { d: "10/6", date: "2026-10-06", pv: 25 }, { d: "10/7", date: "2026-10-07", pv: 50 }, { d: "10/8", date: "2026-10-08", pv: 25 }, { d: "10/9", date: "2026-10-09", pv: 12 }, { d: "10/10", date: "2026-10-10", pv: 2 }, { d: "10/11", date: "2026-10-11", pv: 10 }, { d: "10/12", date: "2026-10-12", pv: 3 }],
-      episodes: [45, 33, 28, 31, 24, 28, 23, 19, 17, 15, 15, 15, 11, 14, 22, 15, 11, 9, 15, 11, 11, 12, 3, 2, 2, 2],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 2 }, { d: "9/27", date: "2026-09-27", pv: 18 }, { d: "9/28", date: "2026-09-28", pv: 47 }, { d: "9/29", date: "2026-09-29", pv: 3 }, { d: "9/30", date: "2026-09-30", pv: 45 }, { d: "10/1", date: "2026-10-01", pv: 24 }, { d: "10/2", date: "2026-10-02", pv: 18 }, { d: "10/3", date: "2026-10-03", pv: 20 }, { d: "10/4", date: "2026-10-04", pv: 25 }, { d: "10/5", date: "2026-10-05", pv: 38 }, { d: "10/6", date: "2026-10-06", pv: 25 }, { d: "10/7", date: "2026-10-07", pv: 50 }, { d: "10/8", date: "2026-10-08", pv: 25 }, { d: "10/9", date: "2026-10-09", pv: 12 }, { d: "10/10", date: "2026-10-10", pv: 2 }, { d: "10/11", date: "2026-10-11", pv: 10 }, { d: "10/12", date: "2026-10-12", pv: 7 }],
+      episodes: [46, 33, 28, 31, 24, 28, 23, 19, 17, 15, 15, 15, 11, 14, 22, 15, 11, 9, 15, 11, 11, 13, 4, 3, 2, 2],
       followers: 5,
       reviewPoints: 6,
       reviewAvg: 3.0,
@@ -519,8 +519,8 @@ const BOOKS = [
     mood: "全肯定の力で、孤高の剣士とともに伝説へ。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 36,
-    cumulativePv: 1508,
+    todayPv: 37,
+    cumulativePv: 1509,
 
     // 小説家になろう データ
     narou: {
@@ -556,13 +556,13 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662704234108",
-      todayPv: 30,
-      totalPv: 223,
+      todayPv: 31,
+      totalPv: 224,
       startDate: "2026-09-19",
       periodStart: "2026-09-19",
       episodesCount: 30,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 0 }, { d: "9/27", date: "2026-09-27", pv: 9 }, { d: "9/28", date: "2026-09-28", pv: 6 }, { d: "9/29", date: "2026-09-29", pv: 23 }, { d: "9/30", date: "2026-09-30", pv: 3 }, { d: "10/1", date: "2026-10-01", pv: 6 }, { d: "10/2", date: "2026-10-02", pv: 4 }, { d: "10/3", date: "2026-10-03", pv: 5 }, { d: "10/4", date: "2026-10-04", pv: 8 }, { d: "10/5", date: "2026-10-05", pv: 2 }, { d: "10/6", date: "2026-10-06", pv: 4 }, { d: "10/7", date: "2026-10-07", pv: 2 }, { d: "10/8", date: "2026-10-08", pv: 3 }, { d: "10/9", date: "2026-10-09", pv: 29 }, { d: "10/10", date: "2026-10-10", pv: 2 }, { d: "10/11", date: "2026-10-11", pv: 5 }, { d: "10/12", date: "2026-10-12", pv: 30 }],
-      episodes: [25, 18, 13, 11, 9, 10, 7, 8, 9, 11, 11, 9, 7, 6, 6, 6, 6, 4, 5, 4, 4, 5, 5, 4, 4, 4, 4, 4, 2, 2],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 0 }, { d: "9/27", date: "2026-09-27", pv: 9 }, { d: "9/28", date: "2026-09-28", pv: 6 }, { d: "9/29", date: "2026-09-29", pv: 23 }, { d: "9/30", date: "2026-09-30", pv: 3 }, { d: "10/1", date: "2026-10-01", pv: 6 }, { d: "10/2", date: "2026-10-02", pv: 4 }, { d: "10/3", date: "2026-10-03", pv: 5 }, { d: "10/4", date: "2026-10-04", pv: 8 }, { d: "10/5", date: "2026-10-05", pv: 2 }, { d: "10/6", date: "2026-10-06", pv: 4 }, { d: "10/7", date: "2026-10-07", pv: 2 }, { d: "10/8", date: "2026-10-08", pv: 3 }, { d: "10/9", date: "2026-10-09", pv: 29 }, { d: "10/10", date: "2026-10-10", pv: 2 }, { d: "10/11", date: "2026-10-11", pv: 5 }, { d: "10/12", date: "2026-10-12", pv: 31 }],
+      episodes: [26, 18, 13, 11, 9, 10, 7, 8, 9, 11, 11, 9, 7, 6, 6, 6, 6, 4, 5, 4, 4, 5, 5, 4, 4, 4, 4, 4, 2, 2],
       followers: 9,
       reviewPoints: 3,
       reviewAvg: 3.0,
@@ -590,28 +590,28 @@ const BOOKS = [
     mood: "引退したいのに、なぜか英雄。無欲な男の異世界オンライン奮闘記。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 35,
-    cumulativePv: 1516,
+    todayPv: 37,
+    cumulativePv: 1518,
 
     // 小説家になろう データ
     narou: {
-      todayPv: 33,
+      todayPv: 34,
       yesterdayPv: 54,
-      cumulativePv: 1173,
+      cumulativePv: 1174,
       startDate: "2026-09-11",
       episodes: 36,
       unique: 656,
-      pc: 233,
+      pc: 234,
       sp: 38,
       app: 0,
-      week: [{ d: "10/6", pv: 38 }, { d: "10/7", pv: 51 }, { d: "10/8", pv: 26 }, { d: "10/9", pv: 45 }, { d: "10/10", pv: 24 }, { d: "10/11", pv: 54 }, { d: "10/12", pv: 33 }],
+      week: [{ d: "10/6", pv: 38 }, { d: "10/7", pv: 51 }, { d: "10/8", pv: 26 }, { d: "10/9", pv: 45 }, { d: "10/10", pv: 24 }, { d: "10/11", pv: 54 }, { d: "10/12", pv: 34 }],
       hourly: {
         todayDate: "10/12",
         yesterdayDate: "10/11",
-        today:     [7, 0, 2, 1, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        today:     [7, 0, 2, 1, 23, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         yesterday: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 42, 6, 2, 0, 0, 2],
       },
-      dailyHistory: [{ d: "9/11", date: "2026-09-11", pv: 33 }, { d: "9/12", date: "2026-09-12", pv: 43 }, { d: "9/13", date: "2026-09-13", pv: 12 }, { d: "9/14", date: "2026-09-14", pv: 5 }, { d: "9/15", date: "2026-09-15", pv: 18 }, { d: "9/16", date: "2026-09-16", pv: 14 }, { d: "9/17", date: "2026-09-17", pv: 15 }, { d: "9/18", date: "2026-09-18", pv: 26 }, { d: "9/19", date: "2026-09-19", pv: 44 }, { d: "9/20", date: "2026-09-20", pv: 55 }, { d: "9/21", date: "2026-09-21", pv: 46 }, { d: "9/22", date: "2026-09-22", pv: 26 }, { d: "9/23", date: "2026-09-23", pv: 16 }, { d: "9/24", date: "2026-09-24", pv: 19 }, { d: "9/25", date: "2026-09-25", pv: 75 }, { d: "9/26", date: "2026-09-26", pv: 43 }, { d: "9/27", date: "2026-09-27", pv: 32 }, { d: "9/28", date: "2026-09-28", pv: 17 }, { d: "9/29", date: "2026-09-29", pv: 19 }, { d: "9/30", date: "2026-09-30", pv: 74 }, { d: "10/1", date: "2026-10-01", pv: 51 }, { d: "10/2", date: "2026-10-02", pv: 28 }, { d: "10/3", date: "2026-10-03", pv: 82 }, { d: "10/4", date: "2026-10-04", pv: 77 }, { d: "10/5", date: "2026-10-05", pv: 32 }, { d: "10/6", date: "2026-10-06", pv: 38 }, { d: "10/7", date: "2026-10-07", pv: 51 }, { d: "10/8", date: "2026-10-08", pv: 26 }, { d: "10/9", date: "2026-10-09", pv: 45 }, { d: "10/10", date: "2026-10-10", pv: 24 }, { d: "10/11", date: "2026-10-11", pv: 54 }, { d: "10/12", date: "2026-10-12", pv: 33 }],
+      dailyHistory: [{ d: "9/11", date: "2026-09-11", pv: 33 }, { d: "9/12", date: "2026-09-12", pv: 43 }, { d: "9/13", date: "2026-09-13", pv: 12 }, { d: "9/14", date: "2026-09-14", pv: 5 }, { d: "9/15", date: "2026-09-15", pv: 18 }, { d: "9/16", date: "2026-09-16", pv: 14 }, { d: "9/17", date: "2026-09-17", pv: 15 }, { d: "9/18", date: "2026-09-18", pv: 26 }, { d: "9/19", date: "2026-09-19", pv: 44 }, { d: "9/20", date: "2026-09-20", pv: 55 }, { d: "9/21", date: "2026-09-21", pv: 46 }, { d: "9/22", date: "2026-09-22", pv: 26 }, { d: "9/23", date: "2026-09-23", pv: 16 }, { d: "9/24", date: "2026-09-24", pv: 19 }, { d: "9/25", date: "2026-09-25", pv: 75 }, { d: "9/26", date: "2026-09-26", pv: 43 }, { d: "9/27", date: "2026-09-27", pv: 32 }, { d: "9/28", date: "2026-09-28", pv: 17 }, { d: "9/29", date: "2026-09-29", pv: 19 }, { d: "9/30", date: "2026-09-30", pv: 74 }, { d: "10/1", date: "2026-10-01", pv: 51 }, { d: "10/2", date: "2026-10-02", pv: 28 }, { d: "10/3", date: "2026-10-03", pv: 82 }, { d: "10/4", date: "2026-10-04", pv: 77 }, { d: "10/5", date: "2026-10-05", pv: 32 }, { d: "10/6", date: "2026-10-06", pv: 38 }, { d: "10/7", date: "2026-10-07", pv: 51 }, { d: "10/8", date: "2026-10-08", pv: 26 }, { d: "10/9", date: "2026-10-09", pv: 45 }, { d: "10/10", date: "2026-10-10", pv: 24 }, { d: "10/11", date: "2026-10-11", pv: 54 }, { d: "10/12", date: "2026-10-12", pv: 34 }],
       episodeCumulative: [47, 45, 46, 39, 39, 41, 34, 35, 29, 28, 25, 23, 21, 22, 33, 25, 18, 25, 25, 18, 23, 15, 18, 27, 17, 12, 26, 14, 21, 6, 13, 15, 4, 9, 18, 0],
       stats: {
         bookmarks: 1,
@@ -627,13 +627,13 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662136045804",
-      todayPv: 2,
-      totalPv: 343,
+      todayPv: 3,
+      totalPv: 344,
       startDate: "2026-09-11",
       periodStart: "2026-09-11",
       episodesCount: 36,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 3 }, { d: "9/27", date: "2026-09-27", pv: 22 }, { d: "9/28", date: "2026-09-28", pv: 7 }, { d: "9/29", date: "2026-09-29", pv: 8 }, { d: "9/30", date: "2026-09-30", pv: 30 }, { d: "10/1", date: "2026-10-01", pv: 6 }, { d: "10/2", date: "2026-10-02", pv: 35 }, { d: "10/3", date: "2026-10-03", pv: 1 }, { d: "10/4", date: "2026-10-04", pv: 6 }, { d: "10/5", date: "2026-10-05", pv: 18 }, { d: "10/6", date: "2026-10-06", pv: 14 }, { d: "10/7", date: "2026-10-07", pv: 8 }, { d: "10/8", date: "2026-10-08", pv: 4 }, { d: "10/9", date: "2026-10-09", pv: 35 }, { d: "10/10", date: "2026-10-10", pv: 5 }, { d: "10/11", date: "2026-10-11", pv: 2 }, { d: "10/12", date: "2026-10-12", pv: 2 }],
-      episodes: [22, 14, 14, 16, 14, 15, 15, 15, 14, 12, 10, 8, 9, 11, 12, 10, 10, 9, 10, 7, 12, 9, 9, 9, 8, 9, 7, 6, 7, 6, 5, 4, 3, 1, 0, 1],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 3 }, { d: "9/27", date: "2026-09-27", pv: 22 }, { d: "9/28", date: "2026-09-28", pv: 7 }, { d: "9/29", date: "2026-09-29", pv: 8 }, { d: "9/30", date: "2026-09-30", pv: 30 }, { d: "10/1", date: "2026-10-01", pv: 6 }, { d: "10/2", date: "2026-10-02", pv: 35 }, { d: "10/3", date: "2026-10-03", pv: 1 }, { d: "10/4", date: "2026-10-04", pv: 6 }, { d: "10/5", date: "2026-10-05", pv: 18 }, { d: "10/6", date: "2026-10-06", pv: 14 }, { d: "10/7", date: "2026-10-07", pv: 8 }, { d: "10/8", date: "2026-10-08", pv: 4 }, { d: "10/9", date: "2026-10-09", pv: 35 }, { d: "10/10", date: "2026-10-10", pv: 5 }, { d: "10/11", date: "2026-10-11", pv: 2 }, { d: "10/12", date: "2026-10-12", pv: 3 }],
+      episodes: [23, 14, 14, 16, 14, 15, 15, 15, 14, 12, 10, 8, 9, 11, 12, 10, 10, 9, 10, 7, 12, 9, 9, 9, 8, 9, 7, 6, 7, 6, 5, 4, 3, 1, 0, 1],
       followers: 4,
       reviewPoints: 3,
       reviewAvg: 3.0,
@@ -661,8 +661,8 @@ const BOOKS = [
     mood: "がんばり屋の妹を、とことん甘やかす。姉妹の辺境スローライフ。",
 
     // 集計サマリー (本日 & 累計)
-    todayPv: 168,
-    cumulativePv: 3170,
+    todayPv: 169,
+    cumulativePv: 3171,
 
     // 小説家になろう データ
     narou: {
@@ -698,13 +698,13 @@ const BOOKS = [
     // カクヨム データ
     kakuyomu: {
       workId: "11054822662133404717",
-      todayPv: 7,
-      totalPv: 334,
+      todayPv: 8,
+      totalPv: 335,
       startDate: "2026-09-11",
       periodStart: "2026-09-11",
       episodesCount: 36,
-      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 4 }, { d: "9/27", date: "2026-09-27", pv: 0 }, { d: "9/28", date: "2026-09-28", pv: 2 }, { d: "9/29", date: "2026-09-29", pv: 13 }, { d: "9/30", date: "2026-09-30", pv: 31 }, { d: "10/1", date: "2026-10-01", pv: 16 }, { d: "10/2", date: "2026-10-02", pv: 12 }, { d: "10/3", date: "2026-10-03", pv: 2 }, { d: "10/4", date: "2026-10-04", pv: 15 }, { d: "10/5", date: "2026-10-05", pv: 12 }, { d: "10/6", date: "2026-10-06", pv: 20 }, { d: "10/7", date: "2026-10-07", pv: 19 }, { d: "10/8", date: "2026-10-08", pv: 2 }, { d: "10/9", date: "2026-10-09", pv: 1 }, { d: "10/10", date: "2026-10-10", pv: 1 }, { d: "10/11", date: "2026-10-11", pv: 31 }, { d: "10/12", date: "2026-10-12", pv: 7 }],
-      episodes: [29, 24, 20, 20, 18, 20, 19, 18, 16, 12, 16, 15, 18, 8, 9, 8, 6, 6, 3, 4, 6, 4, 5, 4, 3, 3, 3, 2, 2, 4, 2, 3, 1, 1, 1, 1],
+      dailyHistory: [{ d: "9/26", date: "2026-09-26", pv: 4 }, { d: "9/27", date: "2026-09-27", pv: 0 }, { d: "9/28", date: "2026-09-28", pv: 2 }, { d: "9/29", date: "2026-09-29", pv: 13 }, { d: "9/30", date: "2026-09-30", pv: 31 }, { d: "10/1", date: "2026-10-01", pv: 16 }, { d: "10/2", date: "2026-10-02", pv: 12 }, { d: "10/3", date: "2026-10-03", pv: 2 }, { d: "10/4", date: "2026-10-04", pv: 15 }, { d: "10/5", date: "2026-10-05", pv: 12 }, { d: "10/6", date: "2026-10-06", pv: 20 }, { d: "10/7", date: "2026-10-07", pv: 19 }, { d: "10/8", date: "2026-10-08", pv: 2 }, { d: "10/9", date: "2026-10-09", pv: 1 }, { d: "10/10", date: "2026-10-10", pv: 1 }, { d: "10/11", date: "2026-10-11", pv: 31 }, { d: "10/12", date: "2026-10-12", pv: 8 }],
+      episodes: [30, 24, 20, 20, 18, 20, 19, 18, 16, 12, 16, 15, 18, 8, 9, 8, 6, 6, 3, 4, 6, 4, 5, 4, 3, 3, 3, 2, 2, 4, 2, 3, 1, 1, 1, 1],
       followers: 7,
       reviewPoints: 3,
       reviewAvg: 3.0,
