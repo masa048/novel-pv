@@ -462,32 +462,54 @@ def parse_kakuyomu_work_stats(work_id):
 
 
 def parse_kakuyomu(work_id):
-    """カクヨム アクセスページから累計PV、各話PV、応援数を取得"""
-    url = f"https://kakuyomu.jp/works/{work_id}/accesses"
-    html = fetch(url)
-
-    m = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', html, re.S)
-    if not m:
-        raise ValueError(f"__NEXT_DATA__ not found for {work_id}")
-    data = json.loads(m.group(1))
-    apollo = data["props"]["pageProps"]["__APOLLO_STATE__"]
-    work_key = next(k for k in apollo if k.startswith("Work:"))
-    work = apollo[work_key]
-
-    total_pv = work["totalReadCount"]
-
-    episode_list_key = next(k for k in work if k.startswith("publicEpisodeUnions"))
+    """カクヨム アクセスページから累計PV、各話PV、応援数を取得（ページネーション対応）"""
+    page = 1
     episodes = []
     episode_cheers = []
-    for ref in work[episode_list_key]["nodes"]:
-        ep = apollo[ref["__ref"]]
-        episodes.append(ep["readCount"])
-        episode_cheers.append(ep.get("publicCheerCount", 0))
-    total_cheers = sum(episode_cheers)
+    total_pv = 0
+    period_start = None
 
-    text = strip_tags(html)
-    period_m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日\s*\d{1,2}:\d{2}\s*から", text)
-    period_start = f"{period_m.group(1)}-{int(period_m.group(2)):02d}-{int(period_m.group(3)):02d}" if period_m else None
+    while True:
+        url = f"https://kakuyomu.jp/works/{work_id}/accesses" if page == 1 else f"https://kakuyomu.jp/works/{work_id}/accesses?page={page}"
+        html = fetch(url)
+
+        m = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', html, re.S)
+        if not m:
+            raise ValueError(f"__NEXT_DATA__ not found for {work_id} (page {page})")
+        data = json.loads(m.group(1))
+        apollo = data["props"]["pageProps"]["__APOLLO_STATE__"]
+        work_key = next(k for k in apollo if k.startswith("Work:"))
+        work = apollo[work_key]
+
+        if page == 1:
+            total_pv = work["totalReadCount"]
+            text = strip_tags(html)
+            period_m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日\s*\d{1,2}:\d{2}\s*から", text)
+            period_start = f"{period_m.group(1)}-{int(period_m.group(2)):02d}-{int(period_m.group(3)):02d}" if period_m else None
+
+        episode_list_key = next((k for k in work if k.startswith("publicEpisodeUnions")), None)
+        if not episode_list_key:
+            break
+
+        union_data = work[episode_list_key]
+        nodes = union_data.get("nodes", [])
+        for ref in nodes:
+            ep = apollo.get(ref["__ref"])
+            if ep:
+                episodes.append(ep.get("readCount", 0))
+                episode_cheers.append(ep.get("publicCheerCount", 0))
+
+        page_info = union_data.get("pageInfo", {})
+        has_next = page_info.get("hasNextPage", False)
+        if not has_next or not nodes:
+            break
+
+        page += 1
+        if page > 50:
+            break
+        time.sleep(0.5)
+
+    total_cheers = sum(episode_cheers)
 
     return {
         "totalPv": total_pv,
