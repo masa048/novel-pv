@@ -18,13 +18,31 @@
       "mood": "今度こそ幸せに。神絵師（ママ）とVTuber（娘）の、騒がしい日々。"
     },
     {
+      "ncode": "n2852mz",
+      "kakuyomuId": "11054822666421597684",
+      "title": "地味OLの町中華と赤提灯一人飲み配信 〜退勤後に背脂と生ビールをキメる低体温アフレコ日記〜",
+      "shortTitle": "地味OLの町中華と赤提灯一人飲み配信",
+      "status": "ongoing",
+      "genre": "現代ドラマ",
+      "order": 2,
+      "cover": "covers/n2852mz.jpg",
+      "tags": [
+        "グルメ",
+        "一人飲み",
+        "配信",
+        "日常",
+        "コメディ"
+      ],
+      "mood": "地味OLが町中華と赤提灯で一人飲み配信する低体温アフレコ飯テロ日記"
+    },
+    {
       "ncode": "n2554mz",
       "kakuyomuId": "11054822666400756001",
       "title": "100層の魔王、暇すぎて配信を始める〜人類が50層で詰んでる裏で、美少女になって東京食べ歩き無双〜",
       "shortTitle": "100層の魔王、暇すぎて配信を始める",
       "status": "ongoing",
       "genre": "ローファンタジー",
-      "order": 2,
+      "order": 3,
       "cover": "covers/n2554mz.jpg",
       "tags": [
         "現代ダンジョン",
@@ -42,7 +60,7 @@
       "shortTitle": "TS転生した元おっさん、美少女VTuberをセルフプロデュースする",
       "status": "ongoing",
       "genre": "ローファンタジー",
-      "order": 3,
+      "order": 4,
       "cover": "covers/n2175mw.jpg",
       "tags": [
         "TS",
@@ -59,7 +77,7 @@
       "shortTitle": "デスゲーム業界に菩薩が来た",
       "status": "ongoing",
       "genre": "ローファンタジー",
-      "order": 4,
+      "order": 5,
       "cover": "covers/n2953mw.jpg",
       "tags": [
         "配信",
@@ -76,7 +94,7 @@
       "shortTitle": "お兄ちゃんが完璧すぎるのが悪い",
       "status": "done",
       "genre": "恋愛",
-      "order": 5,
+      "order": 6,
       "cover": "covers/n7267mu.jpg",
       "tags": [
         "恋愛",
@@ -93,7 +111,7 @@
       "shortTitle": "現代ダンジョン最深部の純喫茶",
       "status": "ongoing",
       "genre": "ローファンタジー",
-      "order": 6,
+      "order": 7,
       "cover": "covers/n2286mu.jpg",
       "tags": [
         "配信",
@@ -109,7 +127,7 @@
       "shortTitle": "絶対カウンターの失格者",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 7,
+      "order": 8,
       "cover": "covers/n0973mu.jpg",
       "tags": [
         "カウンター",
@@ -125,7 +143,7 @@
       "shortTitle": "魔王城の最深部で喫茶店を開く",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 8,
+      "order": 9,
       "cover": "covers/n9355mt.jpg",
       "tags": [
         "喫茶店",
@@ -142,7 +160,7 @@
       "shortTitle": "元受付嬢、孤高の最強剣士を全肯定して伝説になる",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 9,
+      "order": 10,
       "cover": "covers/n7303mt.jpg",
       "tags": [
         "全肯定",
@@ -159,7 +177,7 @@
       "shortTitle": "リアルオンラインを完全解約したい俺",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 10,
+      "order": 11,
       "cover": "covers/n8256ms.jpg",
       "tags": [
         "転生",
@@ -176,7 +194,7 @@
       "shortTitle": "転生したら全肯定お姉ちゃんでした",
       "status": "ongoing",
       "genre": "ハイファンタジー",
-      "order": 11,
+      "order": 12,
       "cover": "covers/n8198ms.jpg",
       "tags": [
         "姉妹愛",
@@ -192,7 +210,7 @@
       "shortTitle": "くっ殺せの感情エネルギーでオーク軍を無双させる",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 12,
+      "order": 13,
       "cover": "covers/n0071ms.jpg",
       "tags": [
         "無双",
@@ -209,7 +227,7 @@
       "shortTitle": "婚約破棄されたデバフ令嬢は、無敵の厄災をじわじわ裁く",
       "status": "done",
       "genre": "ハイファンタジー",
-      "order": 13,
+      "order": 14,
       "cover": "covers/n3926mr.jpg",
       "tags": [
         "婚約破棄",
