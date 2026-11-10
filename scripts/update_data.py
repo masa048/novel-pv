@@ -23,24 +23,56 @@ import requests
 
 JST = timezone(timedelta(hours=9))
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 pv-checker-bot/2.0"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "Accept-Language": "ja,en-US;q=0.9,en;q=0.8",
 }
 TIMEOUT = 25
 
 # キャッシュファイルのパス
 DAILY_CACHE_PATH = "scripts/naro_daily_pv_cache.json"
 CHAPTER_CACHE_PATH = "scripts/naro_episode_cache.json"
+NARO_LIVE_CACHE_PATH = "scripts/naro_live_cache.json"
 KAKUYOMU_STATS_CACHE_PATH = "scripts/kakuyomu_stats_cache.json"
 KAKUYOMU_DAILY_CACHE_PATH = "scripts/kakuyomu_daily_cache.json"
 RANKINGS_AUTO_PATH = "scripts/rankings_auto.json"
 RANKINGS_MANUAL_PATH = "rankings_manual.json"
 
 
-def fetch(url):
-    """URLからHTMLまたはテキストを取得"""
-    r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
-    r.raise_for_status()
-    return r.text
+def fetch(url, max_retries=3, retry_delay=2.5):
+    """URLからHTMLまたはテキストを取得（一時エラー・403/503等のリトライ対応）"""
+    last_err = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+            r.raise_for_status()
+            return r.text
+        except requests.RequestException as e:
+            last_err = e
+            status = getattr(e.response, "status_code", None)
+            if attempt < max_retries:
+                wait_sec = retry_delay * attempt
+                print(f"  fetch retry ({attempt}/{max_retries}) for {url} (status={status}): waiting {wait_sec}s...", file=sys.stderr)
+                time.sleep(wait_sec)
+    raise last_err
+
+
+def fetch_json(url, max_retries=3, retry_delay=2.5):
+    """URLからJSONを取得（リトライ対応）"""
+    last_err = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+            r.raise_for_status()
+            return r.json()
+        except requests.RequestException as e:
+            last_err = e
+            status = getattr(e.response, "status_code", None)
+            if attempt < max_retries:
+                wait_sec = retry_delay * attempt
+                print(f"  fetch_json retry ({attempt}/{max_retries}) for {url} (status={status}): waiting {wait_sec}s...", file=sys.stderr)
+                time.sleep(wait_sec)
+    raise last_err
 
 
 def strip_tags(html):
@@ -336,9 +368,7 @@ def fetch_narou_api_stats(ncodes):
     """なろう公式APIから総合点・ブックマーク数・感想数・初回掲載日・話数等を取得"""
     joined = "-".join(ncodes)
     url = f"https://api.syosetu.com/novelapi/api/?ncode={joined}&out=json"
-    r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
-    r.raise_for_status()
-    rows = r.json()
+    rows = fetch_json(url)
     result = {}
     for row in rows:
         if "ncode" not in row:
@@ -367,9 +397,7 @@ def fetch_narou_api_stats(ncodes):
 def fetch_narou_top300(rtype):
     """なろう公式ランキングAPIから指定種別のTop300を取得"""
     url = f"https://api.syosetu.com/rank/rankget/?rtype={rtype}&out=json"
-    r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
-    r.raise_for_status()
-    rows = r.json()
+    rows = fetch_json(url)
     return {row["ncode"].lower(): {"rank": row["rank"], "pt": row["pt"]} for row in rows}
 
 
@@ -750,6 +778,7 @@ def main():
 
     chapter_cache = load_json_cache(CHAPTER_CACHE_PATH)
     daily_cache = load_json_cache(DAILY_CACHE_PATH)
+    naro_live_cache = load_json_cache(NARO_LIVE_CACHE_PATH)
     kakuyomu_stats_cache = load_json_cache(KAKUYOMU_STATS_CACHE_PATH)
     kakuyomu_daily_cache = load_json_cache(KAKUYOMU_DAILY_CACHE_PATH)
     rankings_auto = load_json_cache(RANKINGS_AUTO_PATH)
@@ -792,18 +821,27 @@ def main():
         try:
             print(f"Processing: {ncode} (Kakuyomu: {book['kakuyomuId']})...", file=sys.stderr)
             
-            # なろうデータ取得（未公開やKASASAGIアクセス不可時は空データにフォールバック）
+            # なろうデータ取得（未公開やアクセス不可時は直前成功キャッシュにフォールバック）
+            narou_success = False
             try:
                 kasasagi = parse_kasasagi(ncode)
                 time.sleep(0.8)
                 naro_cumulative = build_naro_episode_cumulative(ncode, kasasagi["periodStart"], chapter_cache)
                 naro_history = build_naro_daily_history(ncode, kasasagi, daily_cache)
                 time.sleep(0.8)
+                narou_success = True
             except Exception as e:
-                print(f"  narou fetch failed (possibly unpublished) {ncode}: {e}", file=sys.stderr)
-                kasasagi = empty_kasasagi()
-                naro_cumulative = []
-                naro_history = []
+                print(f"  narou fetch failed (using fallback if available) {ncode}: {e}", file=sys.stderr)
+                cached = naro_live_cache.get(ncode.lower()) or naro_live_cache.get(ncode)
+                if cached and cached.get("kasasagi"):
+                    print(f"  -> [FALLBACK] Using previous Narou cache for {ncode} (from {cached.get('updated_at', 'unknown')})", file=sys.stderr)
+                    kasasagi = cached["kasasagi"]
+                    naro_cumulative = cached.get("naro_cumulative") or []
+                    naro_history = cached.get("naro_history") or []
+                else:
+                    kasasagi = empty_kasasagi()
+                    naro_cumulative = []
+                    naro_history = []
 
             # カクヨムデータ取得
             try:
@@ -835,7 +873,24 @@ def main():
                     kakuyomu_stats = (entry.get("stats") if entry else {}) or {"followers": 0, "reviewAvg": None, "reviewCount": 0, "comments": 0}
             
             kakuyomu.update(kakuyomu_stats)
+
+            # なろう公式API統計（取得失敗時はキャッシュから復元）
             narou_extra = narou_api_stats.get(ncode.lower(), {})
+            if not narou_extra:
+                cached = naro_live_cache.get(ncode.lower()) or naro_live_cache.get(ncode)
+                if cached and cached.get("narou_extra"):
+                    narou_extra = cached["narou_extra"]
+
+            # 取得成功時はなろう最新キャッシュを更新
+            if narou_success:
+                naro_live_cache[ncode.lower()] = {
+                    "updated_at": datetime.now(JST).isoformat(),
+                    "kasasagi": kasasagi,
+                    "naro_cumulative": naro_cumulative,
+                    "naro_history": naro_history,
+                    "narou_extra": narou_extra,
+                }
+
             rank_history = build_rank_history(ncode, rankings_auto, manual_rankings)
 
             rendered = render_book_data(book, kasasagi, kakuyomu, kakuyomu_daily, naro_cumulative, naro_history, narou_extra, rank_history)
@@ -849,6 +904,7 @@ def main():
     # キャッシュ保存
     save_json_cache(CHAPTER_CACHE_PATH, chapter_cache)
     save_json_cache(DAILY_CACHE_PATH, daily_cache)
+    save_json_cache(NARO_LIVE_CACHE_PATH, naro_live_cache)
     save_json_cache(KAKUYOMU_STATS_CACHE_PATH, kakuyomu_stats_cache)
     save_json_cache(KAKUYOMU_DAILY_CACHE_PATH, kakuyomu_daily_cache)
     save_json_cache(RANKINGS_AUTO_PATH, rankings_auto)
