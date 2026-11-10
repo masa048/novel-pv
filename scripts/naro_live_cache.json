@@ -504,7 +504,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-11T04:58:30.247098+09:00"
+    "updated_at": "2026-11-11T05:58:34.823020+09:00"
   },
   "n0973mu": {
     "kasasagi": {
@@ -900,11 +900,11 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-11T04:58:04.129917+09:00"
+    "updated_at": "2026-11-11T05:58:08.381055+09:00"
   },
   "n2175mw": {
     "kasasagi": {
-      "app": 38,
+      "app": 42,
       "hourly": {
         "today": [
           25,
@@ -912,7 +912,7 @@
           4,
           2,
           0,
-          0,
+          6,
           0,
           0,
           0,
@@ -961,7 +961,7 @@
         ],
         "yesterdayDate": "11/10"
       },
-      "pc": 818,
+      "pc": 820,
       "periodStart": "2026-10-10",
       "sp": 827,
       "unique": 1789,
@@ -992,7 +992,7 @@
         },
         {
           "d": "11/11",
-          "pv": 31
+          "pv": 37
         }
       ]
     },
@@ -1198,7 +1198,7 @@
       {
         "d": "11/11",
         "date": "2026-11-11",
-        "pv": 31
+        "pv": 37
       }
     ],
     "narou_extra": {
@@ -1210,9 +1210,9 @@
       "ratingAvg": 8.5,
       "ratingCnt": 4,
       "reviewCnt": 0,
-      "weeklyPoint": 2
+      "weeklyPoint": 4
     },
-    "updated_at": "2026-11-11T04:57:44.231206+09:00"
+    "updated_at": "2026-11-11T05:57:46.886156+09:00"
   },
   "n2286mu": {
     "kasasagi": {
@@ -1224,7 +1224,7 @@
           5,
           6,
           4,
-          0,
+          5,
           0,
           0,
           0,
@@ -1273,7 +1273,7 @@
         ],
         "yesterdayDate": "11/10"
       },
-      "pc": 1139,
+      "pc": 1144,
       "periodStart": "2026-09-23",
       "sp": 1245,
       "unique": 4890,
@@ -1304,7 +1304,7 @@
         },
         {
           "d": "11/11",
-          "pv": 23
+          "pv": 28
         }
       ]
     },
@@ -1613,21 +1613,21 @@
       {
         "d": "11/11",
         "date": "2026-11-11",
-        "pv": 23
+        "pv": 28
       }
     ],
     "narou_extra": {
-      "bookmarks": 42,
+      "bookmarks": 43,
       "episodes": 54,
       "firstup": "2026-09-23",
-      "globalPoint": 154,
+      "globalPoint": 156,
       "impressionCnt": 2,
       "ratingAvg": 10.0,
       "ratingCnt": 7,
       "reviewCnt": 0,
-      "weeklyPoint": 6
+      "weeklyPoint": 8
     },
-    "updated_at": "2026-11-11T04:57:59.406812+09:00"
+    "updated_at": "2026-11-11T05:58:03.305428+09:00"
   },
   "n2554mz": {
     "kasasagi": {
@@ -1639,7 +1639,7 @@
           3,
           2,
           1,
-          0,
+          1,
           0,
           0,
           0,
@@ -1688,7 +1688,7 @@
         ],
         "yesterdayDate": "11/10"
       },
-      "pc": 324,
+      "pc": 325,
       "periodStart": "2026-11-07",
       "sp": 375,
       "unique": 172,
@@ -1719,7 +1719,7 @@
         },
         {
           "d": "11/11",
-          "pv": 7
+          "pv": 8
         }
       ]
     },
@@ -1757,7 +1757,7 @@
       {
         "d": "11/11",
         "date": "2026-11-11",
-        "pv": 7
+        "pv": 8
       }
     ],
     "narou_extra": {
@@ -1771,7 +1771,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 12
     },
-    "updated_at": "2026-11-11T04:57:39.458697+09:00"
+    "updated_at": "2026-11-11T05:57:41.681575+09:00"
   },
   "n2852mz": {
     "kasasagi": {
@@ -1782,7 +1782,7 @@
           1,
           1,
           1,
-          0,
+          1,
           0,
           0,
           0,
@@ -1832,7 +1832,7 @@
         ],
         "yesterdayDate": "11/10"
       },
-      "pc": 111,
+      "pc": 112,
       "periodStart": "2026-11-08",
       "sp": 9,
       "unique": 51,
@@ -1863,7 +1863,7 @@
         },
         {
           "d": "11/11",
-          "pv": 5
+          "pv": 6
         }
       ]
     },
@@ -1894,7 +1894,7 @@
       {
         "d": "11/11",
         "date": "2026-11-11",
-        "pv": 5
+        "pv": 6
       }
     ],
     "narou_extra": {
@@ -1908,7 +1908,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-11T04:57:33.846389+09:00"
+    "updated_at": "2026-11-11T05:57:35.716504+09:00"
   },
   "n2953mw": {
     "kasasagi": {
@@ -1920,7 +1920,7 @@
           1,
           0,
           0,
-          0,
+          2,
           0,
           0,
           0,
@@ -1969,7 +1969,7 @@
         ],
         "yesterdayDate": "11/10"
       },
-      "pc": 224,
+      "pc": 226,
       "periodStart": "2026-10-11",
       "sp": 82,
       "unique": 525,
@@ -2000,7 +2000,7 @@
         },
         {
           "d": "11/11",
-          "pv": 1
+          "pv": 3
         }
       ]
     },
@@ -2184,7 +2184,7 @@
       {
         "d": "11/11",
         "date": "2026-11-11",
-        "pv": 1
+        "pv": 3
       }
     ],
     "narou_extra": {
@@ -2198,7 +2198,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-11T04:57:49.441129+09:00"
+    "updated_at": "2026-11-11T05:57:51.781738+09:00"
   },
   "n3926mr": {
     "kasasagi": {
@@ -2719,7 +2719,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-11T04:58:34.846077+09:00"
+    "updated_at": "2026-11-11T05:58:39.760718+09:00"
   },
   "n7267mu": {
     "kasasagi": {
@@ -3085,7 +3085,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 2
     },
-    "updated_at": "2026-11-11T04:57:53.999250+09:00"
+    "updated_at": "2026-11-11T05:57:56.785965+09:00"
   },
   "n7303mt": {
     "kasasagi": {
@@ -3514,21 +3514,21 @@
       "ratingAvg": 8.5,
       "ratingCnt": 4,
       "reviewCnt": 0,
-      "weeklyPoint": 12
+      "weeklyPoint": 14
     },
-    "updated_at": "2026-11-11T04:58:14.058213+09:00"
+    "updated_at": "2026-11-11T05:58:18.239307+09:00"
   },
   "n8135mt": {
     "kasasagi": {
-      "app": 351,
+      "app": 352,
       "hourly": {
         "today": [
           132,
           144,
           82,
           20,
-          20,
-          0,
+          21,
+          84,
           0,
           0,
           0,
@@ -3577,9 +3577,9 @@
         ],
         "yesterdayDate": "11/10"
       },
-      "pc": 4760,
+      "pc": 4769,
       "periodStart": "2026-09-20",
-      "sp": 10595,
+      "sp": 10670,
       "unique": 15805,
       "week": [
         {
@@ -3608,7 +3608,7 @@
         },
         {
           "d": "11/11",
-          "pv": 398
+          "pv": 483
         }
       ]
     },
@@ -3937,21 +3937,21 @@
       {
         "d": "11/11",
         "date": "2026-11-11",
-        "pv": 398
+        "pv": 483
       }
     ],
     "narou_extra": {
-      "bookmarks": 198,
+      "bookmarks": 201,
       "episodes": 59,
       "firstup": "2026-09-20",
-      "globalPoint": 932,
+      "globalPoint": 936,
       "impressionCnt": 5,
       "ratingAvg": 9.4,
       "ratingCnt": 57,
       "reviewCnt": 0,
-      "weeklyPoint": 146
+      "weeklyPoint": 166
     },
-    "updated_at": "2026-11-11T04:57:28.346760+09:00"
+    "updated_at": "2026-11-11T05:57:29.950766+09:00"
   },
   "n8198ms": {
     "kasasagi": {
@@ -4428,17 +4428,17 @@
       }
     ],
     "narou_extra": {
-      "bookmarks": 10,
+      "bookmarks": 11,
       "episodes": 66,
       "firstup": "2026-09-11",
-      "globalPoint": 30,
+      "globalPoint": 32,
       "impressionCnt": 0,
       "ratingAvg": 10.0,
       "ratingCnt": 1,
       "reviewCnt": 0,
-      "weeklyPoint": 0
+      "weeklyPoint": 2
     },
-    "updated_at": "2026-11-11T04:58:24.509331+09:00"
+    "updated_at": "2026-11-11T05:58:28.985757+09:00"
   },
   "n8256ms": {
     "kasasagi": {
@@ -4909,7 +4909,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 2
     },
-    "updated_at": "2026-11-11T04:58:18.736381+09:00"
+    "updated_at": "2026-11-11T05:58:23.249901+09:00"
   },
   "n9355mt": {
     "kasasagi": {
@@ -4921,7 +4921,7 @@
           0,
           5,
           3,
-          0,
+          4,
           0,
           0,
           0,
@@ -4970,9 +4970,9 @@
         ],
         "yesterdayDate": "11/10"
       },
-      "pc": 735,
+      "pc": 737,
       "periodStart": "2026-09-21",
-      "sp": 746,
+      "sp": 748,
       "unique": 1569,
       "week": [
         {
@@ -5001,7 +5001,7 @@
         },
         {
           "d": "11/11",
-          "pv": 8
+          "pv": 12
         }
       ]
     },
@@ -5316,7 +5316,7 @@
       {
         "d": "11/11",
         "date": "2026-11-11",
-        "pv": 8
+        "pv": 12
       }
     ],
     "narou_extra": {
@@ -5328,8 +5328,8 @@
       "ratingAvg": 10.0,
       "ratingCnt": 3,
       "reviewCnt": 0,
-      "weeklyPoint": 26
+      "weeklyPoint": 28
     },
-    "updated_at": "2026-11-11T04:58:08.839136+09:00"
+    "updated_at": "2026-11-11T05:58:13.345157+09:00"
   }
 }
