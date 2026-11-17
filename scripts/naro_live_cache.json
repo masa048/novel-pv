@@ -539,7 +539,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-18T04:58:43.323154+09:00"
+    "updated_at": "2026-11-18T05:58:30.370840+09:00"
   },
   "n0973mu": {
     "kasasagi": {
@@ -970,7 +970,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-18T04:58:14.137467+09:00"
+    "updated_at": "2026-11-18T05:58:03.873041+09:00"
   },
   "n2175mw": {
     "kasasagi": {
@@ -982,7 +982,7 @@
           1,
           1,
           3,
-          0,
+          1,
           0,
           0,
           0,
@@ -1033,7 +1033,7 @@
       },
       "pc": 431,
       "periodStart": "2026-10-10",
-      "sp": 411,
+      "sp": 412,
       "unique": 2208,
       "week": [
         {
@@ -1062,7 +1062,7 @@
         },
         {
           "d": "11/18",
-          "pv": 18
+          "pv": 19
         }
       ]
     },
@@ -1303,7 +1303,7 @@
       {
         "d": "11/18",
         "date": "2026-11-18",
-        "pv": 18
+        "pv": 19
       }
     ],
     "narou_extra": {
@@ -1315,9 +1315,9 @@
       "ratingAvg": 9.0,
       "ratingCnt": 6,
       "reviewCnt": 0,
-      "weeklyPoint": 22
+      "weeklyPoint": 20
     },
-    "updated_at": "2026-11-18T04:57:51.975817+09:00"
+    "updated_at": "2026-11-18T05:57:44.174899+09:00"
   },
   "n2286mu": {
     "kasasagi": {
@@ -1772,9 +1772,9 @@
       "ratingAvg": 9.8,
       "ratingCnt": 8,
       "reviewCnt": 0,
-      "weeklyPoint": 16
+      "weeklyPoint": 14
     },
-    "updated_at": "2026-11-18T04:58:08.720760+09:00"
+    "updated_at": "2026-11-18T05:57:59.074930+09:00"
   },
   "n2554mz": {
     "kasasagi": {
@@ -1785,8 +1785,8 @@
           7,
           29,
           6,
-          39,
-          0,
+          40,
+          8,
           0,
           0,
           0,
@@ -1835,9 +1835,9 @@
         ],
         "yesterdayDate": "11/17"
       },
-      "pc": 759,
+      "pc": 766,
       "periodStart": "2026-11-07",
-      "sp": 1353,
+      "sp": 1355,
       "unique": 734,
       "week": [
         {
@@ -1866,7 +1866,7 @@
         },
         {
           "d": "11/18",
-          "pv": 103
+          "pv": 112
         }
       ]
     },
@@ -1946,21 +1946,21 @@
       {
         "d": "11/18",
         "date": "2026-11-18",
-        "pv": 103
+        "pv": 112
       }
     ],
     "narou_extra": {
-      "bookmarks": 21,
+      "bookmarks": 23,
       "episodes": 15,
       "firstup": "2026-11-07",
-      "globalPoint": 72,
+      "globalPoint": 76,
       "impressionCnt": 0,
       "ratingAvg": 10.0,
       "ratingCnt": 3,
       "reviewCnt": 0,
-      "weeklyPoint": 52
+      "weeklyPoint": 62
     },
-    "updated_at": "2026-11-18T04:57:46.806021+09:00"
+    "updated_at": "2026-11-18T05:57:39.385810+09:00"
   },
   "n2852mz": {
     "kasasagi": {
@@ -2140,7 +2140,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-18T03:57:42.581114+09:00"
+    "updated_at": "2026-11-18T05:57:33.848239+09:00"
   },
   "n2953mw": {
     "kasasagi": {
@@ -2152,7 +2152,7 @@
           1,
           22,
           6,
-          0,
+          1,
           0,
           0,
           0,
@@ -2201,7 +2201,7 @@
         ],
         "yesterdayDate": "11/17"
       },
-      "pc": 225,
+      "pc": 226,
       "periodStart": "2026-10-11",
       "sp": 122,
       "unique": 691,
@@ -2232,7 +2232,7 @@
         },
         {
           "d": "11/18",
-          "pv": 29
+          "pv": 30
         }
       ]
     },
@@ -2458,7 +2458,7 @@
       {
         "d": "11/18",
         "date": "2026-11-18",
-        "pv": 29
+        "pv": 30
       }
     ],
     "narou_extra": {
@@ -2472,7 +2472,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-18T04:57:57.118067+09:00"
+    "updated_at": "2026-11-18T05:57:48.892294+09:00"
   },
   "n3926mr": {
     "kasasagi": {
@@ -2483,7 +2483,7 @@
           0,
           1,
           0,
-          0,
+          1,
           0,
           0,
           0,
@@ -2533,7 +2533,7 @@
         ],
         "yesterdayDate": "11/17"
       },
-      "pc": 209,
+      "pc": 210,
       "periodStart": "2026-08-30",
       "sp": 206,
       "unique": 2619,
@@ -2564,7 +2564,7 @@
         },
         {
           "d": "11/18",
-          "pv": 2
+          "pv": 3
         }
       ]
     },
@@ -3014,7 +3014,7 @@
       {
         "d": "11/18",
         "date": "2026-11-18",
-        "pv": 2
+        "pv": 3
       }
     ],
     "narou_extra": {
@@ -3028,7 +3028,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 0
     },
-    "updated_at": "2026-11-18T04:58:48.621904+09:00"
+    "updated_at": "2026-11-18T05:58:35.563855+09:00"
   },
   "n7267mu": {
     "kasasagi": {
@@ -3429,7 +3429,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 10
     },
-    "updated_at": "2026-11-18T04:58:02.542028+09:00"
+    "updated_at": "2026-11-18T05:57:53.592517+09:00"
   },
   "n7303mt": {
     "kasasagi": {
@@ -3893,9 +3893,9 @@
       "ratingAvg": 8.5,
       "ratingCnt": 4,
       "reviewCnt": 0,
-      "weeklyPoint": 2
+      "weeklyPoint": 0
     },
-    "updated_at": "2026-11-18T04:58:25.389585+09:00"
+    "updated_at": "2026-11-18T05:58:13.603710+09:00"
   },
   "n8135mt": {
     "kasasagi": {
@@ -3906,8 +3906,8 @@
           60,
           16,
           20,
-          55,
-          0,
+          56,
+          88,
           0,
           0,
           0,
@@ -3956,9 +3956,9 @@
         ],
         "yesterdayDate": "11/17"
       },
-      "pc": 3823,
+      "pc": 3832,
       "periodStart": "2026-09-20",
-      "sp": 8754,
+      "sp": 8834,
       "unique": 18426,
       "week": [
         {
@@ -3987,7 +3987,7 @@
         },
         {
           "d": "11/18",
-          "pv": 229
+          "pv": 318
         }
       ]
     },
@@ -4358,21 +4358,21 @@
       {
         "d": "11/18",
         "date": "2026-11-18",
-        "pv": 229
+        "pv": 318
       }
     ],
     "narou_extra": {
-      "bookmarks": 217,
+      "bookmarks": 218,
       "episodes": 66,
       "firstup": "2026-09-20",
-      "globalPoint": 1036,
-      "impressionCnt": 5,
-      "ratingAvg": 9.3,
-      "ratingCnt": 65,
+      "globalPoint": 1042,
+      "impressionCnt": 6,
+      "ratingAvg": 9.2,
+      "ratingCnt": 66,
       "reviewCnt": 0,
-      "weeklyPoint": 118
+      "weeklyPoint": 112
     },
-    "updated_at": "2026-11-18T04:57:37.568927+09:00"
+    "updated_at": "2026-11-18T05:57:28.350937+09:00"
   },
   "n8198ms": {
     "kasasagi": {
@@ -4899,9 +4899,9 @@
       "ratingAvg": 10.0,
       "ratingCnt": 3,
       "reviewCnt": 0,
-      "weeklyPoint": 22
+      "weeklyPoint": 20
     },
-    "updated_at": "2026-11-18T04:58:37.134110+09:00"
+    "updated_at": "2026-11-18T05:58:23.690960+09:00"
   },
   "n8256ms": {
     "kasasagi": {
@@ -5407,7 +5407,7 @@
       "reviewCnt": 0,
       "weeklyPoint": 2
     },
-    "updated_at": "2026-11-18T04:58:30.574867+09:00"
+    "updated_at": "2026-11-18T05:58:18.211334+09:00"
   },
   "n9355mt": {
     "kasasagi": {
@@ -5861,8 +5861,8 @@
       "ratingAvg": 10.0,
       "ratingCnt": 3,
       "reviewCnt": 0,
-      "weeklyPoint": 2
+      "weeklyPoint": 0
     },
-    "updated_at": "2026-11-18T04:58:19.746281+09:00"
+    "updated_at": "2026-11-18T05:58:09.025177+09:00"
   }
 }
