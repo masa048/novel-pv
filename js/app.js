@@ -329,6 +329,11 @@
     });
 
     renderDetailPanel();
+
+    const detailEl = document.getElementById('detailPanel');
+    if (detailEl) {
+      detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // ============================================================
@@ -1723,13 +1728,7 @@
   }
 
   // グローバル公開 (行クリックから詳細を開くため)
-  window.selectBookApp = function (ncode) {
-    selectBook(ncode);
-    const detailEl = document.getElementById('detailSection');
-    if (detailEl) {
-      detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  window.selectBookApp = selectBook;
 
   // 初期化
   function init() {

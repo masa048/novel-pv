@@ -623,6 +623,7 @@ body {
    詳細パネル (Detail Panel)
    ============================================================ */
 .detail-panel {
+  scroll-margin-top: 16px;
   background: var(--panel-bg);
   border: 1.5px solid var(--panel-border);
   border-radius: var(--radius-lg);
